@@ -12,8 +12,13 @@ const AccountScreen = ({navigation}:any) => {
   //     dispatch(authActions.signout())
   //     navigation.navigate('Signin')
   // }
+  console.log('fff')
   return (
      <View>
+       <Text>User</Text>
+       
+       <Text>User</Text>
+       <Text>User</Text>
        <Text>User</Text>
      </View>
       // <View style={t('flex-1 p-10')}>
