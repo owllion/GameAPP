@@ -25,7 +25,7 @@ const Text = styled.Text`
 `
 
 const MyButton = styled.TouchableOpacity`
-  background-color:rgba(0,0,0.5) rgba(0,0,0,.5);
+  background-color:rgba(0,0,0,.3) rgba(0,0,0,.5);
   padding:15px;
   letter-spacing:2px;
   font-size:40px;

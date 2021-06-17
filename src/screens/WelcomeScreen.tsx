@@ -18,13 +18,12 @@ const WelcomeScreen = () => {
        }
     return ( 
    <ImageBackground 
-       source={image} 
+       source={require('../assets/images/doing.jpg')} 
        style={{
-       background:'rgba(0,0,0,.8) 100%, rgba(0,0,0,.2) )',
-       height:'100%',
-       width:'100%',
-       resizeMode:'contain'
-
+         flex:1,
+         paddingTop:100,
+         padding:20,
+         resizeMode: "contain",
        }}>    
     <View>
        <TextContanier>
@@ -47,13 +46,14 @@ const WelcomeScreen = () => {
 const View = styled.SafeAreaView`
    padding-top:${Platform.OS ==='android'? StatusBar.currentHeight : 0}px;
    flex:1;
+   border-radius:20px;
    justify-content:center;
    align-items:flex-start;  
-   background-color:rgba(0,0,0,.2) , rgba(0,0,0,.2) )  
+   background-color:rgba(0,0,0,.3) , rgba(0,0,0,.2) )  
 `
 const TextContanier = styled.View`
   padding:0 27px;
-  top:100px;
+  top:250px;
   left:10px;
   position:absolute;
 `

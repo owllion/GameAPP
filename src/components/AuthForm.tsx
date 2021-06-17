@@ -38,6 +38,7 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
       <Text  style={t('text-white text-center font-bold text-4xl mb-5')}>{headerText}</Text>
    
          { nameInput==='true' && <Input
+              textContentType='name'
               style={t('text-white pl-3')}
               autoCapitalize='none'
               autoCorrect={false}
@@ -55,6 +56,8 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
               {nameInput==='true' &&<Text style={t('-mt-5 pl-2 ')}>{error==='Please enter your name'? <Text style={t('text-red-500 font-bold')}>{error}</Text>:null}</Text>}
             
           <Input
+              keyboardType='email-address'
+              textContentType='emailAddress'
               style={t('text-white pl-3')}
               autoCapitalize='none'
               autoCorrect={false}
@@ -81,10 +84,11 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
            {/* login */}
             {error==='User does not exist'&& <Text style={t('text-red-500 font-bold -mt-5 pb-2 pl-2')}>{error}</Text>}
             <Input
+              textContentType='password'
               style={t('text-white pl-3')}
-            secureTextEntry
-             autoCapitalize='none'
-            autoCorrect={false}
+              secureTextEntry
+              autoCapitalize='none'
+              autoCorrect={false}
               onChangeText= {setPassword}
               value={password}
               labelStyle={{color:'white'}}
@@ -92,7 +96,7 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
               leftIcon={
                 <Icon
                    name='locked'
-                  color='#fff'
+                   color='#fff'
                   />
               }   
           />
@@ -121,11 +125,5 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
 
   )
 };
-
- AuthForm.navigationOptions = () => {
-  return {
-    headerShown:false
-  }
-}
 
 export default  AuthForm

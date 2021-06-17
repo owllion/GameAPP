@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
-import User from '../screens/User'
+import AccountScreen from '../screens/AccountScreen'
 
 import {COLORS, icons} from '../constants'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -26,8 +26,8 @@ const Tabs = () => {
         />
        
          <Tab.Screen 
-            name='User'
-            component={User}
+            name='AccountScreen'
+            component={AccountScreen}
              options= {{
                 tabBarIcon: ({focused})=> <MaterialIcons name="person" size={24} color= { focused ? '#F3A712':"gray" }  />
                       
