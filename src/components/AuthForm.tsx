@@ -1,10 +1,14 @@
-import React,{useState,useEffect} from 'react';
-import {useDispatch,useSelector} from 'react-redux'
-import { View, Text } from 'react-native';
-import t from 'tailwind-rn'
-import { Button,Input } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Fontisto';
-import {authActions} from '../store/slice/Auth'
+import React from 'react';
+import { useDispatch } from 'react-redux'
+import Icon from 'react-native-vector-icons/Fontisto'
+import * as Yup from 'yup'
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
+import styled from 'styled-components/native'
+import Button from '../components/Button'
+import AppFormInput from '../components/AppFormInput'
+import FormikWrapper from '../components/FormikWrapper'
+
 
 interface Props {
     headerText:string;
@@ -13,57 +17,54 @@ interface Props {
     nameInput:string
 }
 
-interface Root {
-  auth:{
-    errorMsg:string
-  }
-}
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().email().label('Email'),
+  password: Yup.string().required().min(7).label('Password'),
+  name:Yup.string().required().min(3).label('Name')
+})
+
 const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
+     const [isLoaded] = useFonts({
+      MarcellusRegular: require('../assets/fonts/Marcellus-Regular.ttf'),
+  });
+       if (!isLoaded) {
+        return <AppLoading />
+       }
 
-  const error = useSelector((state:Root)=> state.auth.errorMsg)
-
-  const dispatch = useDispatch()
-
-  const [email,setEmail] = useState<string>('')
-  const [password,setPassword] =useState<string>('')
-  const [name,setName]=useState<string>('')
-
-
-  useEffect(()=> {
-    dispatch(authActions.setError({message:''}))
-  },[])
-  const userName = name?name:null
   return (
-    <View style={t('flex justify-center m-2 pt-10')}>
-      <Text  style={t('text-white text-center font-bold text-4xl mb-5')}>{headerText}</Text>
-   
-         { nameInput==='true' && <Input
-              textContentType='name'
-              style={t('text-white pl-3')}
-              autoCapitalize='none'
-              autoCorrect={false}
-              onChangeText= {setName}
-              value={name}
-              labelStyle={{color:'white'}}
-              label='Name'
-              leftIcon={
-                  <Icon
-                   name='user-secret'
-                   color='#fff'
-                  />
-              } 
-              /> }  
-              {nameInput==='true' &&<Text style={t('-mt-5 pl-2 ')}>{error==='Please enter your name'? <Text style={t('text-red-500 font-bold')}>{error}</Text>:null}</Text>}
+    <View> 
+      <Text>{headerText}</Text>   
+          <FormikWrapper
+            initialValues= {{ email: '', password: '', name:''}}
+            onSubmit= { values => console.log(values) }
+            validationSchema={ validationSchema }
+          >
             
-          <Input
+             { nameInput==='true' && 
+               <AppFormInput
+                  fieldName='name'
+                  textContentType='name'
+                  style={{ color:'#fff',paddingLeft:20}}
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  labelStyle={{color:'white'}}
+                  label='Name'
+                  leftIcon={
+                    <Icon
+                      name='user-secret'
+                      color='#fff'
+                    />
+                  } 
+                />          
+            } 
+          <AppFormInput
+              fieldName='email'
               keyboardType='email-address'
               textContentType='emailAddress'
-              style={t('text-white pl-3')}
+              style={{color:'#fff',paddingLeft:5}}
               autoCapitalize='none'
               autoCorrect={false}
-              onChangeText= {setEmail}
-              value={email}
-              labelStyle={{color:'white'}}
+              labelStyle={{color:'#fff'}}
               label='Email'
               leftIcon={
                  <Icon
@@ -72,26 +73,16 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
                   />
               }   
           />
-          
-          {/* register */}
-
-           {error==='Please enter your email'? <Text style={t('text-red-500 font-bold -mt-5 pb-2 pl-2')}>{error}</Text>:null}
-           
-           {error==='email is invalid!'? <Text style={t('text-red-500 font-bold -mt-5 pb-2 pl-2')}>{error}</Text>:null}
-            
-           {error==='email already exists!'? <Text style={t('text-red-500 font-bold -mt-5 pb-2 pl-2')}>{error}</Text>:null}
-
-           {/* login */}
-            {error==='User does not exist'&& <Text style={t('text-red-500 font-bold -mt-5 pb-2 pl-2')}>{error}</Text>}
-            <Input
+            <AppFormInput
+              fieldName='password'
               textContentType='password'
-              style={t('text-white pl-3')}
+              style={{color:'#fff',paddingLeft:3}}
               secureTextEntry
               autoCapitalize='none'
-              autoCorrect={false}
-              onChangeText= {setPassword}
-              value={password}
-              labelStyle={{color:'white'}}
+              autoCorrect= {false}
+              labelStyle={{
+                color:'#fff'
+              }}
               label='Password'
               leftIcon={
                 <Icon
@@ -100,30 +91,25 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
                   />
               }   
           />
-           {error==='Please enter your password'? <Text style={t('text-red-500 font-bold -mt-5 pb-2 pl-2')}>{error}</Text>:null}
-          {error==='Password should be at least 7 words'&& <Text style={t('text-red-500 font-bold -mt-5 pb-2 pl-2')}>{error}</Text>}
-           {error==='Wrong password'&& <Text style={t('text-red-500 font-bold -mt-5 pb-2 pl-2')}>{error}</Text>}
-     <Button
-     onPress={()=> onSubmit(email,password,userName)}
-      title={submitButtonText}
-      icon={
-        <Icon
-          style={t('mr-2')}
-            name="smiley"
-            size={15}
-            color="white"
-          />
-        }
-          buttonStyle={{backgroundColor:'transparent',
-            borderColor:'white',
-            borderWidth:1,
-            height:60,
-            
-          }}    
-/>
-      </View>
-
+         <Button
+          text={ submitButtonText }
+         />
+     </FormikWrapper>       
+    </View>
   )
 };
 
+const View = styled.View`
+  justify-content:center;
+  padding:10px;
+  margin:10px
+`
+
+const Text = styled.Text`
+    color:#fff;
+    text-align:center;
+    font-size:45px;
+    margin-bottom:10px;
+    font-family:MarcellusRegular;
+`
 export default  AuthForm

@@ -1,5 +1,5 @@
 
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from '@react-navigation/compat'
 let navigator;
 
 export const setNavigator = nav => {

@@ -1,21 +1,48 @@
 import React from 'react'
-import {TouchableOpacity,Text } from 'react-native';
-import t from 'tailwind-rn'
-import { withNavigation } from 'react-navigation'
+import { withNavigation } from '@react-navigation/compat'
+import styled from 'styled-components/native'
+import { StackNavigationProp } from '@react-navigation/stack';
+import { bold } from '../assets/style/style'
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading'
 
-interface Props {
-    text:string;
-    navigation:any;
-    routeName:string
+export type StackParamList = {
+     LoginScreen:undefined;
+     RegisterScreen:undefined
+    }
+  type Props =  {
+    routeName:string;
+    text:string
+    navigation:StackNavigationProp<StackParamList>,  
 }
 
-
 const NavLink = (props:Props) => {
+     const [isLoaded] =  useFonts({
+      IBMPlexSansBold: require('../assets/fonts/IBMPlexSans-Bold.ttf'),
+      
+    });
+    if (!isLoaded) {
+        return <AppLoading />
+       }
+
     return (
-        <TouchableOpacity style={t('text-center')} onPress={()=> props.navigation.navigate(props.routeName)}>
-          <Text style={t('text-yellow-400  text-sm font-bold mt-1 pl-4')} >{props.text}</Text>
+        <TouchableOpacity 
+          onPress={()=> props.navigation.navigate(props.routeName)}>
+          <Text>{props.text}</Text>
         </TouchableOpacity>
      
     )
 }
+
+const TouchableOpacity = styled.TouchableOpacity`
+  margin: -5px auto 0 auto;
+`
+const Text = styled.Text`
+  font-family:${ bold.fontFamily };
+  font-size:13px;
+  color:#fff;
+
+
+`
+
 export default  withNavigation(NavLink)
