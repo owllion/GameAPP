@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { regular } from '../assets/style/style'
+import { bold } from '../../assets/style/style'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 const ErrorMsg = ({error,visible}:{error:string, visible:string}) => {
@@ -8,7 +8,7 @@ const ErrorMsg = ({error,visible}:{error:string, visible:string}) => {
     if(!error || !visible) return null 
 
      const [isLoaded] =  useFonts({
-      IBMPlexSansRegular: require('../assets/fonts/IBMPlexSans-Regular.ttf'),    
+      IBMPlexSansBold: require('../../assets/fonts/IBMPlexSans-Bold.ttf'),    
     })
     if (!isLoaded) {
         return <AppLoading/>
@@ -24,8 +24,7 @@ const ErrorMsg = ({error,visible}:{error:string, visible:string}) => {
 
 const Text = styled.Text`
    color:red;
-   font-family:${regular.fontFamily};
-   font-weight:900;
+   font-family:${bold.fontFamily};
 `
 const View = styled.View`
   margin-top:-25px;

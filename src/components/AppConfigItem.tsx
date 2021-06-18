@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListItem, Icon ,  Avatar } from 'react-native-elements'
+import { ListItem, Icon , Avatar } from 'react-native-elements'
 import { bold, regular } from '../assets/style/style'
 import Container from '../components/Container'
 import { useFonts } from 'expo-font';

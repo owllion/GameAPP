@@ -1,23 +1,16 @@
 import React,{ useState } from 'react'
 import { Button, Icon } from 'react-native-elements'
-
 import styled from 'styled-components/native'
 import { Modal } from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
-import Container from '../components/Container';
+import Container from './Container';
 import { regular } from '../assets/style/style';
 import { useFonts } from '@expo-google-fonts/rock-salt'
 import AppLoading from 'expo-app-loading';
-import PickerItem from '../components/PickerItem'
+import PickerItem from './PickerItem'
+import ErrorMsg from './forms/ErrorMsg';
+import { useFormikContext } from 'formik'
 
 
-const categories = [
-  { label: 'Travel', id:1},
-  { label: 'Mood', id:2},
-  { label: 'Food', id:3},
-  { label: 'Game', id:4},
-  { label: 'Tech', id:5},
-]
 interface KeyCategory {
     label:string;
     id:number
@@ -25,19 +18,27 @@ interface KeyCategory {
 
 interface Category {
   item: {
-    label:string;
-    id:number
+      id:number,
+      label:string,
+      bg:string,
+      icon:string
   }
 }
 
-const Picker = ()=> {
-  
-  const [visible, setVisible] = useState<boolean>(false);
-  const [category, setCategory] = useState<string>('');
+interface Props {
+  cate:KeyCategory[],
+  fieldName:string,
+  numColumns:number
+}
 
-  const selectHandler = (item:string) => {
-    setCategory(item)
-  }
+
+const PostPicker = (props:Props)=> {
+   const { fieldName , cate , numColumns } = props
+   const { errors ,setFieldValue, touched, values }  = useFormikContext()
+
+ //Modal shoe or not show
+  const [visible, setVisible] = useState<boolean>(false);
+
  const [isLoaded] =  useFonts({
       IBMPlexSansRegular: require('../assets/fonts/IBMPlexSans-Regular.ttf'),
       
@@ -55,14 +56,17 @@ const Picker = ()=> {
             <Icon
               style={{
                 marginRight:10,
-                alignSelf:'baseline'
+                alignSelf:'baseline',
               }}
               type='ionicon'
               name="apps-outline"
               size={25}
-              color="#000"
+              color="#949D6A"
             />
-           <Text>{category? category: 'Category'}</Text> 
+            {!!values[fieldName] ? 
+             <Text dark>{values[fieldName]}</Text>:
+             <Text>Category</Text>
+            }       
            </LeftView>
            <RightView> 
                <Icon
@@ -78,6 +82,10 @@ const Picker = ()=> {
            </RightView> 
         </View>
         </TouchableWithoutFeedback>
+        <ErrorMsg 
+         visible= { touched[ fieldName ] } 
+         error= { errors[ fieldName ] }
+        />
     </Container>
 
       <Modal 
@@ -99,15 +107,19 @@ const Picker = ()=> {
       />
       </IconBox>
       {/* Modal content */}
+      <Text>Hello</Text>
       <FlatList 
-        data={categories}
+        style={{marginTop:'50%'}}
+        data={cate}
+        numColumns={3}
         keyExtractor={(i:KeyCategory)=>i.id.toString()}
         renderItem ={({item}:Category)=> {
            return (
               <PickerItem 
-                label={item.label} 
+                label={item.label}
+                item={item} 
                 selectHandler={ ()=> {
-                  selectHandler(item.label)
+                  setFieldValue(fieldName,item.label)
                   setVisible(false)
                 } }
               />
@@ -122,8 +134,8 @@ const Picker = ()=> {
 const View = styled.View`
 padding:20px;
 flex-direction:row;
-background-color:#A9F0D1;
-margin:20px;
+background-color:#F6CA83;
+margin:-25px 10px 40px 10px;
 border-radius:20px;
 justify-content:space-between;
 ` 
@@ -146,7 +158,9 @@ const IconBox = styled.View`
 
 const Text = styled.Text`
   font-family:${regular.fontFamily};
-  color:#000
+  color:${(props:{dark:boolean})=> props.dark? '#000':'gray'}
 `
-const FlatList = styled.FlatList``
-export default Picker
+const FlatList = styled.FlatList`
+
+`
+export default PostPicker

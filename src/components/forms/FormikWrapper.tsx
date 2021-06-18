@@ -2,11 +2,7 @@ import React from 'react'
 import { Formik } from 'formik'
 
 interface Props {
-    initialValues: {
-        email: string,
-        password:string,
-        name:string
-    },
+    initialValues: object,
     onSubmit:(values:any)=>void,
     validationSchema:object,
     children:React.ReactNode

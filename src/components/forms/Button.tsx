@@ -2,26 +2,27 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import { useFormikContext } from 'formik'
+import { useFormikContext } from "formik";
 
 interface Props {
    text:string;
+   color:boolean;
    children:React.ReactNode;
 }
 
 const Button = (props:Props) => {
-   const { handleSubmit } = useFormikContext()
-
+   const { handleSubmit } = useFormikContext()?? {};
+   const { color , text } = props
     const [isLoaded] = useFonts({
-      MarcellusRegular: require('../assets/fonts/Marcellus-Regular.ttf'),
+      MarcellusRegular: require('../../assets/fonts/Marcellus-Regular.ttf'),
   });
      if (!isLoaded) {
         return <AppLoading />
        }
     
     return (
-        <MyButton onPress={ handleSubmit }>
-          <Text>{props.text}</Text>     
+        <MyButton onPress={ handleSubmit } color>
+          <Text>{text}</Text>     
         </MyButton>
     )
 }
@@ -34,10 +35,10 @@ const Text = styled.Text`
 `
 
 const MyButton = styled.TouchableOpacity`
-  background-color:rgba(0,0,0,.3) rgba(0,0,0,.5);
+  background-color:${(props:{color:boolean})=> props.color? '#C83E4D' :'rgba(0,0,0,.3) rgba(0,0,0,.5)'};
   padding:15px;
   border-radius:50px;
-  margin-bottom:10px; 
-  border:1px #fff solid;
+  margin: 0 10px 10px 10px; 
+  
 `
 export default Button

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'
 import {register} from '../store/actions/authAction'
-import AuthForm from '../components/AuthForm'
+import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'
 

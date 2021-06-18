@@ -1,0 +1,21 @@
+{
+  "Function Component": {
+    "prefix": "rnfc",
+    "body": [
+      "import React from 'react';",
+      "import styled from 'styled-components/native';",
+      "",
+      "const ${TM_FILENAME_BASE} = (props) => {",
+      "  return (",
+      "    <View>$0</View>",
+      "  );",
+      "}",
+      "",
+      "const styles = StyleSheet.create({",
+      "  container: {}",
+      "});",
+      "",
+      "export default ${TM_FILENAME_BASE};"
+    ]
+  }
+}

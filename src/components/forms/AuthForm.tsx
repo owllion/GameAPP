@@ -5,9 +5,9 @@ import * as Yup from 'yup'
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import styled from 'styled-components/native'
-import Button from '../components/Button'
-import AppFormInput from '../components/AppFormInput'
-import FormikWrapper from '../components/FormikWrapper'
+import Button from './Button'
+import AppFormInput from '../AppFormInput'
+import FormikWrapper from './FormikWrapper'
 
 
 interface Props {
@@ -25,7 +25,7 @@ const validationSchema = Yup.object().shape({
 
 const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
      const [isLoaded] = useFonts({
-      MarcellusRegular: require('../assets/fonts/Marcellus-Regular.ttf'),
+      MarcellusRegular: require('../../assets/fonts/Marcellus-Regular.ttf'),
   });
        if (!isLoaded) {
         return <AppLoading />

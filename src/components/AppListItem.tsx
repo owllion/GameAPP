@@ -46,12 +46,14 @@ const AppListItem = (props:Props)=> {
         <Avatar source={{uri: l.avatar_url}} />
         <ListItem.Content>
           <ListItem.Title 
+          numberOfLines={1}
             style={{
               fontFamily:'IBMPlexSansBold'
                 }}>
              {l.name}
           </ListItem.Title>
           <ListItem.Subtitle
+            numberOfLines={2}
             style={{
               fontFamily:'IBMPlexSansThin'
                 }}
@@ -59,6 +61,7 @@ const AppListItem = (props:Props)=> {
               {l.subtitle}
           </ListItem.Subtitle>
         </ListItem.Content>
+        <ListItem.Chevron/>
       </ListItem.Swipeable>
     ))
   }

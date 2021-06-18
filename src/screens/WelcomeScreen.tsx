@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Platform,StatusBar,Dimensions,ImageBackground } from 'react-native'
 import styled from 'styled-components/native'
-import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks'
-
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-import Button from '../components/Button'
+import Button from '../components/forms/Button'
 
 const image = { uri: "https://images.unsplash.com/photo-1500843613192-839e95410c10?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" };
 
@@ -35,8 +33,8 @@ const WelcomeScreen = () => {
         </Text>
       </TextContanier>
       <ButtonContainer>
-        <Button color='yellow' text='LOGIN' />
-        <Button color='green' text='REGISTER' />  
+        <Button text='LOGIN' />
+        <Button text='REGISTER' />  
        </ButtonContainer>
         </View>
         </ImageBackground>   
