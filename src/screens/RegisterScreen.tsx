@@ -25,7 +25,7 @@ const RegisterScreen= () => {
        submitButtonText='Register' 
       /> 
        <NavLink
-         text='Already have an account? Sign in!'   routeName='LoginScreen'
+         text='Already have an account? Sign in!'   routeName='Login'
        />
     </View>
    </ImageBackground>

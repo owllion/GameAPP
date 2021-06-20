@@ -7,7 +7,7 @@ import Button from '../components/forms/Button'
 
 const image = { uri: "https://images.unsplash.com/photo-1500843613192-839e95410c10?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" };
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({navigation}:any) => {
      const [isLoaded] = useFonts({
       MarcellusRegular: require('../assets/fonts/Marcellus-Regular.ttf'),
   });
@@ -19,9 +19,8 @@ const WelcomeScreen = () => {
        source={require('../assets/images/doing.jpg')} 
        style={{
          flex:1,
-         paddingTop:100,
          padding:20,
-         resizeMode: "contain",
+         paddingTop:50,
        }}>    
     <View>
        <TextContanier>
@@ -33,8 +32,8 @@ const WelcomeScreen = () => {
         </Text>
       </TextContanier>
       <ButtonContainer>
-        <Button text='LOGIN' />
-        <Button text='REGISTER' />  
+        <Button text='LOGIN' switchRoute={()=> navigation.navigate('Login')} />
+        <Button text='REGISTER' switchRoute= {()=> navigation.navigate('Register')} />  
        </ButtonContainer>
         </View>
         </ImageBackground>   

@@ -111,7 +111,7 @@ const PostPicker = (props:Props)=> {
       <FlatList 
         style={{marginTop:'50%'}}
         data={cate}
-        numColumns={3}
+        numColumns={numColumns}
         keyExtractor={(i:KeyCategory)=>i.id.toString()}
         renderItem ={({item}:Category)=> {
            return (
@@ -159,6 +159,9 @@ const IconBox = styled.View`
 const Text = styled.Text`
   font-family:${regular.fontFamily};
   color:${(props:{dark:boolean})=> props.dark? '#000':'gray'}
+`
+const CategoryTitle = styled.Text`
+
 `
 const FlatList = styled.FlatList`
 

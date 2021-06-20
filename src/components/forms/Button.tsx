@@ -5,14 +5,14 @@ import AppLoading from 'expo-app-loading';
 import { useFormikContext } from "formik";
 
 interface Props {
-   text:string;
-   color:boolean;
+   text:string; 
    children:React.ReactNode;
+   switchRoute:()=>void
 }
 
 const Button = (props:Props) => {
    const { handleSubmit } = useFormikContext()?? {};
-   const { color , text } = props
+   const { text, switchRoute } = props
     const [isLoaded] = useFonts({
       MarcellusRegular: require('../../assets/fonts/Marcellus-Regular.ttf'),
   });
@@ -21,7 +21,13 @@ const Button = (props:Props) => {
        }
     
     return (
-        <MyButton onPress={ handleSubmit } color>
+        <MyButton
+        onPress={()=> {
+          
+           switchRoute()
+        }} 
+           
+         >
           <Text>{text}</Text>     
         </MyButton>
     )

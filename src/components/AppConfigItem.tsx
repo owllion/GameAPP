@@ -1,24 +1,25 @@
 import React from 'react'
 import { ListItem, Icon , Avatar } from 'react-native-elements'
 import { bold, regular } from '../assets/style/style'
-import Container from '../components/Container'
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading'
+import { useNavigation } from '@react-navigation/native';
 
 interface Obj {
    name?:string;
    set?:string;
    icon?:string;
    avatar?:string;
-   email?:string
+   email?:string;
+   targetScreen:string
 }
 
 interface Arr {
   data:Obj[];
-  bgColor:string
-
+  bgColor:string;
 }
 const AppConfigItem = (props:Arr)=> {
+    const navigation = useNavigation();
    const { data,bgColor }  = props
    const [isLoaded] =  useFonts({
       IBMPlexSansRegular: require('../assets/fonts/IBMPlexSans-Regular.ttf'),
@@ -30,22 +31,23 @@ const AppConfigItem = (props:Arr)=> {
        }
 
     return (
-   <Container>
+   <>
    {
    data.map((item, i) => (
+   
       <ListItem 
         key={i} 
         bottomDivider 
-        onPress={()=>console.log('hello')}
+        onPress={()=> navigation .navigate(item.targetScreen)}
         underlayColor={'#218380'}
         containerStyle={{backgroundColor:bgColor}}
       >
         { !!item.avatar &&  <Avatar rounded source={{uri: item.avatar}} />}
-        { item.icon ?  
+        { !!item.icon &&  
          <Icon 
            name={item.icon}
            type='material-icons'
-           color='#218380' /> : null
+           color='#218380' /> 
         }
         <ListItem.Content>
 
@@ -69,9 +71,13 @@ const AppConfigItem = (props:Arr)=> {
         </ListItem.Content>
         { !item.avatar && <ListItem.Chevron />}
       </ListItem>
+     
     ))
   }
-     </Container>  
+  </>
+    
     )
 }
+
+
 export default AppConfigItem

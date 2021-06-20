@@ -22,7 +22,7 @@ const LoginScreen= () => {
 
        <NavLink 
          text='Do not have an account? Sign up!'  
-         routeName='RegisterScreen'  
+         routeName='Register'  
        />
     </View>
   

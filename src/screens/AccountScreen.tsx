@@ -8,7 +8,8 @@ const user = [{
   name:'Celest',
   email:'bitlittlelie@gmail.com',
   avatar:'https://pyxis.nymag.com/v1/imgs/633/1d6/4d1f62480ba87681ebbfdeacf1cb4eb6a6-28-kidman.rsquare.w700.jpg',
-  icon:''
+  icon:'',
+  targetScreen:''
 }]
 
 const config = [
@@ -16,20 +17,23 @@ const config = [
     set:'My Posts',
     icon:'list',
     email:'',
-    avatar:'', 
+    avatar:'',
+    targetScreen:'' 
   },
   
   {
     set:'My Messages',
     icon:'mail',
     email:'',
-    avatar:'', 
+    avatar:'',
+    targetScreen:'Message' 
   },
   {
     set:'Log out',
     icon:'logout',
     email:'',
     avatar:'', 
+     targetScreen:'Message' 
   }
 ]
 const AccountScreen = ({navigation}:any) => {
@@ -42,7 +46,10 @@ const AccountScreen = ({navigation}:any) => {
 
   return (
      <>
-      <AppConfigItem data={user} bgColor='#FED766' />
+      <AppConfigItem 
+        data={user} 
+        bgColor='#FED766'
+        />
       <View>
       <AppConfigItem data={config} bgColor='#fff' />
       </View>
