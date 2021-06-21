@@ -6,8 +6,17 @@ import { useFonts } from 'expo-font';
 import ActivityIndicator from '../components/ActivityIndicator';
 
 import Card from '../components/Card'
+import {useNetInfo} from '@react-native-community/netinfo';
+
 
 const Home = ({navigation}:any) => {
+  const handler = async()=> {
+   const netInfo = useNetInfo()
+   return !netInfo.isInternetReachable ? alert('沒網路') :alert('有網路!')
+  
+  }
+  handler()
+  
     return (
         <View>
           <ActivityIndicator visible={true} />
