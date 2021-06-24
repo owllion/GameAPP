@@ -1,50 +1,49 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading'
+import CardItem from './CardItem'
 
+
+const categoryItems = [
+  { cateName: "Horror", iconType: "font-awesome-5", iconName: "ghost" },
+  {
+    cateName: "Action",
+    iconType: "material-community",
+    iconName: "knife-military",
+  },
+  {
+    cateName: "Adventure",
+    iconType: "material-community",
+    iconName: "sword-cross",
+  },
+  { cateName: "Rhythm", iconType: "font-awesome-5", iconName: "music" },
+];
+
+interface Game {
+  image: Array<string>;
+  productName: string;
+  price: number;
+  category: string;
+  description: string;
+  productId: string;
+}
 interface Props {
-    title:string;
-    image:string
+  gameList:Game[],
+  index:number
 }
 
-const Card = (props:Props) => {
-  const [isLoaded] =  useFonts({
-      MarcellusRegular: require('../assets/fonts/Marcellus-Regular.ttf'),
-      
-      
-    });
-    if (!isLoaded) {
-        return <AppLoading />
-       }
-
+const Card = ({gameList,index}:Props) => {
+  
+     const result = gameList.filter(g=> g.category === categoryItems[index].cateName )
+   
     return (
-        <View>
-           <Image 
-              source={{
-                  width:'100%',
-                  height:100,
-                  uri:'https://images.unsplash.com/photo-1471005197911-88e9d4a7834d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80'}} />
-                < Description>
-                 <Text>Dont know </Text>
-                </Description>
-        </View>
-    )
+      <FlatList
+        horizontal
+        showHorizontalScrollIndicator={false}
+        data={result}
+        keyExtractor={i=>i.productName}
+        renderItem={({ item }) => <CardItem game={item} />}
+      />
+    );      
 }
-
-const View = styled.View`
-  border-radius:10px;
-  margin-bottom:10px;
-  overflow:hidden;
-  background-color:#fff;
-`
-const Image = styled.Image`
-`
-const Description = styled.View`
-  padding:20px;
-`
-const Text = styled.Text`
-  font-size:20px;
-  font-family:MarcellusRegular;
-` 
+const FlatList = styled.FlatList``
 export default Card
