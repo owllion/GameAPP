@@ -34,9 +34,9 @@ const App = () => {
         <OfflineNotice />
         <NavigationContainer theme={navigationTheme}>
           {/* 如果有user資料或是token就顯示Tabs */}
-           {/* <AuthNavigator />  */}
+          <AuthNavigator />  
           <StatusBar backgroundColor={COLORS.dark} barStyle="light-content" />
-          <Tabs />
+         {/* <Tabs />  */}
         </NavigationContainer>
       </PersistGate>
     </Provider>

@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import { Icon } from 'react-native-elements'
-
+import COLORS from "../assets/color/colors";
 
 const NavButton = (props:{onPress:()=>void})=> {
     return (
-         <TouchableOpacity onPress={props.onPress}>
+         <Pressable onPress={props.onPress}>
           <View>
             <Icon        
                 name='shopping-cart'
@@ -14,15 +14,15 @@ const NavButton = (props:{onPress:()=>void})=> {
                 size={25}                  
             />
           </View>
-        </TouchableOpacity>
+        </Pressable>
     )
 }
 
-const TouchableOpacity = styled.TouchableOpacity`
+const Pressable = styled.Pressable`
 `
 const View = styled.View`
   border-radius:50px;
-  background-color:#8C271E;
+  background-color:${COLORS.primary};
   border:solid 10px #fff;
   width:80px;
   height:80px;

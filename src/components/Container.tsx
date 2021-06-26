@@ -11,7 +11,7 @@ const  Container = ({children}:Props) => {
 }
 
 const View = styled.SafeAreaView`
-padding-top:${Constants.statusBarHeight}px;
+ padding-top:${Constants.statusBarHeight}px;
  flex:1;
 
 `

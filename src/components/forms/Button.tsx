@@ -7,12 +7,12 @@ import { useFormikContext } from "formik";
 interface Props {
    text:string; 
    children:React.ReactNode;
-   switchRoute:()=>void
+   
 }
 
 const Button = (props:Props) => {
    const { handleSubmit } = useFormikContext()?? {};
-   const { text, switchRoute } = props
+   const { text } = props
     const [isLoaded] = useFonts({
       MarcellusRegular: require('../../assets/fonts/Marcellus-Regular.ttf'),
   });
@@ -23,8 +23,7 @@ const Button = (props:Props) => {
     return (
         <MyButton
         onPress={()=> {
-          
-           switchRoute()
+            
         }} 
            
          >

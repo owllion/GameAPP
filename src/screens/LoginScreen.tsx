@@ -5,20 +5,21 @@ import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'
 
-const image = { uri: "https://image.freepik.com/free-vector/collection-architectural-landmarks-painted-by-watercolor_53876-34787.jpg"} ;
 
 const LoginScreen= () => {
-  const dispatch = useDispatch()
- 
- const userLogin = (email:string,password:string,name?:string,) => {
+ const dispatch = useDispatch()
+
+ const userLogin = (email:string,password:string,userName?:string,) => {
+  
    dispatch(register({email,password}))
  }
 
   return (
-   <ImageBackground source={require('../assets/images/sky2.jpg')} > 
+   <ImageBackground source={require('../assets/images/loginbg.jpg')} > 
   
     <View>  
-      <AuthForm  onSubmit={ userLogin } headerText='SIGN IN' nameInput='false'  submitButtonText='Log in'/> 
+      <AuthForm  
+       onSubmit={ userLogin } headerText='SIGN IN' nameInput='false'  submitButtonText='Log in'/> 
 
        <NavLink 
          text='Do not have an account? Sign up!'  

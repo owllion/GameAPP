@@ -6,7 +6,6 @@ import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 const { width } = Dimensions.get("screen");
-import { useNavigation } from '@react-navigation/native';
 
 interface Game {
   game: {
@@ -20,83 +19,98 @@ interface Game {
   };
 }
 
-const CardItem = ({ game }:Game) => {
-  const navigation = useNavigation()
-
+const PopularCard = ({ game }:Game) => {
   const [isLoaded] = useFonts({
-    IBMPlexSansBold: require("../assets/fonts/IBMPlexSans-Bold.ttf"),
+     IBMPlexSansBold: require("../assets/fonts/IBMPlexSans-Bold.ttf"),
   });
   if (!isLoaded) {
     return <AppLoading />;
   }
  
   return (
-    <Pressable onPress={()=> navigation.navigate('Detail',{item:game})}>
+     <Pressable onPress={()=> console.log('123')}>
     <View>
       <Image 
         source={{uri:game.image[0]}}     
       /> 
-       <TextBox>
-      <Text>{game.productName}</Text>
-       </TextBox>
-      <InnerContainer>
-          <Text color margin>${game.price}</Text>       
-          <RatingContainer>         
-          <Text>{game.rating}</Text>
-           
+      <RightBox>
+          <TextBox>
+            <Text padding>{game.productName}</Text>
+            </TextBox> 
+          <InnerContainer>
+
+          <Price>${game.price}</Price> 
+          <RatingContainer> 
+          <Text>{game.rating}</Text>         
           <Icon
             name='star'
             type='AntDesign'
             size={12}
             color={COLORS.yellow}
             style={{
-              marginLeft:5,
-               paddingTop:5
+               marginLeft:5,
+               paddingTop:3
             }}
           />
           </RatingContainer>
          
       </InnerContainer>
+      </RightBox>
+
+
+      
+     
     </View>
     </Pressable>
   );
 };
-const Pressable = styled.Pressable``
-
+const Pressable =styled.Pressable``
 const View = styled.View`
-  height: 300px;
+  height:150px;
+  flex-direction:row;
   background-color: ${COLORS.white};
-  box-shadow:10px 10px 10px rgba(0,0,0,0.5);
-  width: ${width / 2}px;
+  width: ${width-50}px;
   margin: 10px;
   elevation:10;
   border-radius: 10px;
 `;
+const RightBox = styled.View`
+ width:80%;
+ padding-right: 60px;
+ justify-content:center;
 
+`
 const Image = styled.Image`
   height:100%;
-  width:100%;
-  border-radius:10px
+  width:130px;
+  border-radius:10px;
+  margin-right:10px
 `
 const TextBox = styled.View`
-  text-align:center;
-  padding:10px 20px
+  justify-content:center;
+  padding-top:20px
+  
 `
 const Text = styled.Text`
   font-size: 12px;
-  font-family: IBMPlexSansBold;
+  padding:${({padding}:{padding:boolean})=> padding? "15px":0};
+  font-family:IBMPlexSansBold;
   color:${({color}:{color:boolean}) => color? COLORS.primary :COLORS.dark };
   margin-top:${({margin}:{margin:boolean})=> margin? "-10px":0}
 `;
+const Price = styled.Text`
+  font-family: IBMPlexSansBold;
+  color: ${COLORS.primary};
+  margin-top:-5px;
+  padding:3px;
+`
 const InnerContainer = styled.View`
-  margin-top: 5px;
   flex-direction:row;
-  justify-content: space-between;
-  padding:0 20px
+  padding-left:10px
+  
 ` 
 const RatingContainer = styled.View`
   flex-direction:row;
-  margin-left:10px;
-  margin-top:-10px;
+  margin-left:10px
 `
-export default CardItem;
+export default PopularCard

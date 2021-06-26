@@ -1,6 +1,4 @@
 import {createSlice,PayloadAction} from '@reduxjs/toolkit'
-
-
 export interface Data {
     result:{
         token:string,
@@ -25,17 +23,11 @@ const authSlice = createSlice({
       signup(state, { payload }:PayloadAction<Data>) {      
            state.token = payload.result.token
            state.name = payload.result.user.name
-           console.log('註冊資料')
-           console.log(state.token)
-           console.log(state.name)
+           
         },
          signin(state, { payload }:PayloadAction<Data>) {
             state.token = payload.result.token
-            state.name = payload.result.user.name
-            console.log('登入資料')
-             console.log(state.token)
-            console.log(state.name)
-         
+            state.name = payload.result.user.name             
         },
         signout(state) {
             state.token =''

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import CardItem from './CardItem'
-
+import PopularCard from './PopularCard';
 
 const categoryItems = [
   { cateName: "Horror", iconType: "font-awesome-5", iconName: "ghost" },
@@ -19,31 +19,52 @@ const categoryItems = [
 ];
 
 interface Game {
-  image: Array<string>;
-  productName: string;
-  price: number;
-  category: string;
-  description: string;
-  productId: string;
+  image: Array<string>,
+  productName: string,
+  price: number,
+  category: string,
+  description: string,
+  productId: string,
+  rating:number
 }
 interface Props {
   gameList:Game[],
-  index:number
+  index:number,
+  cardItem:boolean,
+  portrait:boolean
+}
+interface renderProps {
+  item: {
+    image: Array<string>,
+    productName: string,
+    price: number,
+    category: string,
+    description: string,
+    productId: string,
+    rating:number
+  }
 }
 
-const Card = ({gameList,index}:Props) => {
+const Card = ({gameList,index,cardItem,portrait}:Props) => {
   
      const result = gameList.filter(g=> g.category === categoryItems[index].cateName )
-   
+    const popular = gameList.filter(g=> g.category === 'Action')
+    const h = portrait? portrait: null
     return (
       <FlatList
+        h={h}
         horizontal
         showHorizontalScrollIndicator={false}
-        data={result}
+        data={cardItem? result:popular}
         keyExtractor={i=>i.productName}
-        renderItem={({ item }) => <CardItem game={item} />}
+        renderItem={({ item }:renderProps) => cardItem? <CardItem game={item} />: <PopularCard game={item}/>}
       />
     );      
 }
-const FlatList = styled.FlatList``
+const FlatList = styled.FlatList`
+ margin-top:-20px;
+ padding-left:7px;
+ height:${({h}:{h:boolean})=> h? "420px":"200px"};
+ flex-grow:0
+`
 export default Card

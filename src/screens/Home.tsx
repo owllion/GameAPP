@@ -78,10 +78,23 @@ const Home = ({ navigation }: any) => {
           Categories
         </Text>
         <ListCategory selectedIndex={selectedIndex} setsetIndexHandler={setsetIndexHandler}/>
-        <Text padding small>
+        <Text padding small margin>
           Top Game
         </Text>
-        <Card gameList={games} index={selectedIndex} />
+        <Card 
+          portrait
+          gameList={games} 
+          index={selectedIndex} 
+          cardItem 
+        />
+        <Text padding small margin>
+          Popular
+        </Text>
+         <Card 
+          gameList={games} 
+          index={selectedIndex} 
+         
+        />
       </ScrollView>
     </Container>
   );
@@ -108,6 +121,7 @@ const Text = styled.Text`
     props.color ? COLORS.primary : "#000"};
 
   padding: ${(props: { padding: boolean }) => (props.padding ? "20px" : 0)};
+ margin-top:${({margin}:{margin:boolean})=> margin? "-5px":0}
 `;
 
 export default Home;

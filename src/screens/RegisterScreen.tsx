@@ -15,7 +15,7 @@ const RegisterScreen= () => {
  }
 
   return (
-    <ImageBackground source={require('../assets/images/sky.jpg')} >
+    <ImageBackground source={require('../assets/images/registerbg.jpg')} >
       
      <View> 
       <AuthForm  
