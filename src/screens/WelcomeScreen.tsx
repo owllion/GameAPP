@@ -3,11 +3,7 @@ import { Platform, StatusBar, Dimensions, ImageBackground } from "react-native";
 import styled from "styled-components/native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
-import Button from "../components/forms/Button";
-
-const image = {
-  uri: "https://images.unsplash.com/photo-1500843613192-839e95410c10?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-};
+import AuthNavBtn from '../components/AuthNavBtn'
 
 const WelcomeScreen = ({ navigation }: any) => {
   const [isLoaded] = useFonts({
@@ -31,13 +27,13 @@ const WelcomeScreen = ({ navigation }: any) => {
           <Text>Highly recommend Death strending.</Text>
         </TextContanier>
         <ButtonContainer>
-          <Button
+          <AuthNavBtn
             text="LOGIN"
-            switchRoute={() => navigation.navigate("Login")}
+            onPress={() => navigation.navigate("Login")}
           />
-          <Button
+          <AuthNavBtn
             text="REGISTER"
-            switchRoute={() => navigation.navigate("Register")}
+            onPress={() => navigation.navigate("Register")}
           />
         </ButtonContainer>
       </View>

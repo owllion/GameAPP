@@ -14,15 +14,7 @@ const user = [{
 
 const config = [
   {
-    set:'My Posts',
-    icon:'list',
-    email:'',
-    avatar:'',
-    targetScreen:'' 
-  },
-  
-  {
-    set:'My Messages',
+    set:'My Orders',
     icon:'mail',
     email:'',
     avatar:'',
@@ -37,12 +29,6 @@ const config = [
   }
 ]
 const AccountScreen = ({navigation}:any) => {
-  // const dispatch = useDispatch()
-
-  // const signout = () => {
-  //     dispatch(authActions.signout())
-  //     navigation.navigate('Signin')
-  // }
 
   return (
      <>

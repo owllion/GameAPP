@@ -34,6 +34,9 @@ const authSlice = createSlice({
         },
        setError(state,{payload}:PayloadAction<Error>) {
            state.errorMsg = payload.message
+       },
+       setErrorClear(state) {
+           state.errorMsg = ''
        }
     }
         

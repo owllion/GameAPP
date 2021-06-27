@@ -1,18 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFormikContext } from 'formik'
 import { Input } from 'react-native-elements';
 import ErrorMsg from './forms/ErrorMsg'
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-
+import { useSelector,useDispatch }  from 'react-redux'
+import { authActions }  from '../store/slice/Auth'
+import COLORS from '../assets/color/colors';
 
 const AppFormInput = ({ fieldName,...otherProps }:{fieldName:string}) => {
+
+
     const { handleChange, errors ,setFieldTouched, touched }  = useFormikContext()
     
+    const errorMsg = useSelector(state=> state.auth.errorMsg)
+    console.log(errorMsg)
+    
+    const dispatch = useDispatch()
+    
+    useEffect(()=>{
+        dispatch(authActions.setErrorClear())
+    },[])
+
+
     const [isLoaded] =  useFonts({
       IBMPlexSansRegular: require('../assets/fonts/IBMPlexSans-Regular.ttf'),
-      IBMPlexSansBold: require('../assets/fonts/IBMPlexSans-Bold.ttf'),
-      
     })
 
      if (!isLoaded) {
@@ -24,14 +36,15 @@ const AppFormInput = ({ fieldName,...otherProps }:{fieldName:string}) => {
        <Input
         {...otherProps}
         style={{
-           fontFamily:'IBMPlexSansRegular'
+           fontFamily:'IBMPlexSansRegular',
+           color:COLORS.white
         }}
         onChangeText= {handleChange(fieldName)}       
         onBlur={()=> setFieldTouched(fieldName)}
-        /> 
-        <ErrorMsg 
+        />     
+         {!errorMsg && <ErrorMsg 
           error={ errors[fieldName]} 
-          visible={ touched[fieldName]} />          
+          visible={ touched[fieldName]} />  }       
        </>
     )
 }

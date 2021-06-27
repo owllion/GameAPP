@@ -1,17 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'
-import { register } from '../store/actions/authAction'
+import { registerOrLogin } from '../store/actions/authAction'
 import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'
-
-const image = { uri: "https://image.freepik.com/free-vector/mobile-wallpaper-with-watercolor-sky_79603-598.jpg"} ;
 
 const RegisterScreen= () => {
   const dispatch = useDispatch()
  
  const userRegister = (email:string,password:string ,userName:string) => {
-   dispatch(register({userName,email,password}))
+   dispatch(registerOrLogin({userName,email,password}))
  }
 
   return (

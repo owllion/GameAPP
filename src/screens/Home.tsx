@@ -4,7 +4,7 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNetInfo } from "@react-native-community/netinfo";
-import { Icon } from "react-native-elements";
+import { Icon,Badge } from "react-native-elements";
 import { Dimensions } from "react-native";
 import axios from "../api/axios";
 
@@ -14,7 +14,7 @@ import Card from "../components/Card";
 import Container from "../components/Container";
 import SearchBar from "../components/SearchBar";
 import ListCategory from "../components/ListCategory";
-
+import CartBtn from "../components/CartBtn";
 interface Game {
   image: Array<string>;
   productName: string;
@@ -24,9 +24,8 @@ interface Game {
   productId: string;
 }
 
-const { width } = Dimensions.get("screen");
 
-const Home = ({ navigation }: any) => {
+const Home = () => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   
  const setsetIndexHandler = (index:number) => setSelectedIndex(index)
@@ -64,13 +63,7 @@ const Home = ({ navigation }: any) => {
             <Text color>{""} Fun</Text>
           </TextInnerBox>
         </TextOuterBox>
-        <Icon
-          name="add-shopping-cart"
-          type="material-icons-outlined"
-          color={COLORS.dark}
-          size={28}
-          onPress={() => console.log("hello")}
-        />
+       <CartBtn/>
       </Header>
       <ScrollView showsVerticalScrollIndicator={false}>
         <SearchBar />
@@ -99,6 +92,7 @@ const Home = ({ navigation }: any) => {
     </Container>
   );
 };
+
 
 const Header = styled.View`
   padding: 2px 20px;

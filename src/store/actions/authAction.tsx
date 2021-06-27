@@ -1,31 +1,31 @@
 //import需要用到的slice
 import authSlice, {authActions} from '../slice/Auth'
 import axios from '../../api/axios'
-import { navigate } from '../../navigationRef.js'
+import * as navigation from '../../navigationRef.js'
 
 
 interface UserData {
    email:string;
    password:string;
-   userName?:string
+   userName:string
 }
 
-export const register = (payload:UserData) => {
+export const registerOrLogin = (payload:UserData) => {
    let path:string;
    return async(dispatch:any) => {
        payload.userName ? path = 'register' : path = 'rnLogin'
        const handler = path === 'register' ? 'signup' : 'signin'
         try {
-           console.log(payload)
+            console.log(payload)
           
              const { data } = await axios.post(`/${path}`,payload) 
              dispatch(authActions[handler](data))
-             navigate('TrackList')
+            
         }catch(e) {
-            console.log(e.response.data)
-            const msg = e.response.data.msg
-            console.log(msg)
-            let errMsg:string | undefined;
+           if(e.response) {
+              const msg = e.response.data.msg
+              console.log(msg)
+              let errMsg:string | undefined;
 
             //login error
             if(msg.includes('No')) {
@@ -50,6 +50,9 @@ export const register = (payload:UserData) => {
                    
            dispatch(authActions.setError({message:errMsg}))
            console.log(errMsg)
+           }
+           
+          
            
         }
        

@@ -5,14 +5,15 @@ import * as Yup from 'yup'
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import styled from 'styled-components/native'
-import Button from './Button'
+import { useSelector}  from 'react-redux'
+
+import SubmitBtn from './SubmitBtn'
 import AppFormInput from '../AppFormInput'
 import FormikWrapper from './FormikWrapper'
-
+import ErrorMsg from '../forms/ErrorMsg'
 
 interface Props {
     headerText:string;
-    onSubmit:Function;
     submitButtonText:string;
     nameInput:string
 }
@@ -23,7 +24,16 @@ const validationSchema = Yup.object().shape({
   name:Yup.string().required().min(3).label('Name')
 })
 
-const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
+const AuthForm= ({ headerText, submitButtonText,nameInput }:Props) => {
+
+     const errorMsg = useSelector(state=> state.auth.errorMsg)
+
+    // 解構的email和password就是initialValues
+  //    const handleSubmit = ({ email, password }:{email:string,password:string}) => {
+  //       dispatch(registerOrLogin({email,password})) 
+  // };
+  // console.log(handleSubmit)
+
      const [isLoaded] = useFonts({
       MarcellusRegular: require('../../assets/fonts/Marcellus-Regular.ttf'),
   });
@@ -35,12 +45,13 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
     <View> 
       <Text>{headerText}</Text>   
           <FormikWrapper
-            initialValues= {{ email: '', password: '', name:''}}
-            onSubmit= { values => console.log(values) }
+            initialValues= {{ email: '', password: '',name:''}}
+            onSubmit= {()=>console.log('FORM的ONSUBMIT')}
             validationSchema={ validationSchema }
           >
             
              { nameInput==='true' && 
+            
                <AppFormInput
                   fieldName='name'
                   textContentType='name'
@@ -55,7 +66,9 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
                       color='#fff'
                     />
                   } 
-                />          
+                />  
+               
+             
             } 
           <AppFormInput
               fieldName='email'
@@ -73,6 +86,21 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
                   />
               }   
           />
+         
+             { errorMsg==='email already exists!' && 
+                  <ErrorMsg 
+                  error={errorMsg}
+                  visible='show' 
+                />  
+
+              }
+              { errorMsg==='User does not exist' && 
+                  <ErrorMsg 
+                  error={errorMsg}
+                  visible='show' 
+                />  
+              }
+             
             <AppFormInput
               fieldName='password'
               textContentType='password'
@@ -91,8 +119,14 @@ const AuthForm= ({headerText,onSubmit, submitButtonText,nameInput}:Props) => {
                   />
               }   
           />
-         <Button
-          text={ submitButtonText }
+          { errorMsg==='Wrong password' && 
+                  <ErrorMsg 
+                  error={errorMsg}
+                  visible='show' 
+                />  
+              }
+         <SubmitBtn
+          text={ submitButtonText }    
          />
      </FormikWrapper>       
     </View>
@@ -112,4 +146,5 @@ const Text = styled.Text`
     margin-bottom:10px;
     font-family:MarcellusRegular;
 `
+const Wrapper =styled.View``
 export default  AuthForm

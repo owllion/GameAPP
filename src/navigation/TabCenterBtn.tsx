@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 import { Icon } from 'react-native-elements'
 import COLORS from "../assets/color/colors";
 
-const NavButton = (props:{onPress:()=>void})=> {
+const TabCenterBtn = (props:{onPress:()=>void})=> {
     return (
          <Pressable onPress={props.onPress}>
           <View>
@@ -31,4 +31,4 @@ const View = styled.View`
   align-items:center
 `
 
-export default NavButton
+export default TabCenterBtn

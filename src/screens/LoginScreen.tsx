@@ -1,25 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux'
-import {register} from '../store/actions/authAction'
 import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'
 
 
 const LoginScreen= () => {
- const dispatch = useDispatch()
-
- const userLogin = (email:string,password:string,userName?:string,) => {
-  
-   dispatch(register({email,password}))
- }
 
   return (
    <ImageBackground source={require('../assets/images/loginbg.jpg')} > 
   
     <View>  
       <AuthForm  
-       onSubmit={ userLogin } headerText='SIGN IN' nameInput='false'  submitButtonText='Log in'/> 
+       headerText='SIGN IN' 
+       nameInput='false'  
+       submitButtonText='Login'/> 
 
        <NavLink 
          text='Do not have an account? Sign up!'  

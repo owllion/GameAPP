@@ -7,8 +7,7 @@ import COLORS from "../assets/color/colors";
 import { Icon } from "react-native-elements";
 import { Image } from '../assets/ImgDetail/Image'
 import { AntDesign } from '@expo/vector-icons'; 
-
-
+import CartBtn from "../components/CartBtn";
 
 
 const Detail = ({navigation,route}:any) => {
@@ -36,13 +35,7 @@ const Detail = ({navigation,route}:any) => {
               />
                </HeaderBtn>
                <HeaderBtn>
-               <Icon
-                  name="add-shopping-cart"
-                  type="material-icons-outlined"
-                  
-                  size={25}
-                  onPress={() => console.log("hello")}
-                />
+                 <CartBtn/>
               </HeaderBtn>
           </Header>
           {/* Header end */}
@@ -107,6 +100,7 @@ const ScrollView = styled.ScrollView``
 const ImageBackground = styled. ImageBackground`
   flex:1
 `
+const View = styled.View``
 const Header = styled.View`
   padding:20px 10px;
   flex-direction:row;

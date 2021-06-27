@@ -19,8 +19,11 @@ interface Arr {
   bgColor:string;
 }
 const AppConfigItem = (props:Arr)=> {
+
     const navigation = useNavigation();
+
    const { data,bgColor }  = props
+
    const [isLoaded] =  useFonts({
       IBMPlexSansRegular: require('../assets/fonts/IBMPlexSans-Regular.ttf'),
       IBMPlexSansBold: require('../assets/fonts/IBMPlexSans-Bold.ttf'),
@@ -74,10 +77,8 @@ const AppConfigItem = (props:Arr)=> {
      
     ))
   }
-  </>
-    
-    )
+  </>   
+     )
 }
-
 
 export default AppConfigItem

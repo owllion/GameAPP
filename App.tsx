@@ -12,12 +12,18 @@ import navigationTheme from "./src/navigation/navigationTheme";
 import OfflineNotice from "./src/components/OfflineNotice";
 import AppLoading from "expo-app-loading";
 import COLORS from "./src/assets/color/colors";
+import { navigationRef } from './src/navigationRef';
+import { useSelector } from 'react-redux';
 
 let persistor = persistStore(store);
 
+
+
+
 const App = () => {
   const [isReady, setIsReady] = useState(false);
-
+  const token = useSelector(state=> state.auth.token)
+  console.log(token)
   if (!isReady) {
     return (
       <AppLoading
@@ -29,18 +35,28 @@ const App = () => {
   }
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+ 
+      <>
         <OfflineNotice />
-        <NavigationContainer theme={navigationTheme}>
+        <NavigationContainer ref={navigationRef} theme={navigationTheme}>
           {/* 如果有user資料或是token就顯示Tabs */}
-          <AuthNavigator />  
+          
           <StatusBar backgroundColor={COLORS.dark} barStyle="light-content" />
-         {/* <Tabs />  */}
+          {/* {token ? <Tabs />: <AuthNavigator />  } */}
+        <Tabs />
         </NavigationContainer>
-      </PersistGate>
-    </Provider>
+     </>
+    
   );
 };
+const AppWrapper = () => {
+  return (
+    <Provider store={store}> 
+     <PersistGate loading={null} persistor={persistor}>
+      <App/>
+      </PersistGate>
+    </Provider>
+  )
+}
 
-export default App;
+export default AppWrapper;

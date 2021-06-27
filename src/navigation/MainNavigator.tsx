@@ -7,7 +7,7 @@ import AccountNavigator from './AccountNavigator'
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'
 import COLORS from "../assets/color/colors";
-import NavButton from './NavButton'
+import TabCenterBtn from './TabCenterBtn'
 import route from '../navigation/route'
 
 import * as Notifications from "expo-notifications";
@@ -39,7 +39,7 @@ const MainNavigator = () => {
             component={CartScreen}
             options= {
                 ({navigation}) => ({
-                  tabBarButton:()=> <NavButton onPress={()=> navigation.navigate(route.RouteList.Account)} />                
+                  tabBarButton:()=> <TabCenterBtn onPress={()=> navigation.navigate(route.RouteList.Account)} />                
                 })                           
             }
         />     
