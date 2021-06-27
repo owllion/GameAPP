@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { useFonts } from "expo-font";
+import { useDispatch } from 'react-redux'
 import AppLoading from "expo-app-loading";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNetInfo } from "@react-native-community/netinfo";
@@ -15,6 +16,8 @@ import Container from "../components/Container";
 import SearchBar from "../components/SearchBar";
 import ListCategory from "../components/ListCategory";
 import CartBtn from "../components/CartBtn";
+import userApi from '../api/user'
+import { authActions } from '../store/slice/Auth'
 interface Game {
   image: Array<string>;
   productName: string;
@@ -26,6 +29,8 @@ interface Game {
 
 
 const Home = () => {
+  const dispatch = useDispatch()
+  
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   
  const setsetIndexHandler = (index:number) => setSelectedIndex(index)
@@ -35,11 +40,17 @@ const Home = () => {
     getAllGames();
   }, []);
   const getAllGames = async () => {
-    const {
-      data: { allGames },
-    } = await axios.get("/games/all");
+    try {
+      dispatch(authActions.setLoading({isLoading:true}))
+       const { data: { allGames }} = await userApi.getAllGames();
+ 
+       setGames(allGames);
+       dispatch(authActions.setLoading({isLoading:false}))
+    }catch(e) {
+      dispatch(authActions.setLoading({isLoading:false}))
+       alert(`Something wrong! ${e}`)
+    }
    
-    setGames(allGames);
   };
   // const handler = async () => {
   //   const netInfo = useNetInfo();
@@ -55,6 +66,7 @@ const Home = () => {
   }
   return (
     <Container>
+      
       <Header>
         <TextOuterBox>
           <Text>Find your game</Text>

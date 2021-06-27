@@ -17,6 +17,9 @@ export interface Data {
 export interface Error {
     message:string 
 }
+export interface Loading {
+    isLoading:boolean
+}
 
 const authSlice = createSlice({
     name: 'auth',
@@ -30,7 +33,8 @@ const authSlice = createSlice({
         county:'',
         district:'',
         road:'',
-        errorMsg:''
+        errorMsg:'',
+        loading:false
     },
     reducers : {
        
@@ -48,7 +52,14 @@ const authSlice = createSlice({
         },
          signin(state, { payload }:PayloadAction<Data>) {
             state.token = payload.result.token
-            state.name = payload.result.user.name             
+           state.name = payload.result.user.name
+           state.email = payload.result.user.email
+           state.avatarRnDefault = payload.result.user.avatarRnDefault
+           state.cartList = payload.result.user.cartList
+           state.favList = payload.result.user.favList
+           state.county = payload.result.user.county
+           state.district = payload.result.user.district
+           state.road = payload.result.user.road         
         },
         signout(state) {
             state.token =''
@@ -58,6 +69,9 @@ const authSlice = createSlice({
        },
        setErrorClear(state) {
            state.errorMsg = ''
+       },
+       setLoading(state,{ payload }:PayloadAction<Loading>) {
+           state.loading = payload.isLoading
        }
     }
         
