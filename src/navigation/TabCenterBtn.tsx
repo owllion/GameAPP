@@ -10,8 +10,8 @@ const TabCenterBtn = (props:{onPress:()=>void})=> {
             <Icon        
                 name='shopping-cart'
                 type='material-icons'
-                color='#fff'
-                size={25}                  
+                color={COLORS.white}
+                size={30}                  
             />
           </View>
         </Pressable>
@@ -22,13 +22,11 @@ const Pressable = styled.Pressable`
 `
 const View = styled.View`
   border-radius:50px;
-  background-color:${COLORS.primary};
-  border:solid 10px #fff;
-  width:80px;
-  height:80px;
+  background-color:${COLORS.orange};
+  width:70px;
+  height:70px;
   bottom:30px;
   justify-content:center;
   align-items:center
 `
-
 export default TabCenterBtn

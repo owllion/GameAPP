@@ -1,6 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
 import Home from "../screens/Home";
 import CartScreen from '../screens/CartScreen'
 import AccountNavigator from './AccountNavigator'
@@ -9,7 +8,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import COLORS from "../assets/color/colors";
 import TabCenterBtn from './TabCenterBtn'
 import route from '../navigation/route'
-
+import { Badge } from "react-native-elements";
 import * as Notifications from "expo-notifications";
 
 
@@ -20,18 +19,42 @@ const MainNavigator = () => {
         <Tab.Navigator
         tabBarOptions={{
             activeBackgroundColor: '#fff',
-            activeTintColor:COLORS.primary,
+            activeTintColor:COLORS.orange,
             inactiveBackgroundColor:'#fff',
             inactiveTintColor:'gray',
-            showLabel:false
+            showLabel:false,
+            tabStyle:{            
+                backgroundColor:'transparent',             
+            },
+            style: {
+                backgroundColor:COLORS.primary,
+                borderTopWidth:0,
+                borderRadius:50,
+                height:60,
+                position: 'absolute',
+                left: 20,
+                right: 20,
+                bottom:20
+             },
         }}
       >
           <Tab.Screen 
             name='Game'
             component={Home}
             options= {{
-                tabBarIcon: ({size,color})=> <Entypo name="game-controller" size={size} color= {color}/> 
-                      
+                tabBarIcon: ({size,color,focused})=> 
+                <>
+                <Entypo name="game-controller" size={size} color= {color}/> 
+                { focused &&  
+                    <Badge 
+                      badgeStyle={   
+                        {
+                          backgroundColor:COLORS.orange, borderColor:COLORS.orange
+                        }
+                      }  
+                    />
+                }
+                </>              
             }}
         />
          <Tab.Screen 
@@ -39,7 +62,7 @@ const MainNavigator = () => {
             component={CartScreen}
             options= {
                 ({navigation}) => ({
-                  tabBarButton:()=> <TabCenterBtn onPress={()=> navigation.navigate(route.RouteList.Account)} />                
+                  tabBarButton:()=> <TabCenterBtn onPress={()=> navigation.navigate(route.RouteList.Cart)} />                
                 })                           
             }
         />     
@@ -47,7 +70,20 @@ const MainNavigator = () => {
             name='Account'
             component={AccountNavigator}
              options= {{
-                tabBarIcon: ({size,color})=> <MaterialIcons name="person" size={size} color= {color}/>                     
+
+                tabBarIcon: ({size,color,focused})=>
+                <>
+                 <MaterialIcons name="person" size={size} color= {color}/>  
+                  { focused &&  
+                    <Badge 
+                      badgeStyle={   
+                        {
+                          backgroundColor:COLORS.orange, borderColor:COLORS.orange
+                        }
+                      }  
+                    />
+                }
+                </>                   
             }}
            
         />

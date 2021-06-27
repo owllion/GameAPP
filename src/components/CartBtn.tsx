@@ -13,7 +13,13 @@ const CartBtn = ()=> {
           size={28}
           onPress={() => console.log("hello")}
         />
-        <Badge value="2" status="error" containerStyle={{ position: 'absolute', top: -9, right: -6 }} />
+        <Badge 
+         value="2" 
+         status="error" 
+         badgeStyle={{
+           backgroundColor:COLORS.orange
+         }}
+         containerStyle={{ position: 'absolute', top: -9, right: -6 }} />
         </View>
     )
 }

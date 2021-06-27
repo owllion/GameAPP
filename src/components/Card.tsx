@@ -54,7 +54,8 @@ const Card = ({gameList,index,cardItem,portrait}:Props) => {
       <FlatList
         h={h}
         horizontal
-        showHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         data={cardItem? result:popular}
         keyExtractor={i=>i.productName}
         renderItem={({ item }:renderProps) => cardItem? <CardItem game={item} />: <PopularCard game={item}/>}
@@ -64,7 +65,7 @@ const Card = ({gameList,index,cardItem,portrait}:Props) => {
 const FlatList = styled.FlatList`
  margin-top:-20px;
  padding-left:7px;
- height:${({h}:{h:boolean})=> h? "420px":"200px"};
+ height:${({h}:{h:boolean})=> h? "420px":"280px"};
  flex-grow:0
 `
 export default Card

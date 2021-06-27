@@ -6,6 +6,7 @@ const COLORS = {
   grey: "#A9A9A9",
   yellow: "#ffb900",
   red: "red",
+  orange:"#FE7161",
   tranparent: "rgba(0,0,0,0)",
 };
 

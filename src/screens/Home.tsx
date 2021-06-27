@@ -112,7 +112,7 @@ const Text = styled.Text`
   font-family: IBMPlexSansBold;
 
   color: ${(props: { color: boolean }) =>
-    props.color ? COLORS.primary : "#000"};
+    props.color ? COLORS.orange : "#000"};
 
   padding: ${(props: { padding: boolean }) => (props.padding ? "20px" : 0)};
  margin-top:${({margin}:{margin:boolean})=> margin? "-5px":0}

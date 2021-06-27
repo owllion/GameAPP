@@ -3,7 +3,14 @@ export interface Data {
     result:{
         token:string,
         user:{
-            name:string
+            name:string,
+            email:string,
+            avatarRnDefault:string,
+            favList:[],
+            cartList:[],
+            county:string,
+            district:string,
+            road:string
         }
     }
 }
@@ -15,14 +22,28 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         token:'',
-        name:'',     
+        name:'',
+        email:'',
+        avatarRnDefault:'',
+        cartList:[],
+        favList:[],
+        county:'',
+        district:'',
+        road:'',
         errorMsg:''
     },
     reducers : {
-        //登入成功就儲存token和name
+       
       signup(state, { payload }:PayloadAction<Data>) {      
            state.token = payload.result.token
            state.name = payload.result.user.name
+           state.email = payload.result.user.email
+           state.avatarRnDefault = payload.result.user.avatarRnDefault
+           state.cartList = payload.result.user.cartList
+           state.favList = payload.result.user.favList
+           state.county = payload.result.user.county
+           state.district = payload.result.user.district
+           state.road = payload.result.user.road
            
         },
          signin(state, { payload }:PayloadAction<Data>) {
