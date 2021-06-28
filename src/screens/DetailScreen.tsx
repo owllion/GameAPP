@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components/native'
 import { useFonts } from 'expo-font';
 import AppLoading from "expo-app-loading";
@@ -6,11 +6,16 @@ import Container from '../components/Container';
 import COLORS from "../assets/color/colors";
 import { Icon } from "react-native-elements";
 import { Image } from '../assets/ImgDetail/Image'
-import { AntDesign } from '@expo/vector-icons'; 
 import CartBtn from "../components/CartBtn";
-
+import AddToCartBtn from '../components/AddToCartBtn';
+import QtyBtn from '../components/QtyBtn';
 
 const Detail = ({navigation,route}:any) => {
+    const [qty, setQty] = useState<number>(1)
+    
+    const qtyHandler = (type:string) => {
+      setQty(type==='add'? qty+1:qty-1)
+    }
 
     const [isLoaded] = useFonts({
     IBMPlexSansRegular: require("../assets/fonts/IBMPlexSans-Regular.ttf"),
@@ -21,6 +26,7 @@ const Detail = ({navigation,route}:any) => {
   }
 
     const {item} = route.params
+    const gameId = item.productId
     const gameBg = Image.filter(i=> i.name === item.productName)?.find(i=>i.img)
     return (
       <ImageBackground source={gameBg.img}>
@@ -37,9 +43,7 @@ const Detail = ({navigation,route}:any) => {
                <HeaderBtn>
                  <CartBtn/>
               </HeaderBtn>
-          </Header>
-          {/* Header end */}
-          {/* Content start */}      
+          </Header>        
         </Container>
 
          <ContentBox>
@@ -75,32 +79,17 @@ const Detail = ({navigation,route}:any) => {
 
             <PriceAndNumber>     
               <Text large color>${item.price}</Text>
-              <QuantityBox>  
-                <QuantityBtn>
-                  <AntDesign name="minus" size={15} color="black" />                
-                  </QuantityBtn>
-
-                    <Text style={{color:COLORS.white}}>1</Text>
-                    
-                  <QuantityBtn>
-                 <AntDesign name="plus" size={15} color="black" />
-                </QuantityBtn>
-
-              </QuantityBox>  
+                <QtyBtn qtyHandler={qtyHandler} qty={qty}/>
             </PriceAndNumber> 
-            <AddToCartBtn> 
-              <Text style={{color:COLORS.white}}>Add To Cart</Text>   
-            </AddToCartBtn>    
+            <AddToCartBtn gameId={gameId} qty={qty}/>         
         </ContentBox>       
-      </ImageBackground>     
-     
+      </ImageBackground>         
     )
 }
 const ScrollView = styled.ScrollView`` 
 const ImageBackground = styled. ImageBackground`
   flex:1
 `
-const View = styled.View``
 const Header = styled.View`
   padding:20px 10px;
   flex-direction:row;
@@ -115,14 +104,7 @@ const HeaderBtn = styled.View`
   justify-content:center;
   align-items:center
 `
-const DetailBox = styled.View`
-  padding:20px;
-  flex-direction:row;
-  justify-content:space-between;
-  width:100%;
-  position:absolute;
-  bottom:30px
-`
+
 const RatingBox = styled.View`
   flex-direction:row;
   height:43px;
@@ -184,13 +166,5 @@ const QuantityBtn = styled.View`
   align-items:center;
   border-radius:5px
 `
-const AddToCartBtn = styled.View`
-  height:50px;
-  justify-content:center;
-  align-items:center;
-  background-color:${COLORS.primary};
-  border-radius:10px;
-  padding: 0 10px;
-  margin-top:20px;
-`
+
 export default Detail

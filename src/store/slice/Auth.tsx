@@ -6,8 +6,24 @@ export interface Data {
             name:string,
             email:string,
             avatarRnDefault:string,
-            favList:[],
-            cartList:[],
+            favList:{
+                image: Array<string>;
+                productName: string;
+                price: number;
+                category: string;
+                description: string;
+                productId: string;
+                rating:number
+            }[],
+            cartList:{
+                image: Array<string>;
+                productName: string;
+                price: number;
+                category: string;
+                description: string;
+                productId: string;
+                rating:number
+            }[],
             county:string,
             district:string,
             road:string
@@ -20,6 +36,21 @@ export interface Error {
 export interface Loading {
     isLoading:boolean
 }
+export interface Cart {
+  cartList: {
+        image: Array<string>;
+        productName: string;
+        price: number;
+        category: string;
+        description: string;
+        productId: string;
+        rating:number
+  }[]
+}
+export interface CartLength {
+    length:number
+} 
+
 
 const authSlice = createSlice({
     name: 'auth',
@@ -27,8 +58,9 @@ const authSlice = createSlice({
         token:'',
         name:'',
         email:'',
-        avatarRnDefault:'',
+        avatar:'',
         cartList:[],
+        cartListLength:0,
         favList:[],
         county:'',
         district:'',
@@ -42,7 +74,7 @@ const authSlice = createSlice({
            state.token = payload.result.token
            state.name = payload.result.user.name
            state.email = payload.result.user.email
-           state.avatarRnDefault = payload.result.user.avatarRnDefault
+           state.avatar = payload.result.user.avatarRnDefault
            state.cartList = payload.result.user.cartList
            state.favList = payload.result.user.favList
            state.county = payload.result.user.county
@@ -51,10 +83,10 @@ const authSlice = createSlice({
            
         },
          signin(state, { payload }:PayloadAction<Data>) {
-            state.token = payload.result.token
+           state.token = payload.result.token
            state.name = payload.result.user.name
            state.email = payload.result.user.email
-           state.avatarRnDefault = payload.result.user.avatarRnDefault
+           state.avatar = payload.result.user.avatarRnDefault
            state.cartList = payload.result.user.cartList
            state.favList = payload.result.user.favList
            state.county = payload.result.user.county
@@ -72,6 +104,12 @@ const authSlice = createSlice({
        },
        setLoading(state,{ payload }:PayloadAction<Loading>) {
            state.loading = payload.isLoading
+       },
+       setCart(state, { payload }:PayloadAction<Cart>) {
+           state.cartList = payload.cartList
+       },
+       setCartLength(state, { payload }:PayloadAction<CartLength> ) {
+           state.cartListLength = payload.length
        }
     }
         

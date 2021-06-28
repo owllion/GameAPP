@@ -43,7 +43,7 @@ const AppListItem = (props:Props)=> {
             />
          }
      >
-        <Avatar source={{uri: l.avatar_url}} />
+        {/* <Avatar containerStyle={{borderRadius:10}} source={require('../assets/ImgDetail/death.png')} /> */}
         <ListItem.Content>
           <ListItem.Title 
           numberOfLines={1}
@@ -61,6 +61,7 @@ const AppListItem = (props:Props)=> {
               {l.subtitle}
           </ListItem.Subtitle>
         </ListItem.Content>
+        
         <ListItem.Chevron/>
       </ListItem.Swipeable>
     ))

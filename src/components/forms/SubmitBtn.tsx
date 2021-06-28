@@ -24,11 +24,16 @@ const SubmitBtn = (props:Props) => {
     }
     const checkSubmit = () => {
        if(!isChecked) {
-          alert('pls check your field again!')
+          alert('Please check your field again!')
           return 
        }
-       console.log(values.name)
-      dispatch(registerOrLogin({email:values.email,password:values.password,userName:values.name})) 
+       dispatch(
+          registerOrLogin({
+           email:values.email,
+           password:values.password,
+           userName:values.name
+         })
+      ) 
 
       }
    
@@ -41,17 +46,6 @@ const SubmitBtn = (props:Props) => {
        }
    
     return (
-      //   <TouchableOpacity
-      //     onPress={()=>{
-      //         if(!isChecked) return console.log('no')
-      //      console.log('stuck')
-      //       handleSubmit()
-      //      console.log('stuck2')
-
-      //     }}         
-      //    >
-      //     <Text>{text}</Text>     
-      //   </TouchableOpacity>
       <TouchableOpacity
           onPress={checkSubmit}
          >

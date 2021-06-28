@@ -17,9 +17,6 @@ import { useSelector } from 'react-redux';
 
 let persistor = persistStore(store);
 
-
-
-
 const App = () => {
   const [isReady, setIsReady] = useState(false);
   const token = useSelector(state=> state.auth.token)
@@ -35,18 +32,18 @@ const App = () => {
   }
 
   return (
- 
       <>
         <OfflineNotice />
-        <NavigationContainer ref={navigationRef} theme={navigationTheme}>
-          {/* 如果有user資料或是token就顯示Tabs */}
-          
-          <StatusBar backgroundColor={COLORS.dark} barStyle="light-content" />
-          {/* {token ? <Tabs />: <AuthNavigator />  } */}
-        <Tabs />
+        <NavigationContainer 
+          ref={navigationRef} 
+          theme={navigationTheme}
+        >   
+        <StatusBar backgroundColor={COLORS.dark} barStyle="light-content" />
+
+        { token ? <Tabs />: <AuthNavigator /> } 
+
         </NavigationContainer>
-     </>
-    
+     </>  
   );
 };
 const AppWrapper = () => {

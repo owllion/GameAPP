@@ -5,9 +5,7 @@ import { useDispatch } from 'react-redux'
 import AppLoading from "expo-app-loading";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNetInfo } from "@react-native-community/netinfo";
-import { Icon,Badge } from "react-native-elements";
 import { Dimensions } from "react-native";
-import axios from "../api/axios";
 
 import COLORS from "../assets/color/colors";
 import ActivityIndicator from "../components/ActivityIndicator";

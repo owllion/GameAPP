@@ -12,7 +12,8 @@ interface UserData {
 
 export const registerOrLogin = (payload:UserData) => {
    let path:string;
-   return async(dispatch:any) => {
+   return async(dispatch:any,getState:any) => {
+      console.log(getState())
        payload.userName ? path = 'register' : path = 'rnLogin'
        const handler = path === 'register' ? 'signup' : 'signin'
         try {
