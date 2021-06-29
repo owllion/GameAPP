@@ -11,23 +11,17 @@ import AddToCartBtn from '../components/AddToCartBtn';
 import QtyBtn from '../components/QtyBtn';
 
 const Detail = ({navigation,route}:any) => {
+
     const [qty, setQty] = useState<number>(1)
-    
-    const qtyHandler = (type:string) => {
-      setQty(type==='add'? qty+1:qty-1)
-    }
-
-    const [isLoaded] = useFonts({
-    IBMPlexSansRegular: require("../assets/fonts/IBMPlexSans-Regular.ttf"),
-    IBMPlexSansBold: require("../assets/fonts/IBMPlexSans-Bold.ttf"),
-  });
-  if (!isLoaded) {
-    return <AppLoading />;
-  }
-
-    const {item} = route.params
+  
+    const { item } = route.params
     const gameId = item.productId
     const gameBg = Image.filter(i=> i.name === item.productName)?.find(i=>i.img)
+    
+    const qtyHandler = (type:string) => {
+      setQty( type==='add'? qty+1: qty-1 )
+    }
+
     return (
       <ImageBackground source={gameBg.img}>
         <Container>
@@ -79,7 +73,7 @@ const Detail = ({navigation,route}:any) => {
 
             <PriceAndNumber>     
               <Text large color>${item.price}</Text>
-                <QtyBtn qtyHandler={qtyHandler} qty={qty}/>
+                <QtyBtn stock={item.stock} qtyHandler={qtyHandler} qty={qty}/>
             </PriceAndNumber> 
             <AddToCartBtn gameId={gameId} qty={qty}/>         
         </ContentBox>       

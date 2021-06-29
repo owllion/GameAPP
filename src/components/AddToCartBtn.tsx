@@ -31,7 +31,9 @@ const AddToCartBtn = ({gameId,qty}:{gameId:string,qty:number}) => {
 
     return (
         <Pressable 
-        onPress={addToCartHandler}> 
+        onPress={addToCartHandler}
+        android_ripple={{color:COLORS.light,borderless:true}}
+        > 
           <Text style={{color:COLORS.white}}>Add To Cart</Text>   
         </Pressable>    
     )

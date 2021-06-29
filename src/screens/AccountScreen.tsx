@@ -61,8 +61,8 @@ const AccountScreen = () => {
 
 const Wrapper = styled.View`
   background-color:${COLORS.primary};
-  padding-left:20px;
-  padding-top:20px;
+  padding-left:28px;
+  padding-top:50px;
   flex:1
 `
 const ImageContainer = styled.View`

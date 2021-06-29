@@ -5,7 +5,9 @@ import COLORS from "../assets/color/colors";
 
 const TabCenterBtn = (props:{onPress:()=>void})=> {
     return (
-         <Pressable onPress={props.onPress}>
+         <Pressable
+         android_ripple={{color:COLORS.light, borderless:true}} 
+         onPress={props.onPress}>
           <View>
             <Icon        
                 name='shopping-cart'

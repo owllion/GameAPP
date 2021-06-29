@@ -6,6 +6,7 @@ export default Object.freeze ({
         Home:'Home',
         Login:'Login',
         Register:'Register',
-        Welcome:'Welcome'
+        Welcome:'Welcome',
+        Fav:'Fav'
     }
 })

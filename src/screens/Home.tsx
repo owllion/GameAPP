@@ -63,8 +63,7 @@ const Home = () => {
     return <AppLoading />;
   }
   return (
-    <Container>
-      
+    <Container>     
       <Header>
         <TextOuterBox>
           <Text>Find your game</Text>

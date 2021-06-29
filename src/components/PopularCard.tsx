@@ -6,6 +6,7 @@ import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 const { width } = Dimensions.get("screen");
+import { useNavigation } from '@react-navigation/native';
 
 interface Game {
   game: {
@@ -20,6 +21,8 @@ interface Game {
 }
 
 const PopularCard = ({ game }:Game) => {
+  const navigation = useNavigation()
+
   const [isLoaded] = useFonts({
      IBMPlexSansBold: require("../assets/fonts/IBMPlexSans-Bold.ttf"),
   });
@@ -28,7 +31,12 @@ const PopularCard = ({ game }:Game) => {
   }
  
   return (
-     <Pressable onPress={()=> console.log('123')}>
+    <Pressable 
+    android_ripple={{
+      color:COLORS.grey,
+      borderless:true
+    }}
+    onPress={()=> navigation.navigate('Detail',{item:game})}>
     <View>
       <Image 
         source={{uri:game.image[0]}}     

@@ -3,12 +3,22 @@ import styled from 'styled-components/native'
 import { AntDesign } from '@expo/vector-icons'; 
 import COLORS from "../assets/color/colors";
 
-const QtyBtn = ({qtyHandler,qty}:{qtyHandler:(type:string)=>void, qty:number}) => {
+interface Props {
+   qtyHandler?:(type:string)=>void,
+   updateQtyHandler?:(type:string,index:number)=>void,
+   qty:number,
+   stock:number,
+   index:number
+}
+
+
+const QtyBtn = ({qtyHandler, updateQtyHandler, qty ,stock, index}:Props) => {
     return (
         <QuantityBox>  
-            <QuantityBtn 
+            <QuantityBtn
+              disabled={qty===1} 
               android_ripple={{color:COLORS.primary}}
-              onPress={() => { qtyHandler('minus') }}
+              onPress={() => { qtyHandler? qtyHandler('minus'):updateQtyHandler('minus',index) }}
               >
             <AntDesign name="minus" size={15} color="black" />                
            </QuantityBtn>
@@ -16,8 +26,9 @@ const QtyBtn = ({qtyHandler,qty}:{qtyHandler:(type:string)=>void, qty:number}) =
             <Text style={{color:COLORS.white}}>{qty}</Text>
                     
             <QuantityBtn 
+              disabled={qty=== stock} 
               android_ripple={{color:COLORS.primary}}
-              onPress={() => { qtyHandler('add') }}
+              onPress={() => { qtyHandler? qtyHandler('add'):updateQtyHandler('add',index) }}
               >
              <AntDesign name="plus" size={15} color="black" />
             </QuantityBtn>

@@ -1,9 +1,6 @@
 //import需要用到的slice
-import authSlice, {authActions} from '../slice/Auth'
+import { authActions } from '../slice/Auth'
 import axios from '../../api/axios'
-import * as navigation from '../../navigationRef.js'
-
-
 interface UserData {
    email:string;
    password:string;
@@ -36,26 +33,22 @@ export const registerOrLogin = (payload:UserData) => {
                errMsg = 'Wrong password'
             }
 
-            //register error
-            if(msg.includes('invalid')) {
-               errMsg = 'email is invalid!'
-            }
+           
+            // if(msg.includes('invalid')) {
+            //    errMsg = 'email is invalid!'
+            //}
              if(msg.includes('duplicate') ) {
               errMsg = 'email already exists!'
              
            }
 
-            if(msg.includes('shorter')) {
-              errMsg = 'Password should be at least 7 words'            
-           } 
+         //    if(msg.includes('shorter')) {
+         //      errMsg = 'Password should be at least 7 words'            
+         //   } 
                    
            dispatch(authActions.setError({message:errMsg}))
            console.log(errMsg)
-           }
-           
-          
-           
-        }
-       
+           }       
+        }     
    }
 }

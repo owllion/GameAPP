@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from "../screens/Home";
-import CartScreen from '../screens/CartScreen'
+import FavScreen from '../screens/FavScreen'
 import AccountNavigator from './AccountNavigator'
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'
@@ -58,13 +58,23 @@ const MainNavigator = () => {
             }}
         />
          <Tab.Screen 
-            name='Cart'
-            component={CartScreen}
-            options= {
-                ({navigation}) => ({
-                  tabBarButton:()=> <TabCenterBtn onPress={()=> navigation.navigate(route.RouteList.Cart)} />                
-                })                           
-            }
+            name='Fav'
+            component={FavScreen}
+            options= {{
+                tabBarIcon: ({size,color,focused})=> 
+                <>
+                <Entypo name="heart" size={size} color= {color}/> 
+                { focused &&  
+                    <Badge 
+                      badgeStyle={   
+                        {
+                          backgroundColor:COLORS.orange, borderColor:COLORS.orange
+                        }
+                      }  
+                    />
+                }
+                </>              
+            }}
         />     
          <Tab.Screen 
             name='Account'

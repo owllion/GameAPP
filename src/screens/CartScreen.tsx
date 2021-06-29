@@ -1,132 +1,215 @@
-import React,{ useState } from 'react'
+import React,{ useState,useEffect } from 'react'
 import styled from 'styled-components/native'
 import Container from '../components/Container'
-import AppLoading from "expo-app-loading";
-import { useFonts } from "expo-font";
 import BackBtn from '../components/BackBtn';
-import { ListItem,Button,Avatar,CheckBox,Icon  } from 'react-native-elements'
+import { ListItem,Button,Avatar ,Icon  } from 'react-native-elements'
 import COLORS from "../assets/color/colors";
 import QtyBtn from '../components/QtyBtn';
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+import userApi from '../api/user'
+import { authActions } from '../store/slice/Auth';
+import { updateQty } from '../store/actions/updateQtyAction'
+interface Game {  
+    image: Array<string>,
+    productName: string,
+    price: number,
+    category: string,
+    description: string,
+    productId: string,
+    rating:number,
+    isChecked:boolean,
+    qty:number
+  
+}
 
-const CartScreen = () => {
-   const cartList = useSelector(state=> state.auth.cartList)
-  console.log('cartscreen!')
-  console.log(cartList)
-     const [isChecked, setIsChecked] = useState<boolean>(false)
-     const [isLoaded] =  useFonts({
-      MarcellusRegular: require("../assets/fonts/Marcellus-Regular.ttf"),    
-    });
-    if (!isLoaded) {
-        return <AppLoading />
-       }
+
+const CartScreen = ({navigation}:any) => {
+     const [total,setTotal] = useState<number>(0)
+     const dispatch = useDispatch()
+     const cartList = useSelector(state=> state.auth.cartList)
+     const token = useSelector(state=> state.auth.token)
+
+     const countTotal = () => {
+       let total = 0 
+       cartList.forEach(item => {       
+           total += Math.floor(item.price*item.qty)      
+       })
+       setTotal(total)
+    } 
+     
+    const deleteHandler = async(id:string) => {
+      try {
+          const {data: {cartList:list}} = await userApi.deleteItem({cartList,productId:id},token)
+           dispatch(authActions.setCart({cartList:list}))
+      }catch(e) {
+        if(e.response) {
+          alert(e.response.data.msg)
+        }    
+      }
+    }
+
+      const updateQtyHandler = (type:string,index:number) => {
+            dispatch(authActions.setCartItemQty({type,index}) )
+            updateQty({
+                    productId:cartList[index].productId,
+                    qty:cartList[index].qty,
+                    cartList,
+              })
+      } 
+
+    useEffect(()=> {
+      countTotal()
+    },[cartList])
+  
     return (     
        <Container>
+         <BackBtnBox>
          <BackBtn/>
+         <Text>Back</Text>
+       </BackBtnBox>
          <View>
-        <Text title margin>Cart</Text>    
-     {/* main content */}    
+        <Text title margin>Cart</Text> 
+       {cartList.length ?  
            <FlatList
              showsVerticalScrollIndicator={false}
-             ketExtractor={i=>i.productId}
+             keyExtractor={i=>i.productId}
              data={cartList}
-             renderItem={({item})=> (
+             renderItem={({item,index})=> (
                 <ListItem.Swipeable
-      containerStyle={{
-          paddingVertical:10,
-          backgroundColor:COLORS.light,
-          borderTopLeftRadius:15,
-          borderBottomLeftRadius:15,
-          marginBottom:15,
-          height:100,
-          borderBottomWidth:0
-      }}     
-       onPress={()=>{}}
-       underlayColor={COLORS.tranparent}
-       key={item.productId} 
-       bottomDivider
-       leftContent={
-            <Button          
-            onPress={()=> console.log('hoe')}
-            icon={
-              <Icon
-                type='fontisto'
-                name="trash"
-                size={35}
-                color={COLORS.white}
-              />
-          }
-            buttonStyle={{ 
-              height: 100, 
-              backgroundColor: COLORS.orange,
-              borderTopLeftRadius:15,
-              borderBottomLeftRadius:15,   
-            }}
-            />
-         }
-         rightContent={
-           <NumContainer>
-             <QtyBtn/>
-            </NumContainer>
-         }
-     >
-       <CheckBox
-       size={36}
-       checkedIcon={
-         <Icon
-           type='ionicon'
-           name='checkmark'
-           color={COLORS.orange}
-         />
-       } 
-           containerStyle={{paddingHorizontal:-50}}
-            checked={isChecked}
-            onPress={()=>setIsChecked(!isChecked)}
-            checkedColor={COLORS.orange}
-    /> 
-        <Avatar 
-         avatarStyle={{
-           borderRadius:8,
-         }}    
-         size={50}
-         source={{uri:item.image[0]}} />
+                    onPress={()=>navigation.navigate('Detail',{item:item})}
+                    containerStyle={{
+                        paddingVertical:10,
+                        backgroundColor:COLORS.light,
+                        borderTopLeftRadius:15,
+                        borderBottomLeftRadius:15,
+                        marginBottom:15,
+                        height:100,
+                        borderBottomWidth:0
+                    }}   
+                     activeOpacity={1}
+                    underlayColor={'transparent'}            
+                    key={item.productId} 
+                    bottomDivider
+                    leftContent={
+                          <Button          
+                           onPress={()=>deleteHandler(item.productId)}
+                          icon={
+                            <Icon
+                              type='fontisto'
+                              name="trash"
+                              size={35}
+                              color={COLORS.white}
+                            />
+                          }
+                            buttonStyle={{ 
+                              height: 100, 
+                              backgroundColor: COLORS.orange,
+                              borderTopLeftRadius:15,
+                              borderBottomLeftRadius:15,   
+                            }}
+                         />
+                     }
+                    
+                            rightContent={
+                              <NumContainer>
+                                <QtyBtn
+                                index={index}                              
+                                 updateQtyHandler={updateQtyHandler} 
+                                 qty={item.qty} 
+                                 stock={item.stock} />
+                                </NumContainer>
+                            }
+                    >        
+                <Avatar 
+                avatarStyle={{
+                  borderRadius:8,
+                }}    
+                size={50}
+                source={{uri:item.image[0]}} />
         <ListItem.Content style={{margin:-10}}>
           <ListItem.Title 
           numberOfLines={1}
             style={{
               fontFamily:'IBMPlexSansBold',
-              fontSize:10
+              fontSize:11,
+              marginLeft:8
                 }}>
              {item.productName}
           </ListItem.Title>
+          <ListItem.Subtitle 
+            style={{
+              fontSize:10,
+              fontFamily:'IBMPlexSansRegular',
+              marginLeft:8
+              }}
+          >
+            ${item.price}</ListItem.Subtitle>
         </ListItem.Content>
-       <Text>x12</Text>
-      <Text>${item.price}</Text>
+       <Text>x{item.qty}</Text>
+      <Text>${item.qty*item.price}</Text>
        
       </ListItem.Swipeable> 
              )}
-           />
-     {/* main content */}
-        </View>
+           /> 
+           : 
+           <> 
+           <Text>Your cart is empty!</Text>
+           <ImageBox>
+           <Image 
+           resizeMode='contain'
+           source={require('../assets/images/emptyBag.png')} />
+          </ImageBox>
+           </>       
+
+    }
+     </View>
+        <CheckoutContainer>
+          <TextBox>
+          <Text white>Total:</Text>
+          <Text white>${total}</Text>
+         </TextBox>
+          <CheckBtn 
+           
+            android_ripple={{
+              color:COLORS.yellow,
+            }}
+           >
+            <Text white regular>Checkout</Text>
+          </CheckBtn>
+        </CheckoutContainer>
        </Container>     
     )
 }
 const FlatList = styled.FlatList``
-const Wrapper = styled.View`
-  background-color:${COLORS.primary};
-  padding-left:20px;
-  padding-top:20px;
-  flex:1
+const Image = styled.Image`
+  width:100%;
+  height:100%
+`
+const ImageBox = styled.View`
+ justify-content:center;
+ align-items:center;
+ padding:15px;
+ padding-right:50px;
+ margin-top:40px;
+ width:100%;
+ height:60%;
+`
+const BackBtnBox = styled.View`
+  padding-left:10px;
+  flex-direction:row;  
+  align-items:center
 `
 const View = styled.View`
   padding:25px 0 0 25px;
-
+  flex:.8
 `
-const ScrollView = styled.ScrollView``
+const TextBox =styled.View`
+`
 const Text = styled.Text`
   font-size:${({title}:{title:boolean})=> title?'25px' :'15px'};
-  font-family:IBMPlexSansBold;
-  margin-bottom:${({margin}:{margin:boolean})=> margin? '30px':0}
+  font-family:${({regular}:{regular:boolean})=>regular? 'IBMPlexSansRegular':'IBMPlexSansBold'};
+  margin-bottom:${({margin}:{margin:boolean})=> margin? '30px':0};
+  color:${({white}:{white:boolean})=> white? COLORS.white: COLORS.dark}
 `
 const NumContainer = styled.View`
  justify-content:center;
@@ -134,23 +217,27 @@ const NumContainer = styled.View`
  height:100px;
  background-color:${COLORS.primary}
 `
-const QuantityBox = styled.View`
-  height:35px;
-  width:100px;
-  background-color:${COLORS.primary};
-  border-radius:7px;
-  align-items:center;
-  margin-top:10px;
-  justify-content:space-between;
-  flex-direction:row;
+const CheckoutContainer = styled.View`
+ flex-direction:row;
+ justify-content:space-between;
+ align-items:center;
+ background-color:${COLORS.primary};
+ padding:25px;
+ height:120px;
+ bottom:0;
+ position:absolute;
+ width:100%;
+ border-top-left-radius:30px;
+ border-top-right-radius:30px;
+ padding-left:40px;
 `
-const QuantityBtn = styled.View`
-  height:25px;
-  width:25px;
-  background-color:${COLORS.white};
-  margin:0 5px;
+const CheckBtn = styled.Pressable`
+  border-radius:8px;
+  background-color:${COLORS.orange}
+  padding:15px;
+  width:60%;
   justify-content:center;
-  align-items:center;
-  border-radius:5px
+  align-items:center  
 `
+
 export default CartScreen

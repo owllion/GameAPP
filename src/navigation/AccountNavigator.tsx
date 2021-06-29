@@ -6,7 +6,7 @@ import MessageScreen from '../screens/MessageScreen'
 const Stack = createStackNavigator()
 
 const AccountNavigator = () => (
-     <Stack.Navigator initialRouteName='Account'> 
+     <Stack.Navigator initialRouteName='Account' screenOptions={{ headerShown: false }}> 
         <Stack.Screen name='Account' component={AccountScreen}  />      
         <Stack.Screen name='Message' component={MessageScreen}  />      
     </Stack.Navigator>

@@ -3,17 +3,22 @@ import styled from "styled-components/native";
 import { Icon,Badge } from "react-native-elements";
 import COLORS from "../assets/color/colors";
 import {useSelector} from 'react-redux'
+import { useNavigation } from '@react-navigation/native';
+
 const CartBtn = ()=> {
   const cartList = useSelector(state=> state.auth.cartList)
-  console.log(cartList.length)
+
+  const navigation = useNavigation()
+
     return (
-        <View>
+        <Pressable 
+         android_ripple={{color:COLORS.orange, borderless:true}} 
+         onPress={()=>navigation.navigate('Cart')}>
         <Icon
           name="add-shopping-cart"
           type="material-icons-outlined"
           color={COLORS.dark}
           size={28}
-          onPress={() => console.log("hello")}
         />
         <Badge 
          value={cartList.length?cartList.length:0}
@@ -22,9 +27,9 @@ const CartBtn = ()=> {
            backgroundColor:COLORS.orange
          }}
          containerStyle={{ position: 'absolute', top: -9, right: -6 }} />
-        </View>
+        </Pressable>
     )
 }
 
-const View = styled.View``
+const Pressable = styled.Pressable``
 export default CartBtn

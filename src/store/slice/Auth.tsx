@@ -22,7 +22,10 @@ export interface Data {
                 category: string;
                 description: string;
                 productId: string;
-                rating:number
+                rating:number,
+                qty:number,
+                isChecked:boolean,
+                stock:number
             }[],
             county:string,
             district:string,
@@ -44,13 +47,23 @@ export interface Cart {
         category: string;
         description: string;
         productId: string;
-        rating:number
+        rating:number,
+        qty:number,
+        isChecked:boolean,
+        stock:number
   }[]
 }
 export interface CartLength {
     length:number
 } 
 
+export interface Props {
+    index:number,
+    type:string
+}
+export interface AllChecked {
+   allChecked:boolean
+}
 
 const authSlice = createSlice({
     name: 'auth',
@@ -59,9 +72,9 @@ const authSlice = createSlice({
         name:'',
         email:'',
         avatar:'',
-        cartList:[],
+        cartList:[{}],
         cartListLength:0,
-        favList:[],
+        favList:[{}],
         county:'',
         district:'',
         road:'',
@@ -110,6 +123,9 @@ const authSlice = createSlice({
        },
        setCartLength(state, { payload }:PayloadAction<CartLength> ) {
            state.cartListLength = payload.length
+       },
+       setCartItemQty(state, { payload }:PayloadAction<Props> ) {
+           payload.type==='add'? state.cartList[payload.index].qty++ :state.cartList[payload.index].qty--
        }
     }
         
