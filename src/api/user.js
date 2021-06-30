@@ -28,6 +28,7 @@ const updateQty = (data,token) => instance.post('/cart/product/updateQty', data,
         Authorization: token
     }
   })
+
 export default {
     getAllGames,
     addToCart,
