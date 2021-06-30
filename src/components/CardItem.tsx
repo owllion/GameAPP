@@ -79,7 +79,8 @@ const Image = styled.Image`
   border-radius:10px
 `
 const TextBox = styled.View`
-  text-align:center;
+  align-items:center;
+  justify-content:center;
   padding:10px 20px
 `
 const Text = styled.Text`

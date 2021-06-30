@@ -23,8 +23,7 @@ interface removeProps {
 } 
 
 export const addToFav = (payload:AddProps) => {
-    console.log('add')
-    console.log(payload)
+  
     return async(dispatch:any,getState:any) => {
        const state = getState().auth
        console.log('132')
@@ -43,10 +42,9 @@ export const addToFav = (payload:AddProps) => {
 }
 
 export const removeFromFav = (payload:removeProps) => {
-    console.log(payload)
     return async(dispatch:any,getState:any) => {
        const state = getState().auth
-      console.log('test test')
+      
        try {
            dispatch(authActions.setLoading({isLoading:true}))
            const {data:{favList}} = await userApi.removeFromFav(payload,state.token)

@@ -13,18 +13,18 @@ import userApi from '../api/user'
 import { authActions } from '../store/slice/Auth'
 
 const Detail = ({navigation,route}:any) => {
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
+
     const favList = useSelector(state=>state.auth.favList)
-    console.log('這是從store取得的favlist')
-    console.log(favList)
     const token = useSelector(state=>state.auth.token)
 
-
     const [isFav,setFav] = useState<unknown>()
+    
+    //click btn will call api-->get and set new favlist to state -->useEffect run-->get new index--> set new isFav --> heart btn change !
     useEffect(()=>{
        const index = favList.findIndex(i=> i.productId === gameId)
        console.log(index)
-       index === -1 ?setFav(-1): setFav(index)
+       index === -1 ? setFav(-1): setFav(index)
     },[favList])
 
     const [qty, setQty] = useState<number>(1)
@@ -36,27 +36,23 @@ const Detail = ({navigation,route}:any) => {
     const qtyHandler = (type:string) => {
       setQty( type==='add'? qty+1: qty-1 )
     }
-    
-    //if index !== -1 means this item is in favList,then show red heart,otherwise show the blue one.
-   const index = favList.findIndex(i=> i.productId === gameId)
-    
-    const favHandler = async() => {
-      if(isFav === -1) {
-          const {data:{favList:fav}} =await  userApi.addToFav({productId:item.productId},token) 
-          dispatch(authActions.setFavList({favList:fav}))
-      }else {
-         const {data:{favList:fav}} =await userApi.removeFromFav({productId:item.productId, favlist:favList},token)
-         dispatch(authActions.setFavList({favList:fav}))
-      }
-      // const {data:{favList:fav}} = 
-      // isFav === -1 ? 
-      // await userApi.addToFav({productId:item.productId},token)
-      // :
-      // await userApi.removeFromFav({productId:item.productId, favlist:favList},token)
+ 
+     const favHandler = async() => {
+      const {data:{favList:fav}} = 
+      isFav === -1 ? 
+      await userApi.addToFav({productId:item.productId},token)
+      :
+      await userApi.removeFromFav({productId:item.productId, favlist:favList},token)
 
-      // dispatch(authActions.setFavList({favList:fav}))
+      dispatch(authActions.setFavList({favList:fav}))
      
     }
+    //  const favHandler = () => {
+    //   isFav === -1 ? 
+    //    addToFav({productId:item.productId})
+    //   :
+    //   removeFromFav({productId:item.productId, favlist:favList})
+    // } 
 
     return (
       <ImageBackground source={gameBg.img}>

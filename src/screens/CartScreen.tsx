@@ -169,7 +169,13 @@ const CartScreen = ({navigation}:any) => {
           <Text white>${total}</Text>
          </TextBox>
           <CheckBtn 
-           
+            onPress={()=>{
+              if(cartList.length) {
+                navigation.navigate('Checkout',{total})
+              }else {
+                alert('Your cart is empty!')
+              }
+              }}
             android_ripple={{
               color:COLORS.yellow,
             }}

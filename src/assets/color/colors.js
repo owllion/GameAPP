@@ -7,6 +7,7 @@ const COLORS = {
   yellow: "#ffb900",
   red: "#A50104",
   orange:"#FE7161",
+  darkGrey:"#4D5061",
   tranparent: "rgba(0,0,0,0)",
 };
 
