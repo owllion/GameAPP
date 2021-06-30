@@ -61,8 +61,20 @@ export interface Props {
     index:number,
     type:string
 }
-export interface AllChecked {
-   allChecked:boolean
+export interface FavProps {
+    favList :{
+      image: Array<string>;
+        productName: string;
+        price: number;
+        category: string;
+        description: string;
+        productId: string;
+        rating:number,
+        qty:number,
+        isChecked:boolean,
+        stock:number
+    }[]
+     
 }
 
 const authSlice = createSlice({
@@ -126,6 +138,9 @@ const authSlice = createSlice({
        },
        setCartItemQty(state, { payload }:PayloadAction<Props> ) {
            payload.type==='add'? state.cartList[payload.index].qty++ :state.cartList[payload.index].qty--
+       },
+       setFavList(state, { payload }:PayloadAction<FavProps>) {
+           state.favList = payload.favList 
        }
     }
         

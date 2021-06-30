@@ -1,7 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import styled from 'styled-components/native'
-import { useFonts } from 'expo-font';
-import AppLoading from "expo-app-loading";
 import Container from '../components/Container';
 import COLORS from "../assets/color/colors";
 import { Icon } from "react-native-elements";
@@ -9,8 +7,25 @@ import { Image } from '../assets/ImgDetail/Image'
 import CartBtn from "../components/CartBtn";
 import AddToCartBtn from '../components/AddToCartBtn';
 import QtyBtn from '../components/QtyBtn';
+import { useSelector,useDispatch } from 'react-redux';
+import { addToFav,removeFromFav } from '../store/actions/favAction';
+import userApi from '../api/user'
+import { authActions } from '../store/slice/Auth'
 
 const Detail = ({navigation,route}:any) => {
+  const dispatch = useDispatch()
+    const favList = useSelector(state=>state.auth.favList)
+    console.log('這是從store取得的favlist')
+    console.log(favList)
+    const token = useSelector(state=>state.auth.token)
+
+
+    const [isFav,setFav] = useState<unknown>()
+    useEffect(()=>{
+       const index = favList.findIndex(i=> i.productId === gameId)
+       console.log(index)
+       index === -1 ?setFav(-1): setFav(index)
+    },[favList])
 
     const [qty, setQty] = useState<number>(1)
   
@@ -20,6 +35,27 @@ const Detail = ({navigation,route}:any) => {
     
     const qtyHandler = (type:string) => {
       setQty( type==='add'? qty+1: qty-1 )
+    }
+    
+    //if index !== -1 means this item is in favList,then show red heart,otherwise show the blue one.
+   const index = favList.findIndex(i=> i.productId === gameId)
+    
+    const favHandler = async() => {
+      if(isFav === -1) {
+          const {data:{favList:fav}} =await  userApi.addToFav({productId:item.productId},token) 
+          dispatch(authActions.setFavList({favList:fav}))
+      }else {
+         const {data:{favList:fav}} =await userApi.removeFromFav({productId:item.productId, favlist:favList},token)
+         dispatch(authActions.setFavList({favList:fav}))
+      }
+      // const {data:{favList:fav}} = 
+      // isFav === -1 ? 
+      // await userApi.addToFav({productId:item.productId},token)
+      // :
+      // await userApi.removeFromFav({productId:item.productId, favlist:favList},token)
+
+      // dispatch(authActions.setFavList({favList:fav}))
+     
     }
 
     return (
@@ -55,13 +91,26 @@ const Detail = ({navigation,route}:any) => {
           <Text color>{item.rating}</Text>
           </RatingBox>
 
-          <IconBox>
+          <IconBox
+            
+          >
+            {isFav!== -1 ? 
             <Icon
               raised
               name='heart'
               type='font-awesome'
+              color={COLORS.red}
+              onPress={favHandler}
+               />
+              :
+              <Icon
+              raised
+              name='heart'
+              type='font-awesome'
               color={COLORS.primary}
-              onPress={() => console.log('hello')} />
+              onPress={favHandler}
+              />
+              }
           </IconBox>
          
           <ContentText bold large>

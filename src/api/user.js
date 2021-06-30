@@ -13,8 +13,12 @@ const deleteItem = (data,token) => instance.post('/cart/delete',data,{
     }
   })
 
-const addToFav = data => instance.post('/game/addToFav', data)
-const removeFromFav = data => instance.delete('/game/removeFromFav', data,{
+const addToFav = (data,token) => instance.post('/game/addToFav', data,{
+    headers: {
+        Authorization: token
+    }
+  })
+const removeFromFav = (data,token) => instance.post('/user/delete/favlist', data,{
     headers: {
         Authorization: token
     }
