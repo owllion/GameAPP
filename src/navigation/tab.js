@@ -7,6 +7,7 @@ import CheckoutScreen from '../screens/CheckoutScreen';
 import NewAddressScreen from '../screens/NewAddressScreen';
 import OrderScreen from '../screens/OrderScreen';
 import OrderDetailScreen from '../screens/OrderDetailScreen';
+import CouponScreen from '../screens/CouponScreen'
 
 
 const Stack = createStackNavigator();
@@ -17,8 +18,9 @@ const Tabs = () => (
     <Stack.Screen name="Cart" component={CartScreen} />
     <Stack.Screen name="Checkout" component={CheckoutScreen} />
     <Stack.Screen name="NewAddress" component={NewAddressScreen} />
-    <Stack.Screen name="Order" component={OrderScreen} />
-    <Stack.Screen name="OrderDetail" component={OrderDetailScreen} />
+    <Stack.Screen name='Coupon' component={CouponScreen}  />      
+    <Stack.Screen name='Order' component={OrderScreen}  />      
+    <Stack.Screen name='OrderDetail' component={OrderDetailScreen}  />      
    
   </Stack.Navigator>
 );

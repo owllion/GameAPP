@@ -4,17 +4,14 @@ import { authActions } from '../store/slice/Auth'
 import styled from 'styled-components/native'
 import COLORS from "../assets/color/colors";
 import { Avatar } from 'react-native-elements'
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading'
 import ConfigItem from '../components/ConfigItem'
-import navigationTheme from '../navigation/navigationTheme';
+
 
 const AccountScreen = ({navigation}:any) => {
    const dispatch = useDispatch()
    const userName = useSelector(state=> state.auth.name)
    const userEmail = useSelector(state=> state.auth.email)
    const avatarUrl = useSelector(state=> state.auth.avatar)
-    console.log(avatarUrl)
    const logoutHandler = () => {
      dispatch(authActions.signout())
    }
@@ -39,6 +36,10 @@ const AccountScreen = ({navigation}:any) => {
           <ConfigItem 
             text='My Orders' 
             handle={()=>navigation.navigate('Order')}
+          />
+          <ConfigItem 
+            text='My Coupons' 
+            handle={()=>navigation.navigate('Coupon')}
           />
           <ConfigItem
             text='Log Out' 

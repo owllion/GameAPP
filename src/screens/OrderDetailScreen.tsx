@@ -5,6 +5,7 @@ import BackBtn from '../components/BackBtn';
 import { getOrderDetail } from '../store/actions/OrderDetailAction'
 import {useDispatch,useSelector} from 'react-redux'
 import {  Icon } from 'react-native-elements'
+import DayJS from 'react-dayjs';
 
 const OrderDetailScreen = ({route}:any) => {
     const { orderId } = route.params
@@ -12,7 +13,7 @@ const OrderDetailScreen = ({route}:any) => {
      const detail = useSelector(state=>state.order.detail)
     
     const orderItem = detail.order_item
- 
+   const date = detail.createdAt
     useEffect(()=> {
        dispatch(getOrderDetail({orderId}))
     },[])
@@ -106,7 +107,8 @@ const OrderDetailScreen = ({route}:any) => {
             </DetailBox>
             <DetailBox>
                 <Text>Order Time</Text> 
-                <Text>{detail.createdAt}</Text> 
+               
+                <DayJS format="YYYY-MM-DD hh:mm A" element={Text}>{ date }</DayJS>
             </DetailBox>
              <DetailBox>
                 <Text>Order Status</Text> 
@@ -148,6 +150,7 @@ const UpperBlock = styled.View`
 `
 const InnerContainer = styled.View`
  padding-left:10px;
+
 `
 const Text = styled.Text`
  font-size:${({title}:{title:boolean})=> title?'25px' :'11px'};
