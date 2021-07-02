@@ -2,9 +2,6 @@ import React from "react";
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
-import { Icon } from "react-native-elements";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
 const { width } = Dimensions.get("screen");
 import { useNavigation } from '@react-navigation/native';
 
@@ -48,8 +45,8 @@ const View = styled.View`
   margin-bottom:10px; 
 `;
 const Box =styled.View`
-  height:${width/numColumns}px;
-  width:${width/3}px;
+  height:200px;
+  width:150px;
   margin:20px;
 `
 const Image = styled.Image`

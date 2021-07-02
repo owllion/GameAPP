@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { useFormikContext } from 'formik'
 import { useDispatch } from 'react-redux'
-import { registerOrLogin } from '../../store/actions/authAction'
+import { registerOrLogin } from '../../store/actions/AuthAction'
 
 interface Props {
    text:string; 

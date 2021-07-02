@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'
-import { registerOrLogin } from '../store/actions/authAction'
+import { registerOrLogin } from '../store/actions/AuthAction'
 import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'

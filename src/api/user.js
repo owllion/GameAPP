@@ -28,6 +28,31 @@ const updateQty = (data,token) => instance.post('/cart/product/updateQty', data,
         Authorization: token
     }
   })
+const applyCode = (data,token) => instance.post('/applycoupon', data,{
+    headers: {
+        Authorization: token
+    }
+  })
+const createOrder = (data,token) =>instance.post('/game/create_order', data,{
+    headers: {
+        Authorization: token
+    }
+  })
+const getOrderList = token => instance.get('/user/orderList',{
+    headers: {
+        Authorization: token
+    }
+  })
+const getOrderDetail = (data,token) => instance.post('/order/detail',data,{
+    headers: {
+        Authorization: token
+    }
+  })
+const getCouponList = token => instance.get('/user/couponList',{
+    headers: {
+        Authorization: token
+    }
+  })
 
 export default {
     getAllGames,
@@ -35,6 +60,11 @@ export default {
     deleteItem,
     addToFav,
     removeFromFav,
-    updateQty
+    updateQty,
+    applyCode,
+    createOrder,
+    getOrderList,
+    getOrderDetail,
+    getCouponList
 }
  

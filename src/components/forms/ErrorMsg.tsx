@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 
-const ErrorMsg = ({error,visible}:{error:string, visible:string}) => {
+const ErrorMsg = ({error,visible}:{error:string, visible:string|null}) => {
     //如果沒有傳錯誤訊息和visible(touched[欄位名稱])就不回傳
     if(!error || !visible) return null 
 
@@ -27,8 +27,7 @@ const Text = styled.Text`
    font-family:IBMPlexSansBold;
 `
 const View = styled.View`
-  margin-top:-25px;
-  margin-bottom:10px;
+   
   padding-left:10px;
 `
 export default ErrorMsg

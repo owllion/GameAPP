@@ -7,8 +7,9 @@ import { Avatar } from 'react-native-elements'
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading'
 import ConfigItem from '../components/ConfigItem'
+import navigationTheme from '../navigation/navigationTheme';
 
-const AccountScreen = () => {
+const AccountScreen = ({navigation}:any) => {
    const dispatch = useDispatch()
    const userName = useSelector(state=> state.auth.name)
    const userEmail = useSelector(state=> state.auth.email)
@@ -18,15 +19,7 @@ const AccountScreen = () => {
      dispatch(authActions.signout())
    }
 
-   const [isLoaded] =  useFonts({
-      IBMPlexSansRegular: require('../assets/fonts/IBMPlexSans-Regular.ttf'),
-      IBMPlexSansBold: require('../assets/fonts/IBMPlexSans-Bold.ttf'),
-      
-    });
-    if (!isLoaded) {
-        return <AppLoading />
-       }
-      
+  
   return (
    <Wrapper>
       <UserContainer>     
@@ -45,7 +38,7 @@ const AccountScreen = () => {
        <ConfigContainer>
           <ConfigItem 
             text='My Orders' 
-            handle={()=>console.log('order screen does not exist:)')}
+            handle={()=>navigation.navigate('Order')}
           />
           <ConfigItem
             text='Log Out' 

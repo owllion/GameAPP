@@ -5,6 +5,9 @@ import DetailScreen from '../screens/DetailScreen'
 import CartScreen from '../screens/CartScreen'
 import CheckoutScreen from '../screens/CheckoutScreen';
 import NewAddressScreen from '../screens/NewAddressScreen';
+import OrderScreen from '../screens/OrderScreen';
+import OrderDetailScreen from '../screens/OrderDetailScreen';
+
 
 const Stack = createStackNavigator();
 const Tabs = () => (
@@ -14,6 +17,9 @@ const Tabs = () => (
     <Stack.Screen name="Cart" component={CartScreen} />
     <Stack.Screen name="Checkout" component={CheckoutScreen} />
     <Stack.Screen name="NewAddress" component={NewAddressScreen} />
+    <Stack.Screen name="Order" component={OrderScreen} />
+    <Stack.Screen name="OrderDetail" component={OrderDetailScreen} />
+   
   </Stack.Navigator>
 );
 

@@ -35,8 +35,8 @@ const BtnBox = styled.View`
   padding-left:10px;
 `
 const Container = styled.View`
- padding:40px 10px 180px 10px;
- margin-bottom:30px;
+ padding:40px 10px 100px 10px;
+ flex:1;
  background-color:${COLORS.primary}
 `
 const Text = styled.Text`

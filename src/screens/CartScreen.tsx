@@ -8,7 +8,7 @@ import QtyBtn from '../components/QtyBtn';
 import {useSelector,useDispatch} from 'react-redux'
 import userApi from '../api/user'
 import { authActions } from '../store/slice/Auth';
-import { updateQty } from '../store/actions/updateQtyAction'
+import { updateQty } from '../store/actions/UpdateQtyAction'
 interface Game {  
     image: Array<string>,
     productName: string,

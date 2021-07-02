@@ -8,7 +8,7 @@ import CartBtn from "../components/CartBtn";
 import AddToCartBtn from '../components/AddToCartBtn';
 import QtyBtn from '../components/QtyBtn';
 import { useSelector,useDispatch } from 'react-redux';
-import { addToFav,removeFromFav } from '../store/actions/favAction';
+import { addToFav,removeFromFav } from '../store/actions/FavAction';
 import userApi from '../api/user'
 import { authActions } from '../store/slice/Auth'
 
@@ -16,7 +16,6 @@ const Detail = ({navigation,route}:any) => {
     const dispatch = useDispatch()
 
     const favList = useSelector(state=>state.auth.favList)
-    const token = useSelector(state=>state.auth.token)
 
     const [isFav,setFav] = useState<unknown>()
     
@@ -37,22 +36,12 @@ const Detail = ({navigation,route}:any) => {
       setQty( type==='add'? qty+1: qty-1 )
     }
  
-     const favHandler = async() => {
-      const {data:{favList:fav}} = 
+    const favHandler = () => {
       isFav === -1 ? 
-      await userApi.addToFav({productId:item.productId},token)
-      :
-      await userApi.removeFromFav({productId:item.productId, favlist:favList},token)
-
-      dispatch(authActions.setFavList({favList:fav}))
-     
-    }
-    //  const favHandler = () => {
-    //   isFav === -1 ? 
-    //    addToFav({productId:item.productId})
-    //   :
-    //   removeFromFav({productId:item.productId, favlist:favList})
-    // } 
+       dispatch(addToFav({productId:item.productId}))
+       :
+       dispatch(removeFromFav({productId:item.productId, favlist:favList}))
+    } 
 
     return (
       <ImageBackground source={gameBg.img}>

@@ -15,6 +15,13 @@ export interface Data {
                 productId: string;
                 rating:number
             }[],
+            couponList:{
+                discount_type:string,
+                amount:number,
+                expiry_date:Date,
+                minimum_amount:number,
+                code:string
+            }[],
             cartList:{
                 image: Array<string>;
                 productName: string;
@@ -61,6 +68,15 @@ export interface Props {
     index:number,
     type:string
 }
+export interface CouponList {
+    couponList:{
+        discount_type:string,
+        amount:number,
+        expiry_date:Date,
+        minimum_amount:number,
+        code:string
+   }[]
+}
 export interface FavProps {
     favList :{
       image: Array<string>;
@@ -85,6 +101,7 @@ const authSlice = createSlice({
         email:'',
         avatar:'',
         cartList:[{}],
+        couponList:[{}],
         cartListLength:0,
         favList:[{}],
         county:'',
@@ -101,6 +118,7 @@ const authSlice = createSlice({
            state.email = payload.result.user.email
            state.avatar = payload.result.user.avatarRnDefault
            state.cartList = payload.result.user.cartList
+           state.couponList = payload.result.user.couponList
            state.favList = payload.result.user.favList
            state.county = payload.result.user.county
            state.district = payload.result.user.district
@@ -117,6 +135,9 @@ const authSlice = createSlice({
            state.county = payload.result.user.county
            state.district = payload.result.user.district
            state.road = payload.result.user.road         
+        },
+        setCouponList(state,{payload}:PayloadAction<CouponList>) {
+            state.couponList = payload.couponList
         },
         signout(state) {
             state.token =''

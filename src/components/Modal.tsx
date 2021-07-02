@@ -7,53 +7,58 @@ interface Props {
   visible:boolean,
   closeHandler:()=>void,
   setAddressHandler:(address:string)=>void,
-  text:string
+  data:string[],
 }
 
 
-const Modal = ({visible,closeHandler,setAddressHandler,text}:Props) => {
+const Modal = ({visible,closeHandler, setAddressHandler,data}:Props) => {
     if(!visible) return null
+   
     return (
         <>
       <Overlay 
      overlayStyle={{
-         padding:30,
+         padding:20,
          margin:20,
-         height:'35%',
-         width:'80%',
+         height:'100%',
+         width:'100%',
          backgroundColor:'rgba(225,225,225,.8)'
      }}
       isVisible={visible} 
       onBackdropPress={closeHandler} 
       >
-         <Text>{text}</Text>
-             {/* <FlatList 
-              style={{marginTop:'50%'}}
-              data={cate}
-              numColumns={numColumns}
-              keyExtractor={(i)=>i.id.toString()}
-              renderItem ={({item})=> {
-                    return (
-                          
-                      )
+              <FlatList          
+               data={data}      
+               keyExtractor={(i)=>i}
+               renderItem ={({item})=> {
+                return (
+                  <ChooseBtn 
+                    android_ripple={{color:COLORS.grey}}
+                    onPress={()=>{
+                     closeHandler()
+                     setAddressHandler(item)
+                  }
+                }>
+                   <Text>{item}</Text>         
+                  </ChooseBtn>
+              )
         }}
-      />  */}
-         {/* <Input/>
-         <CheckBtn 
-       
-         android_ripple={{color:COLORS.light}}>
-           <Text white >Change</Text>
-         </CheckBtn> */}
+      />  
+        
       </Overlay>
    </>
     )
 }
 
-
+const FlatList = styled.FlatList``
 const Text = styled.Text`
 font-size:16px;
 font-family:IBMPlexSansRegular;
-color:${({white}:{white:boolean})=>white?COLORS.light:COLORS.dark}
+border-bottom-width:1px;
+border-bottom-color:${COLORS.grey};
+border-style:solid;
+color:${({white}:{white:boolean})=>white?COLORS.light:COLORS.dark};
+padding-bottom:6px;
 `
 const Input =styled.TextInput`
   font-family:IBMPlexSansRegular;
@@ -71,5 +76,8 @@ const CheckBtn = styled.Pressable`
   align-items:center;
   border-radius:10px;
   background-color:${COLORS.orange}
+`
+const ChooseBtn = styled.Pressable`
+padding:5px 5px 0 0;
 `
 export default Modal

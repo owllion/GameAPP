@@ -67,7 +67,7 @@ const View = styled.View`
   height: 300px;
   background-color: ${COLORS.white};
   box-shadow:10px 10px 10px rgba(0,0,0,0.5);
-  width: ${width / 2}px;
+  width: 220px;
   margin: 10px;
   elevation:10;
   border-radius: 10px;

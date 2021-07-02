@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import authSlice from './slice/Auth'
+import orderSlice from './slice/OrderSlice';
 
 const persistConfig = {
   key: 'root',
@@ -15,7 +16,8 @@ const persistConfig = {
 }
 //之後reducer都要加在這裡
 const reducers = combineReducers({
-   auth:authSlice.reducer
+   auth:authSlice.reducer,
+   order:orderSlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

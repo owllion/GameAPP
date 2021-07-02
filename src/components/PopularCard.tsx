@@ -77,7 +77,7 @@ const View = styled.View`
   height:150px;
   flex-direction:row;
   background-color: ${COLORS.white};
-  width: ${width-50}px;
+  width: 360px;
   margin: 10px;
   elevation:10;
   border-radius: 10px;
