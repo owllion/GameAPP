@@ -76,7 +76,7 @@ const CouponScreen = () => {
                <Text highlight title bold>SALE</Text> 
              </LeftBox>
              <RightBox>   
-                 <CodeText>{item.code}</CodeText>     
+                 <CodeText selectable>{item.code}</CodeText>     
                  <Text>Expire: <DayJS format="YYYY-MM-DD hh:mm A" element={Text}>{item.expiry_date}</DayJS></Text>
              </RightBox>
           </View>      
@@ -86,9 +86,13 @@ const CouponScreen = () => {
     )
 }
 
-const FlatList = styled.FlatList``
+const FlatList = styled.FlatList`
+
+flex-grow:0`
 const ScrollView =styled.ScrollView`
- margin-top:${({selected}:{selected:number})=> selected === 1? '-320px':0}`
+
+`
+
 const View = styled.View`
   padding:10px;
   flex-direction:row;

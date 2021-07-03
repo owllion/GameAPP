@@ -9,7 +9,8 @@ import ErrorMsg from '../components/forms/ErrorMsg'
 import { authActions } from '../store/slice/Auth';
 import { orderActions } from '../store/slice/OrderSlice';
 import { Icon } from 'react-native-elements'
-import {createOrder} from '../store/actions/CreateOrderAction'
+import PayBtn from '../components/PayBtn'
+
 
 //  Stripe.setOptionsAsync({
 //    publishableKey: 'pk_test_51J81cSCui39c5krd6UGvXeLfCWrZDEZ0yUf98p0Wg5CT8kYfGoXSnov4SVfgfQwYUObW9b7loSOvfps6tgYAjyD50028JLqwsr',
@@ -26,12 +27,15 @@ const CheckoutScreen = ({route,navigation}: {route:any,navigation:any})=> {
     const dispatch = useDispatch()
     const errorMsg = useSelector(state=> state.auth.errorMsg)
     const isVisible = errorMsg ? 'show':null
-    const city = useSelector(state=>state.auth.county)
-    const district = useSelector(state=>state.auth.district)
-    const road = useSelector(state=>state.auth.road)
+    
     const discount = useSelector(state=>state.order.discount)
     const final = useSelector(state=>state.order.finalPrice)
     const cartList = useSelector(state=>state.auth.cartList)
+     const city = useSelector(state=>state.auth.county)
+    console.log(city)
+    const district = useSelector(state=>state.auth.district)
+    const road = useSelector(state=>state.auth.road)
+    
     const Address = () => {
       if(!city) {
         return 'No address'
@@ -41,7 +45,7 @@ const CheckoutScreen = ({route,navigation}: {route:any,navigation:any})=> {
         return `${city}${district}${road}`
       }
     }
-
+   
     const callCard = async() => {
         const params = {
         number: '4242424242424242',
@@ -181,26 +185,15 @@ const CheckoutScreen = ({route,navigation}: {route:any,navigation:any})=> {
             </OrderDetailBox>
 
             <PayBtn
-              
-              android_ripple={{color:COLORS.orange}} 
-              onPress={()=>
-               { 
-                 if( Address()==='No address') {
-                  alert('You miss something.')
-                  return 
-                }
-                 dispatch(createOrder({
-                payment_method:"Credit",
-                total_price:finalPrice,
-                delivery_address:Address(),
-                discount,
-                discount_code:code,
-                order_item:cartList
-              }))
-               } 
-             }>
-             <Text>Create Order</Text>
-            </PayBtn>
+              finalPrice={finalPrice}
+              code={code}
+              discount={discount}
+              cartList={cartList}
+              newCity={newCity}
+              newDistrict= {newDistrict}
+              newRoad ={newRoad}
+              Address={Address}
+             />      
             </ScrollView>
        </Container>
     )
@@ -231,15 +224,7 @@ const ApplyCodeBtn = styled.Pressable`
   border-radius:5px;
   width:28%
 `
-const PayBtn = styled.Pressable`
-  padding:10px;
-  justify-content:center;
-  align-items:center;
-  background-color:${COLORS.orange};
-  margin-top:20px;
-  border-radius:8px;
 
-`
 const BtnBox = styled.View`
   padding-left:10px;
 `

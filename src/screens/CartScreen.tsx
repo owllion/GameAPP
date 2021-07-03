@@ -76,6 +76,7 @@ const CartScreen = ({navigation}:any) => {
              data={cartList}
              renderItem={({item,index})=> (
                 <ListItem.Swipeable
+                    key={index}
                     onPress={()=>navigation.navigate('Detail',{item:item})}
                     containerStyle={{
                         paddingVertical:10,

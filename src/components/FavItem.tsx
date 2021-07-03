@@ -32,7 +32,9 @@ const FavItem = ({ game }:Game) => {
       </Box>
 
        <TextBox>
-      <Text>{game.productName}</Text>
+      <Text 
+       numberOfLines={1}
+      selectable ellipsizeMode='tail'>{game.productName}</Text>
        </TextBox>
 
     </View>
@@ -57,9 +59,11 @@ const Image = styled.Image`
 const TextBox = styled.View`
   align-items:center;
   justify-content:center;
+  width:150px;
+  padding-left:35px;
 `
 const Text = styled.Text`
-  font-size: 5px;
+  font-size: 10px;
   font-family: IBMPlexSansBold;
   color:${COLORS.white} 
 `;

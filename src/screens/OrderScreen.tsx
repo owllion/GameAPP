@@ -6,7 +6,9 @@ import userApi from '../api/user'
 import { ListItem, Icon  } from 'react-native-elements'
 import Container from '../components/Container';
 import {useSelector} from 'react-redux'
-const OrderScreen = ({navigation}:any) =>{
+const OrderScreen = ({navigation,route}:any) =>{
+  const {routeName} = route.params
+  const routepNameProps = routeName==='Success'?'Game':null 
     const [orderList,setOrderList] = useState([])
     const token = useSelector(state=>state.auth.token)
     const getOrderListHandler = async() => {
@@ -35,7 +37,7 @@ const OrderScreen = ({navigation}:any) =>{
 
     return (
         <Container>
-            <BackBtn/>
+            <BackBtn routeName={routepNameProps} />
             <Title>Order</Title> 
     <ScrollView>     
     { orderList?  

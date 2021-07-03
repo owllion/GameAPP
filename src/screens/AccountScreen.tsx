@@ -35,7 +35,7 @@ const AccountScreen = ({navigation}:any) => {
        <ConfigContainer>
           <ConfigItem 
             text='My Orders' 
-            handle={()=>navigation.navigate('Order')}
+            handle={()=>navigation.navigate('Order',{routeName:'Account'})}
           />
           <ConfigItem 
             text='My Coupons' 

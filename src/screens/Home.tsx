@@ -25,10 +25,18 @@ interface Game {
   productId: string;
 }
 
-
-const Home = () => {
+const Home = ({navigation}:any) => {
+  const onSubmitHandler = () => {
+    navigation.navigate('SearchResult',{gameList:games,keywords})
+  }
+  const setKeywordsHandler = (text:string) => {
+    setKeywords(text)
+  }
+  const clearSearchHandler = () => {
+    setKeywords('')
+  }
   const dispatch = useDispatch()
-  
+  const [keywords,setKeywords] = useState<string>('')
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   
  const setsetIndexHandler = (index:number) => setSelectedIndex(index)
@@ -47,14 +55,9 @@ const Home = () => {
     }catch(e) {
       dispatch(authActions.setLoading({isLoading:false}))
        alert(`Something wrong! ${e}`)
-    }
-   
+    }  
   };
-  // const handler = async () => {
-  //   const netInfo = useNetInfo();
-  //   return !netInfo.isInternetReachable ? alert("沒網路") : alert("有網路!");
-  // };
-  // handler();
+
   const [isLoaded] = useFonts({
     IBMPlexSansRegular: require("../assets/fonts/IBMPlexSans-Regular.ttf"),
     IBMPlexSansBold: require("../assets/fonts/IBMPlexSans-Bold.ttf"),
@@ -75,7 +78,10 @@ const Home = () => {
        <CartBtn/>
       </Header>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <SearchBar />
+        <SearchBar
+        clearSearchHandler={clearSearchHandler} 
+         setKeywordsHandler={setKeywordsHandler}
+         onSubmitHandler={onSubmitHandler} />
         <Text padding small>
           Categories
         </Text>
@@ -94,8 +100,7 @@ const Home = () => {
         </Text>
          <Card 
           gameList={games} 
-          index={selectedIndex} 
-         
+          index={selectedIndex}         
         />
       </ScrollView>
     </Container>

@@ -35,7 +35,7 @@ export const createOrder = (payload:Props) => {
           dispatch(authActions.setCart({cartList:user.cartList}))
           dispatch(authActions.setLoading({isLoading:false}))
           alert('成功')
-          navigate('Order')
+          navigate('Success')
        }catch(e) {        
            if(e.response) {
               alert(e.response.data.msg)

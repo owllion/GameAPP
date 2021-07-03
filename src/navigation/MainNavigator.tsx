@@ -6,11 +6,7 @@ import AccountNavigator from './AccountNavigator'
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'
 import COLORS from "../assets/color/colors";
-import TabCenterBtn from './TabCenterBtn'
-import route from '../navigation/route'
 import { Badge } from "react-native-elements";
-import * as Notifications from "expo-notifications";
-
 
 const Tab = createBottomTabNavigator()
 
