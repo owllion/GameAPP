@@ -1,10 +1,7 @@
 import React from "react";
-import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
-const { width } = Dimensions.get("screen");
 import { useNavigation } from '@react-navigation/native';
-
 interface Game {
   game: {
     image: Array<string>;
@@ -16,7 +13,6 @@ interface Game {
     rating:number
   };
 }
-const numColumns = 2
 
 const FavItem = ({ game }:Game) => {
    

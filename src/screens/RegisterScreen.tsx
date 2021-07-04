@@ -4,6 +4,7 @@ import { registerOrLogin } from '../store/actions/AuthAction'
 import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'
+import ActivityIndicator from '../components/ActivityIndicator';
 
 const RegisterScreen= () => {
   const dispatch = useDispatch()
@@ -13,6 +14,8 @@ const RegisterScreen= () => {
  }
 
   return (
+    <>
+    <ActivityIndicator/>
     <ImageBackground source={require('../assets/images/registerbg.jpg')} >
       
      <View> 
@@ -27,6 +30,7 @@ const RegisterScreen= () => {
        />
     </View>
    </ImageBackground>
+   </>
   )
 }
 

@@ -5,17 +5,19 @@ import AppLoading from 'expo-app-loading';
 import { useFormikContext } from 'formik'
 import { useDispatch } from 'react-redux'
 import { registerOrLogin } from '../../store/actions/AuthAction'
+import COLORS from '../../assets/color/colors';
 
 interface Props {
    text:string; 
 }
 
 const SubmitBtn = (props:Props) => {
+   const { text } = props
    const dispatch = useDispatch()
     const { errors,values }  = useFormikContext()
    
     let isChecked:boolean;
-  console.log(values)
+ 
     if(errors.email) { 
        //one field gets error, others get error too.So only need to check one field.
        isChecked = false
@@ -34,34 +36,27 @@ const SubmitBtn = (props:Props) => {
            userName:values.name
          })
       ) 
-
-      }
-   
-    const { text } = props
-    const [isLoaded] = useFonts({
-      MarcellusRegular: require('../../assets/fonts/Marcellus-Regular.ttf'),
-  });
-     if (!isLoaded) {
-        return <AppLoading />
-       }
-   
+   }
     return (
-      <TouchableOpacity
+      <Pressable
+          android_ripple={{
+             color:COLORS.light
+          }}
           onPress={checkSubmit}
          >
           <Text>{text}</Text>     
-        </TouchableOpacity>
+        </Pressable>
     )
 }
 
 const Text = styled.Text`
-   font-family:MarcellusRegular;
+   font-family:IBMPlexSansBold;
    font-size:18px;
    color:white;
    text-align:center;
 `
 
-const TouchableOpacity = styled.TouchableOpacity`
+const Pressable = styled.Pressable`
   background-color:rgba(0,0,0,.3) rgba(0,0,0,.5);
   padding:15px;
   border-radius:50px;

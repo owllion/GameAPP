@@ -9,8 +9,7 @@ import AddToCartBtn from '../components/AddToCartBtn';
 import QtyBtn from '../components/QtyBtn';
 import { useSelector,useDispatch } from 'react-redux';
 import { addToFav,removeFromFav } from '../store/actions/FavAction';
-import userApi from '../api/user'
-import { authActions } from '../store/slice/Auth'
+import ActivityIndicator from '../components/ActivityIndicator';
 
 const Detail = ({navigation,route}:any) => {
     const dispatch = useDispatch()
@@ -44,8 +43,11 @@ const Detail = ({navigation,route}:any) => {
     } 
 
     return (
+      <>
+      <ActivityIndicator/>
       <ImageBackground source={gameBg.img}>
         <Container>
+          <ActivityIndicator/>
           <Header>
             <HeaderBtn>
               <Icon
@@ -107,11 +109,16 @@ const Detail = ({navigation,route}:any) => {
 
             <PriceAndNumber>     
               <Text large color>${item.price}</Text>
-                <QtyBtn stock={item.stock} qtyHandler={qtyHandler} qty={qty}/>
+                <QtyBtn 
+                 stock={item.stock} 
+                 qtyHandler={qtyHandler} 
+                 qty={qty}
+                />
             </PriceAndNumber> 
             <AddToCartBtn gameId={gameId} qty={qty}/>         
         </ContentBox>       
-      </ImageBackground>         
+      </ImageBackground> 
+      </>        
     )
 }
 const ScrollView = styled.ScrollView`` 

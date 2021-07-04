@@ -10,8 +10,6 @@ import Container from "../components/Container";
 import SearchBar from "../components/SearchBar";
 import ListCategory from "../components/ListCategory";
 import CartBtn from "../components/CartBtn";
-import userApi from '../api/user'
-import { authActions } from '../store/slice/Auth'
 import { getGameList } from "../store/actions/GetGameListAction";
 import ActivityIndicator from "../components/ActivityIndicator";
 
@@ -41,8 +39,9 @@ const Home = ({navigation}:any) => {
     return <AppLoading />;
   }
   return (
-    <Container> 
-      
+    <>
+    <ActivityIndicator/>
+    <Container>    
       <Header>
         <TextOuterBox>
           <Text>Find your game</Text>
@@ -79,6 +78,7 @@ const Home = ({navigation}:any) => {
         />
       </ScrollView>
     </Container>
+    </>
   );
 };
 

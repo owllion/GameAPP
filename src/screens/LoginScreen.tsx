@@ -2,11 +2,14 @@ import React from 'react';
 import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'
+import ActivityIndicator from '../components/ActivityIndicator';
 
 
 const LoginScreen= () => {
 
   return (
+    <>
+    <ActivityIndicator/>
    <ImageBackground source={require('../assets/images/loginbg.jpg')} > 
   
     <View>  
@@ -22,6 +25,7 @@ const LoginScreen= () => {
     </View>
   
  </ImageBackground>
+ </>
   )
 }
 

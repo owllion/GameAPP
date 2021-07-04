@@ -9,19 +9,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import userApi from '../api/user'
 import { authActions } from '../store/slice/Auth';
 import { updateQty } from '../store/actions/UpdateQtyAction'
-interface Game {  
-    image: Array<string>,
-    productName: string,
-    price: number,
-    category: string,
-    description: string,
-    productId: string,
-    rating:number,
-    isChecked:boolean,
-    qty:number
-  
-}
-
+import EmptyImg from '../components/EmptyImg';
 
 const CartScreen = ({navigation}:any) => {
      const [total,setTotal] = useState<number>(0)
@@ -64,7 +52,7 @@ const CartScreen = ({navigation}:any) => {
     return (     
        <Container>
          <BackBtnBox>
-         <BackBtn/>
+         <BackBtn routeName={null} />
          <Text>Back</Text>
        </BackBtnBox>
          <View>
@@ -109,18 +97,18 @@ const CartScreen = ({navigation}:any) => {
                               borderBottomLeftRadius:15,   
                             }}
                          />
-                     }
-                    
-                            rightContent={
-                              <NumContainer>
-                                <QtyBtn
-                                index={index}                              
-                                 updateQtyHandler={updateQtyHandler} 
-                                 qty={item.qty} 
-                                 stock={item.stock} />
-                                </NumContainer>
-                            }
-                    >        
+                     }                
+                      rightContent={
+                          <NumContainer>
+                            <QtyBtn
+                              index={index}         
+                              updateQtyHandler={updateQtyHandler} 
+                              qty={item.qty} 
+                              stock={item.stock} 
+                            />
+                       </NumContainer>
+                  }
+             >        
                 <Avatar 
                 avatarStyle={{
                   borderRadius:8,
@@ -152,16 +140,10 @@ const CartScreen = ({navigation}:any) => {
       </ListItem.Swipeable> 
              )}
            /> 
-           : 
-           <> 
-           <Text>Your cart is empty!</Text>
-           <ImageBox>
-           <Image 
-           resizeMode='contain'
-           source={require('../assets/images/emptyBag.png')} />
-          </ImageBox>
-           </>       
-
+           : <EmptyImg 
+              text='Your cart is empty!'
+              color='dark'
+              img={require('../assets/images/emptyBag.png')} />
     }
      </View>
         <CheckoutContainer>
@@ -187,20 +169,8 @@ const CartScreen = ({navigation}:any) => {
        </Container>     
     )
 }
+
 const FlatList = styled.FlatList``
-const Image = styled.Image`
-  width:100%;
-  height:100%
-`
-const ImageBox = styled.View`
- justify-content:center;
- align-items:center;
- padding:15px;
- padding-right:50px;
- margin-top:40px;
- width:100%;
- height:60%;
-`
 const BackBtnBox = styled.View`
   padding-left:10px;
   flex-direction:row;  

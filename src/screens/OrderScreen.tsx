@@ -3,21 +3,31 @@ import styled from 'styled-components/native'
 import COLORS from "../assets/color/colors";
 import BackBtn from '../components/BackBtn';
 import userApi from '../api/user'
-import { ListItem, Icon  } from 'react-native-elements'
 import Container from '../components/Container';
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+import EmptyImg from '../components/EmptyImg';
+import ActivityIndicator from '../components/ActivityIndicator';
+import { authActions } from '../store/slice/Auth';
+
 const OrderScreen = ({navigation,route}:any) =>{
+
+  const dispatch = useDispatch()
   const {routeName} = route.params
+
   const routepNameProps = routeName==='Success'?'Game':null 
     const [orderList,setOrderList] = useState([])
     const token = useSelector(state=>state.auth.token)
     const getOrderListHandler = async() => {
         try {
+           dispatch(authActions.setLoading({isLoading:true}))
            const {data:{orderList}} = await userApi.getOrderList(token)  
            setOrderList(orderList)
+          dispatch(authActions.setLoading({isLoading:false}))
+
         }catch(e) {
             if(e.response) {
-                alert(e.response.data.msg)
+              dispatch(authActions.setLoading({isLoading:true}))  
+              alert(e.response.data.msg)
             }
         }
         
@@ -29,29 +39,39 @@ const OrderScreen = ({navigation,route}:any) =>{
   //get each order's first img of order item
   const orderItem = orderList.map(i=> i.order_item)
   const result = orderItem.map(i=> i.map(o=> o.image))
-  let imageArr = []
+  let imageArr:Array<string> = []
   result.forEach(i=> {
     const l = i.length - 1
     imageArr.push(i[l][0])
   })
 
     return (
+      <>
+      <ActivityIndicator/>
         <Container>
-            <BackBtn routeName={routepNameProps} />
-            <Title>Order</Title> 
-    <ScrollView>     
-    { orderList?  
+          <BackBtn routeName={routepNameProps}/>
+          <Title>Order</Title> 
+   
+    {!orderList[0]?
+     <EmptyImg 
+        text='You have not purchased anything!'
+        color='primary'
+        img={require('../assets/images/emptyFav.png')} 
+      />
+      :   
+      <ScrollView>
+       {     
       orderList.map((item, i) => (
       <DetailBox 
       onPress={()=>navigation.navigate('OrderDetail',{orderId:item.orderId})}
       android_ripple={{color:COLORS.grey}}
       key={i}
       >
-          <View> 
-              <Text>Order ID:{item.orderId}</Text>
-              <Text highlight>{item.order_status}</Text>
-          </View>
-          <View> 
+        <View> 
+            <Text>Order ID:{item.orderId}</Text>
+            <Text highlight>{item.order_status}</Text>
+        </View>
+        <View> 
               <ImageBox>
                 <Image source={{uri:imageArr[i]}} />
               </ImageBox>
@@ -62,11 +82,12 @@ const OrderScreen = ({navigation,route}:any) =>{
           </View>
          
       </DetailBox>         
-    )): <Text>Nothing here...</Text>
-    }
-    </ScrollView>
-
+    ))
+     }
+      </ScrollView>     
+  }
      </Container>
+     </>
     )
 }
 const ScrollView = styled.ScrollView``

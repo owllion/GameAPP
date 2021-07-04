@@ -13,19 +13,23 @@ const AddToCartBtn = ({gameId,qty}:{gameId:string,qty:number}) => {
 
       const addToCartHandler = async() => {
         try {
-           dispatch(authActions.setLoading({isLoading:true})) 
+         dispatch(authActions.setLoading({isLoading:true}))
 
-            const {data:{cartList}} = await userApi.addToCart({productId:gameId,qty},token)
-           console.log(cartList)
-            const length = cartList.length
+         const {data:{cartList}} = await userApi.addToCart({productId:gameId,qty},token)
+          
+         const length = cartList.length
 
-            dispatch(authActions.setCart({cartList}))               
-            console.log(cartList)
-            dispatch(authActions.setCartLength({length}))  
-            dispatch(authActions.setLoading({isLoading:false}))     
+         dispatch(authActions.setCart({cartList}))               
+            
+         dispatch(authActions.setCartLength({length}))  
+         dispatch(authActions.setLoading({isLoading:false}))     
        }catch(e) {
-           dispatch(authActions.setLoading({isLoading:false}))
-          alert(e)
+         if(e.response) {
+            dispatch(authActions.setLoading({isLoading:false}))
+            alert(e.response.data.msg)
+         }
+           
+          
        }
     }
 

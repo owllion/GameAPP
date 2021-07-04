@@ -21,7 +21,6 @@ interface Props {
 export const updateQty = (payload:Props) => {
     return async(dispatch:any,getState:any) => {
        const state = getState().auth
-       console.log(state.token)
        try {
            dispatch(authActions.setLoading({isLoading:true}))
           const {data:{cartList}} = await userApi.updateQty(payload,state.token)

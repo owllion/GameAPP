@@ -4,6 +4,7 @@ import FavItem from '../components/FavItem'
 import {useSelector} from 'react-redux'
 import COLORS from "../assets/color/colors";
 import BackBtn from '../components/BackBtn'
+import EmptyImg from '../components/EmptyImg';
 
 const numColumns = 2
 const FavScreen = ()=> {
@@ -15,14 +16,10 @@ const FavScreen = ()=> {
                 </BtnBox>
            
             {!favList[0]?
-             <> 
-              <Text white>Nothing Here...</Text>
-              <ImageBox>
-              <Image 
-              resizeMode='contain'
-              source={require('../assets/images/emptyFav.png')} />
-              </ImageBox>
-              </>
+             <EmptyImg 
+              text='Nothing in favlist...'
+              color='light'
+              img={require('../assets/images/emptyFav.png')} />
               :   
               <>
                <Text>Favorite</Text>     
@@ -44,19 +41,6 @@ const FavScreen = ()=> {
        </Container>     
     )
 }
-const Image = styled.Image`
-  width:100%;
-  height:100%
-`
-const ImageBox = styled.View`
- justify-content:center;
- align-items:center;
- padding:15px;
- padding-right:50px;
- margin-top:40px;
- width:100%;
- height:60%;
-`
 const BtnBox = styled.View`
   padding-left:10px;
 `
@@ -73,8 +57,6 @@ const Text = styled.Text`
  margin-bottom:20px;
  color:${({white}:{white:boolean})=>white?COLORS.white:COLORS.orange}
 `
-const FlatList = styled.FlatList`
- 
-`
+const FlatList = styled.FlatList``
 
 export default FavScreen

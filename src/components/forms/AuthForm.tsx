@@ -6,7 +6,6 @@ import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import styled from 'styled-components/native'
 import { useSelector}  from 'react-redux'
-
 import SubmitBtn from './SubmitBtn'
 import AppFormInput from '../AppFormInput'
 import FormikWrapper from './FormikWrapper'
@@ -36,6 +35,7 @@ const AuthForm= ({ headerText, submitButtonText,nameInput }:Props) => {
 
      const [isLoaded] = useFonts({
       MarcellusRegular: require('../../assets/fonts/Marcellus-Regular.ttf'),
+      IBMPlexSansBold: require('../../assets/fonts/IBMPlexSans-Bold.ttf'),
   });
        if (!isLoaded) {
         return <AppLoading />

@@ -3,7 +3,7 @@ import FavItem from '../components/FavItem'
 import BackBtn from '../components/BackBtn'
 import styled from 'styled-components/native'
 import COLORS from '../assets/color/colors'
-
+import EmptyImg from '../components/EmptyImg'
 
 const numColumns = 2
 const SearchResultScreen = ({route}:any)=> {
@@ -18,11 +18,11 @@ const SearchResultScreen = ({route}:any)=> {
            </BtnBox>
           <Text>Search Result</Text>
           {!renderList[0]?
-          <ImageBox>
-        <Image 
-        resizeMode='contain'
-        source={require('../assets/images/noMatch.png')} />
-        </ImageBox>
+           <EmptyImg 
+            text=''
+            color='orange'
+            img={require('../assets/images/noMatch.png')} 
+      />
         :
            <FlatList
           contentContainerStyle={{alignItems:'center'}}

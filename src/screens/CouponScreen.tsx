@@ -5,6 +5,7 @@ import DayJS from 'react-dayjs';
 import {useSelector} from 'react-redux'
 import Container from '../components/Container';
 import BackBtn from '../components/BackBtn';
+import EmptyImg from '../components/EmptyImg';
 
 const selectedState = [{title:'Unused'},{title:'Used'}]
 interface List {
@@ -69,14 +70,11 @@ const CouponScreen = () => {
             />          
         
       { !renderList[0]?
-        <Box> 
-        <Text title bold>You don't have any coupon...</Text>
-        <ImageBox>
-        <Image 
-        resizeMode='contain'
-        source={require('../assets/images/emptyBag.png')} />
-        </ImageBox>
-        </Box>
+        <EmptyImg 
+        text='You do not have any coupon...'
+        color='primary'
+        img={require('../assets/images/emptyBag.png')} 
+      />
         :
         <ScrollView>
         {

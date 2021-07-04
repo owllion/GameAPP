@@ -8,7 +8,7 @@ interface Props {
    updateQtyHandler?:(type:string,index:number)=>void,
    qty:number,
    stock:number,
-   index:number
+   index?:number
 }
 
 

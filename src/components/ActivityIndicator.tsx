@@ -23,7 +23,7 @@ const View = styled.View`
   width:100%;
   z-index:1;
   position:absolute;
-  background-color:rgba(225,225,225,.8)
+  background-color:rgba(225,225,225,1)
 `
 
 export default ActivityIndicator

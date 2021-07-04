@@ -1,5 +1,6 @@
 import { authActions } from '../slice/Auth'
 import axios from '../../api/axios'
+import { isLoading } from 'expo-font';
 interface UserData {
    email:string;
    password:string;
@@ -9,20 +10,22 @@ interface UserData {
 export const registerOrLogin = (payload:UserData) => {
    let path:string;
    return async(dispatch:any,getState:any) => {
-      console.log(getState())
        payload.userName ? path = 'register' : path = 'rnLogin'
        const handler = path === 'register' ? 'signup' : 'signin'
         try {
-            console.log(payload)
-          
-             const { data } = await axios.post(`/${path}`,payload) 
+           dispatch(authActions.setLoading({isLoading:true}))
+            const values = {
+               email:payload.email,
+               password:payload.password,
+               name:payload.userName
+            }
+             const { data } = await axios.post(`/${path}`,values) 
              
              dispatch(authActions[handler](data))
-            
+             dispatch(authActions.setLoading({isLoading:false}))
         }catch(e) {
            if(e.response) {
               const msg = e.response.data.msg
-              console.log(msg)
               let errMsg:string | undefined;
 
             //login error
@@ -32,23 +35,15 @@ export const registerOrLogin = (payload:UserData) => {
             if(msg.includes('Incorrect')) {
                errMsg = 'Wrong password'
             }
-
-           
-            // if(msg.includes('invalid')) {
-            //    errMsg = 'email is invalid!'
-            //}
-             if(msg.includes('duplicate') ) {
+       
+            if(msg.includes('duplicate') ) {
               errMsg = 'email already exists!'
              
-           }
-
-         //    if(msg.includes('shorter')) {
-         //      errMsg = 'Password should be at least 7 words'            
-         //   } 
-                   
+           }            
            dispatch(authActions.setError({message:errMsg}))
-           console.log(errMsg)
-           }       
+           dispatch(authActions.setLoading({isLoading:false}))
+           }  
+
         }     
    }
 }

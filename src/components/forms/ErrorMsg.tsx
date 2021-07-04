@@ -27,7 +27,7 @@ const Text = styled.Text`
    font-family:IBMPlexSansBold;
 `
 const View = styled.View`
-   
   padding-left:10px;
+  margin-top:-25px;
 `
 export default ErrorMsg

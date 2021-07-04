@@ -105,7 +105,7 @@ const PayBtn = ({newCity,newDistrict,newRoad,finalPrice,code,discount,cartList,A
 
   return (
      <Pressable            
-        android_ripple={{color:COLORS.orange}} 
+        android_ripple={{color:COLORS.light}} 
         onPress={async()=>
         { 
             if( Address()==='No address') {
