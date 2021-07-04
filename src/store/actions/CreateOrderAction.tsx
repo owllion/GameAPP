@@ -34,7 +34,7 @@ export const createOrder = (payload:Props) => {
           dispatch(authActions.setCouponList({couponList:user.couponList}))
           dispatch(authActions.setCart({cartList:user.cartList}))
           dispatch(authActions.setLoading({isLoading:false}))
-          alert('成功')
+         
           navigate('Success')
        }catch(e) {        
            if(e.response) {

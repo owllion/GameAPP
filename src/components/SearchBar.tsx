@@ -3,16 +3,13 @@ import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
 
 interface Props {
-  clearSearchHandler:()=>void,
   onSubmitHandler:()=>void,
   setKeywordsHandler:(text:string)=>void
 }
 
 const SearchBar = (props:Props) => {
-  const {clearSearchHandler, onSubmitHandler,setKeywordsHandler} = props
-  useEffect(()=>{
-    clearSearchHandler()
-  },[])
+  const { onSubmitHandler,setKeywordsHandler} = props
+
   return (
     <Container>
       <Feather

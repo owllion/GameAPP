@@ -1,4 +1,3 @@
-//import需要用到的slice
 import { authActions } from '../slice/Auth'
 import axios from '../../api/axios'
 interface UserData {
@@ -17,6 +16,7 @@ export const registerOrLogin = (payload:UserData) => {
             console.log(payload)
           
              const { data } = await axios.post(`/${path}`,payload) 
+             
              dispatch(authActions[handler](data))
             
         }catch(e) {

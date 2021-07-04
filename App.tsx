@@ -20,11 +20,11 @@ let persistor = persistStore(store);
 const App = () => {
   const [isReady, setIsReady] = useState(false);
   const token = useSelector(state=> state.auth.token)
-  console.log(token)
+
   if (!isReady) {
     return (
       <AppLoading
-        startAsync={() => console.log("開始")}
+        startAsync={() => console.log("Ready")}
         onFinish={() => setIsReady(true)}
         onError={console.warn}
       />

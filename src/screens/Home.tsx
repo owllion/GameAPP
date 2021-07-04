@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { useFonts } from "expo-font";
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import AppLoading from "expo-app-loading";
 import { ScrollView } from "react-native-gesture-handler";
-import { useNetInfo } from "@react-native-community/netinfo";
-import { Dimensions } from "react-native";
-
 import COLORS from "../assets/color/colors";
-import ActivityIndicator from "../components/ActivityIndicator";
 import Card from "../components/Card";
 import Container from "../components/Container";
 import SearchBar from "../components/SearchBar";
@@ -16,48 +12,27 @@ import ListCategory from "../components/ListCategory";
 import CartBtn from "../components/CartBtn";
 import userApi from '../api/user'
 import { authActions } from '../store/slice/Auth'
-interface Game {
-  image: Array<string>;
-  productName: string;
-  price: number;
-  category: string;
-  description: string;
-  productId: string;
-}
+import { getGameList } from "../store/actions/GetGameListAction";
+import ActivityIndicator from "../components/ActivityIndicator";
 
 const Home = ({navigation}:any) => {
   const onSubmitHandler = () => {
-    navigation.navigate('SearchResult',{gameList:games,keywords})
+    navigation.navigate('SearchResult',{gameList,keywords})
   }
   const setKeywordsHandler = (text:string) => {
     setKeywords(text)
   }
-  const clearSearchHandler = () => {
-    setKeywords('')
-  }
+  const gameList = useSelector(state =>state.order.gameList)
   const dispatch = useDispatch()
   const [keywords,setKeywords] = useState<string>('')
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   
  const setsetIndexHandler = (index:number) => setSelectedIndex(index)
 
-  const [games, setGames] = useState<Game[]>([]);
   useEffect(() => {
-    getAllGames();
+    dispatch(getGameList()) 
   }, []);
-  const getAllGames = async () => {
-    try {
-      dispatch(authActions.setLoading({isLoading:true}))
-       const { data: { allGames }} = await userApi.getAllGames();
- 
-       setGames(allGames);
-       dispatch(authActions.setLoading({isLoading:false}))
-    }catch(e) {
-      dispatch(authActions.setLoading({isLoading:false}))
-       alert(`Something wrong! ${e}`)
-    }  
-  };
-
+ console.log(gameList)
   const [isLoaded] = useFonts({
     IBMPlexSansRegular: require("../assets/fonts/IBMPlexSans-Regular.ttf"),
     IBMPlexSansBold: require("../assets/fonts/IBMPlexSans-Bold.ttf"),
@@ -66,7 +41,8 @@ const Home = ({navigation}:any) => {
     return <AppLoading />;
   }
   return (
-    <Container>     
+    <Container> 
+      
       <Header>
         <TextOuterBox>
           <Text>Find your game</Text>
@@ -79,7 +55,6 @@ const Home = ({navigation}:any) => {
       </Header>
       <ScrollView showsVerticalScrollIndicator={false}>
         <SearchBar
-        clearSearchHandler={clearSearchHandler} 
          setKeywordsHandler={setKeywordsHandler}
          onSubmitHandler={onSubmitHandler} />
         <Text padding small>
@@ -91,7 +66,7 @@ const Home = ({navigation}:any) => {
         </Text>
         <Card 
           portrait
-          gameList={games} 
+          gameList={gameList} 
           index={selectedIndex} 
           cardItem 
         />
@@ -99,7 +74,7 @@ const Home = ({navigation}:any) => {
           Popular
         </Text>
          <Card 
-          gameList={games} 
+          gameList={gameList} 
           index={selectedIndex}         
         />
       </ScrollView>
@@ -129,7 +104,7 @@ const Text = styled.Text`
     props.color ? COLORS.orange : "#000"};
 
   padding: ${(props: { padding: boolean }) => (props.padding ? "20px" : 0)};
- margin-top:${({margin}:{margin:boolean})=> margin? "-5px":0}
+  margin-top:${({margin}:{margin:boolean})=> margin? "-5px":0}
 `;
 
 export default Home;

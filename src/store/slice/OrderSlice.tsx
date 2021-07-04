@@ -5,16 +5,47 @@ interface DisProps {
     discount:number
 }
 
-interface DetailProps {
+interface GameListProps {
+    gameList: {
+        image: Array<string>;
+        productName: string;
+        price: number;
+        category: string;
+        description: string;
+        productId: string;
+    }[] 
+}
 
+interface DetailProps {
+  orderDetail:{
+    total_price:number,
+    discount:number,
+    discount_code:string,
+    payment_method:string,
+    delivery_address:string,
+    order_item:{
+        image: Array<string>;
+        productName: string;
+        price: number;
+        category: string;
+        description: string;
+        productId: string;
+        rating:number,
+        qty:number,
+        isChecked:boolean,
+        stock:number
+    }[]
+    }
+    
 }
 
 const orderSlice = createSlice({
     name: 'order',
     initialState: {
         finalPrice:0,
-        discount:'',
-        detail:{}
+        discount:0,
+        detail:{},
+        gameList:[]
     },
     reducers : {
        setDisAndPrice(state, { payload }:PayloadAction<DisProps>) {
@@ -23,11 +54,13 @@ const orderSlice = createSlice({
       },
       clearDisAndPrice(state) {
            state.finalPrice = 0 
-           state.discount = ''
+           state.discount = 0
       },
       setOrderDetail(state,{ payload }:PayloadAction<DetailProps>) {
-          console.log(payload.orderDetail)
           state.detail = payload.orderDetail
+      },
+      setGameList(state,{ payload }:PayloadAction<GameListProps>) {
+          state.gameList = payload.gameList
       }
     }
         

@@ -14,9 +14,16 @@ const SearchResultScreen = ({route}:any)=> {
     return (
         <Container>
            <BtnBox>
-             <BackBtn/>
+             <BackBtn routeName={null}/>
            </BtnBox>
           <Text>Search Result</Text>
+          {!renderList[0]?
+          <ImageBox>
+        <Image 
+        resizeMode='contain'
+        source={require('../assets/images/noMatch.png')} />
+        </ImageBox>
+        :
            <FlatList
           contentContainerStyle={{alignItems:'center'}}
             showsVerticalScrollIndicator={false}
@@ -30,10 +37,25 @@ const SearchResultScreen = ({route}:any)=> {
             )
          }}
       /> 
+      }
         </Container>
                      
     )
 }
+const Image = styled.Image`
+  width:100%;
+  height:100%
+`
+const ImageBox = styled.View`
+ justify-content:center;
+ align-items:center;
+ padding:15px;
+ padding-right:50px;
+ margin-top:40px;
+ width:100%;
+ height:60%;
+ margin-left:20px;
+`
 const FlatList = styled.FlatList``
 const Container = styled.View`
  padding:40px 10px 10px 10px;

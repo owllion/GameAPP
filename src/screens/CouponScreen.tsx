@@ -40,7 +40,7 @@ const CouponScreen = () => {
     return (
       <Container>
         <BtnBox>
-         <BackBtn/>
+         <BackBtn routeName={null}/>
             </BtnBox>
              <TextBox>
          <Text title bold>Coupon</Text> 
@@ -67,8 +67,19 @@ const CouponScreen = () => {
                    </UseBox>           
                )}
             />          
-        <ScrollView selected={selected}>
-      {
+        
+      { !renderList[0]?
+        <Box> 
+        <Text title bold>You don't have any coupon...</Text>
+        <ImageBox>
+        <Image 
+        resizeMode='contain'
+        source={require('../assets/images/emptyBag.png')} />
+        </ImageBox>
+        </Box>
+        :
+        <ScrollView>
+        {
         renderList.map((item,i)=> (          
           <View key={i} >
              <LeftBox>
@@ -80,17 +91,19 @@ const CouponScreen = () => {
                  <Text>Expire: <DayJS format="YYYY-MM-DD hh:mm A" element={Text}>{item.expiry_date}</DayJS></Text>
              </RightBox>
           </View>      
-      ))}
-      </ScrollView>
+      ))
+        }
+        </ScrollView>
+    }
+     
       </Container>
     )
 }
 
 const FlatList = styled.FlatList`
-
 flex-grow:0`
 const ScrollView =styled.ScrollView`
-
+  flex:1
 `
 
 const View = styled.View`
@@ -158,5 +171,24 @@ const Text = styled.Text`
   font-family:${({bold}: {bold:boolean})=> bold ? 'IBMPlexSansBold':'IBMPlexSansRegular'};
   font-size:${({title}:{title:boolean})=> title?'20px' :'11px'};
   color:${({highlight}:{highlight:boolean})=> highlight? COLORS.white : COLORS.dark};
+`
+const Image = styled.Image`
+  width:100%;
+  height:100%
+`
+const ImageBox = styled.View`
+ justify-content:center;
+ align-items:center;
+ padding:15px;
+ padding-right:50px;
+ margin-top:40px;
+ width:100%;
+ height:80%;
+`
+const Box = styled.View`
+ flex:1;
+ padding:20px;
+ padding-left:45px;
+ margin-top:-40px;
 `
 export default CouponScreen
