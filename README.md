@@ -17,11 +17,7 @@
 ## Demo
 [Video](https://streamable.com/j229ge)
 # Screen Preview
-![image](https://github.com/owllion/Styled-component-practice/blob/main/home.png)
-![image](https://github.com/owllion/Styled-component-practice/blob/main/itemdetail.png)
-![image](https://github.com/owllion/Styled-component-practice/blob/main/cart.png)
-![image](https://github.com/owllion/Styled-component-practice/blob/main/checkout.png)
-![image](https://github.com/owllion/Styled-component-practice/blob/main/orderdetail.png)
+![image](https://github.com/owllion/Styled-component-practice/blob/main/CollageMaker_20210706_110116279.jpg)
 
 ## Run this project
 ```
