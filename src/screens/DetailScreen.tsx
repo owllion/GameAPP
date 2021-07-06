@@ -47,7 +47,7 @@ const Detail = ({navigation,route}:any) => {
       <ActivityIndicator/>
       <ImageBackground source={gameBg.img}>
         <Container>
-          <ActivityIndicator/>
+          
           <Header>
             <HeaderBtn>
               <Icon

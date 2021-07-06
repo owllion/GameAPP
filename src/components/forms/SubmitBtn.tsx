@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
 import { useFormikContext } from 'formik'
 import { useDispatch } from 'react-redux'
 import { registerOrLogin } from '../../store/actions/AuthAction'
@@ -25,7 +23,7 @@ const SubmitBtn = (props:Props) => {
        isChecked = true
     }
     const checkSubmit = () => {
-       if(!isChecked) {
+       if(!isChecked || !values.email || !values.password) {
           alert('Please check your field again!')
           return 
        }

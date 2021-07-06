@@ -132,6 +132,7 @@ const authSlice = createSlice({
            state.avatar = payload.result.user.avatarRnDefault
            state.cartList = payload.result.user.cartList
            state.favList = payload.result.user.favList
+           state.couponList = payload.result.user.couponList
            state.county = payload.result.user.county
            state.district = payload.result.user.district
            state.road = payload.result.user.road         

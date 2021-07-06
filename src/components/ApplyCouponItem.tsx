@@ -84,7 +84,7 @@ const ApplyCouponItem = (props:Props)=> {
     )
 }
 const ErrorBox = styled.View`
-  margin-top:1px;
+  margin-top:25px;
 `
 const OrderDetailBox = styled.View`
   padding:15px;

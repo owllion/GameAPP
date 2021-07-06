@@ -57,7 +57,7 @@ const OrderDetail = (props:Props) => {
            </View>      
             </TextBox> 
 
-        {
+        {!!orderItem&&
         orderItem.map((item,index)=> (
             <ItemWrapper key={index}>
            <ItemBox>

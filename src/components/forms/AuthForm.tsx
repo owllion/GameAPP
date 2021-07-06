@@ -1,15 +1,15 @@
 import React from 'react';
-import { useDispatch } from 'react-redux'
 import Icon from 'react-native-vector-icons/Fontisto'
 import * as Yup from 'yup'
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import styled from 'styled-components/native'
-import { useSelector}  from 'react-redux'
+import { useSelector, useDispatch}  from 'react-redux'
 import SubmitBtn from './SubmitBtn'
 import AppFormInput from '../AppFormInput'
 import FormikWrapper from './FormikWrapper'
 import ErrorMsg from '../forms/ErrorMsg'
+
 
 interface Props {
     headerText:string;
@@ -24,9 +24,9 @@ const validationSchema = Yup.object().shape({
 })
 
 const AuthForm= ({ headerText, submitButtonText,nameInput }:Props) => {
-
+    
      const errorMsg = useSelector(state=> state.auth.errorMsg)
-
+   
     // 解構的email和password就是initialValues
   //    const handleSubmit = ({ email, password }:{email:string,password:string}) => {
   //       dispatch(registerOrLogin({email,password})) 
@@ -40,7 +40,7 @@ const AuthForm= ({ headerText, submitButtonText,nameInput }:Props) => {
        if (!isLoaded) {
         return <AppLoading />
        }
-
+  
   return (
     <View> 
       <Text>{headerText}</Text>   

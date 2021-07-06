@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux'
 import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'
 import ActivityIndicator from '../components/ActivityIndicator';
+import { authActions } from '../store/slice/Auth';
 
+const LoginScreen= ({navigation}:any) => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+       dispatch(authActions.setErrorClear())
+    });
 
-const LoginScreen= () => {
-
+    return unsubscribe;
+  }, [navigation]);
   return (
     <>
     <ActivityIndicator/>

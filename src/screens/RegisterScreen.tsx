@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { registerOrLogin } from '../store/actions/AuthAction'
 import AuthForm from '../components/forms/AuthForm'
 import NavLink from '../components/NavLink'
 import styled from 'styled-components/native'
 import ActivityIndicator from '../components/ActivityIndicator';
+import { authActions } from '../store/slice/Auth';
 
-const RegisterScreen= () => {
+const RegisterScreen= ({navigation}:any) => {
   const dispatch = useDispatch()
  
  const userRegister = (email:string,password:string ,userName:string) => {
    dispatch(registerOrLogin({userName,email,password}))
  }
+ useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+       dispatch(authActions.setErrorClear())
+    });
 
+    return unsubscribe;
+  }, [navigation]);
   return (
     <>
     <ActivityIndicator/>

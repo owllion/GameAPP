@@ -37,7 +37,14 @@ const CouponScreen = () => {
   useEffect(()=>{
      renderListHandler()
   }, [selected])
-  
+   console.log(renderList)
+   console.log('這是renderList')
+   console.log('這是renderList')
+   console.log('這是renderList')
+   console.log('這是renderList')
+   console.log('這是renderList')
+   console.log('這是renderList')
+   console.log('這是renderList')
     return (
       <Container>
         <BtnBox>
@@ -76,10 +83,11 @@ const CouponScreen = () => {
         img={require('../assets/images/emptyBag.png')} 
       />
         :
-        <ScrollView>
-        {
-        renderList.map((item,i)=> (          
-          <View key={i} >
+      <FlatList 
+        keyExtractor={i=>i.code.toString()}
+        data={renderList}
+        renderItem={({item,i})=> (
+             <View key={i}>
              <LeftBox>
                <Text title bold>BIG </Text>
                <Text highlight title bold>SALE</Text> 
@@ -88,10 +96,12 @@ const CouponScreen = () => {
                  <CodeText selectable>{item.code}</CodeText>     
                  <Text>Expire: <DayJS format="YYYY-MM-DD hh:mm A" element={Text}>{item.expiry_date}</DayJS></Text>
              </RightBox>
-          </View>      
-      ))
-        }
-        </ScrollView>
+          </View>    
+        )}
+      />
+
+
+      
     }
      
       </Container>
