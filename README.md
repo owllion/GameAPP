@@ -16,7 +16,7 @@
 
 ## Demo
 [Video](https://streamable.com/j229ge)
-# Screen Preview
+## Screen Preview
 ![image](https://github.com/owllion/Styled-component-practice/blob/main/CollageMaker_20210706_110116279.jpg)
 
 ## Run this project
