@@ -6,7 +6,7 @@
 > An E-commerce App Built With React Native.
 
 ## Skills
-> React Native + React Native Elements + TypeScript
+> React Native + Redux + React Native Elements + TypeScript
 ## Features
 * Log in / Log out / Sign up  
 * Add to cart / Remove from cart 
