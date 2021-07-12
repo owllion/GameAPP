@@ -111,9 +111,6 @@ const CouponScreen = () => {
 const FlatList = styled.FlatList`
   flex-grow: 0;
 `;
-const ScrollView = styled.ScrollView`
-  flex: 1;
-`;
 
 const View = styled.View`
   padding: 10px;
