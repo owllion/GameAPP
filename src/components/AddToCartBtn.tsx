@@ -4,10 +4,12 @@ import COLORS from "../assets/color/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/slice/Auth";
 import userApi from "../api/user";
+import { useAppSelector } from "../store/hooks";
+import { AxiosError } from "axios";
 
 const AddToCartBtn = ({ gameId, qty }: { gameId: string; qty: number }) => {
-  const token = useSelector((state) => state.auth.token);
-  const cart = useSelector((state) => state.auth.cartList);
+  const token = useAppSelector((state) => state.auth.token);
+  const cart = useAppSelector((state) => state.auth.cartList);
   console.log(token);
   const dispatch = useDispatch();
 
@@ -25,11 +27,10 @@ const AddToCartBtn = ({ gameId, qty }: { gameId: string; qty: number }) => {
 
       dispatch(authActions.setCartLength({ length }));
       dispatch(authActions.setLoading({ isLoading: false }));
-    } catch (e) {
-      if (e.response) {
-        dispatch(authActions.setLoading({ isLoading: false }));
-        alert(e.response.data.msg);
-      }
+    } catch (error) {
+      const msg = ((error as AxiosError).response?.data as { msg: string }).msg;
+      dispatch(authActions.setLoading({ isLoading: false }));
+      alert(msg);
     }
   };
 
