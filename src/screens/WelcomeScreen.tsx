@@ -3,7 +3,7 @@ import { Platform, StatusBar, Dimensions, ImageBackground } from "react-native";
 import styled from "styled-components/native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
-import AuthNavBtn from '../components/AuthNavBtn'
+import AuthNavBtn from "../components/AuthNavBtn";
 
 const WelcomeScreen = ({ navigation }: any) => {
   const [isLoaded] = useFonts({

@@ -12,14 +12,14 @@ import navigationTheme from "./src/navigation/navigationTheme";
 import OfflineNotice from "./src/components/OfflineNotice";
 import AppLoading from "expo-app-loading";
 import COLORS from "./src/assets/color/colors";
-import { navigationRef } from './src/navigationRef';
-import { useSelector } from 'react-redux';
+import { navigationRef } from "./src/navigationRef";
+import { useSelector } from "react-redux";
 
 let persistor = persistStore(store);
 
 const App = () => {
   const [isReady, setIsReady] = useState(false);
-  const token = useSelector(state=> state.auth.token)
+  const token = useSelector((state) => state.auth.token);
 
   if (!isReady) {
     return (
@@ -32,28 +32,24 @@ const App = () => {
   }
 
   return (
-      <>
-        <OfflineNotice />
-        <NavigationContainer 
-          ref={navigationRef} 
-          theme={navigationTheme}
-        >   
+    <>
+      <OfflineNotice />
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
         <StatusBar backgroundColor={COLORS.dark} barStyle="light-content" />
 
-        { token ? <Tabs />: <AuthNavigator /> } 
-
-        </NavigationContainer>
-     </>  
+        {token ? <Tabs /> : <AuthNavigator />}
+      </NavigationContainer>
+    </>
   );
 };
 const AppWrapper = () => {
   return (
-    <Provider store={store}> 
-     <PersistGate loading={null} persistor={persistor}>
-      <App/>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
       </PersistGate>
     </Provider>
-  )
-}
+  );
+};
 
 export default AppWrapper;

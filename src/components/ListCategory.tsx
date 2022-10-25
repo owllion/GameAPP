@@ -20,12 +20,11 @@ const categoryItems = [
   { cateName: "Rhythm", iconType: "font-awesome-5", iconName: "music" },
 ];
 
-interface Props  {
-   selectedIndex:number,
-   setsetIndexHandler:(index:number)=>void   
+interface Props {
+  selectedIndex: number;
+  setsetIndexHandler: (index: number) => void;
 }
-const ListCategory = ({selectedIndex,setsetIndexHandler}:Props) => {
-
+const ListCategory = ({ selectedIndex, setsetIndexHandler }: Props) => {
   const [isLoaded] = useFonts({
     IBMPlexSansBold: require("../assets/fonts/IBMPlexSans-Bold.ttf"),
   });

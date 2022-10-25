@@ -1,14 +1,14 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
 
 interface Props {
-  onSubmitHandler:()=>void,
-  setKeywordsHandler:(text:string)=>void
+  onSubmitHandler: () => void;
+  setKeywordsHandler: (text: string) => void;
 }
 
-const SearchBar = (props:Props) => {
-  const { onSubmitHandler,setKeywordsHandler} = props
+const SearchBar = (props: Props) => {
+  const { onSubmitHandler, setKeywordsHandler } = props;
 
   return (
     <Container>
@@ -17,11 +17,11 @@ const SearchBar = (props:Props) => {
         size={30}
         style={{ marginLeft: 15, marginTop: 16 }}
       />
-      <TextInput 
-       placeholder="Search" 
-       onChangeText={setKeywordsHandler}
-       onSubmitEditing={onSubmitHandler}
-       />
+      <TextInput
+        placeholder="Search"
+        onChangeText={setKeywordsHandler}
+        onSubmitEditing={onSubmitHandler}
+      />
     </Container>
   );
 };

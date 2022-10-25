@@ -1,19 +1,18 @@
-import React from 'react'
-import styled from 'styled-components/native'
-import Constants from 'expo-constants'
+import React from "react";
+import styled from "styled-components/native";
+import Constants from "expo-constants";
 
 interface Props {
-    children:React.ReactNode
+  children: React.ReactNode;
 }
 
-const  Container = ({children}:Props) => {
-    return  <View>{children}</View>    
-}
+const Container = ({ children }: Props) => {
+  return <View>{children}</View>;
+};
 
 const View = styled.SafeAreaView`
- padding-top:${Constants.statusBarHeight}px;
- flex:1;
+  padding-top: ${Constants.statusBarHeight}px;
+  flex: 1;
+`;
 
-`
-
-export default Container
+export default Container;
