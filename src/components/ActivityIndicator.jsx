@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const ActivityIndicator = () => {
   const visible = useSelector((state) => state.auth.loading);
-  console.log(visible);
   if (!visible) return null;
 
   return (

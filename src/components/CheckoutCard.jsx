@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import COLORS from "../assets/color/colors";
 import styled from "styled-components/native";
 import { PaymentsStripe as Stripe } from "expo-payments-stripe";
+import { STRIPE_PUBLISHABLE_KEY } from "@env";
 
-Stripe.setOptionsAsync({
-  publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-  androidPayMode: "test",
-});
-
+// Stripe.setOptionsAsync({
+//   publishableKey: STRIPE_PUBLISHABLE_KEY,
+//   androidPayMode: "test",
+// });
 const CheckoutCard = () => {
   const [card, setCard] = useState({ last4: "", brand: "" });
 
@@ -19,7 +19,7 @@ const CheckoutCard = () => {
       cvc: "223",
     };
     try {
-      const token = await Stripe.paymentRequestWithCardFormAsync(params);
+      // const token = await Stripe.paymentRequestWithCardFormAsync(params);
       setCard({ last4: token.card.last4, brand: token.card.brand });
     } catch (e) {
       console.log(e);

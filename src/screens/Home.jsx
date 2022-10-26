@@ -22,8 +22,8 @@ const Home = ({ navigation }) => {
   };
   const gameList = useSelector((state) => state.order.gameList);
   const dispatch = useDispatch();
-  const [keywords, setKeywords] = useState < string > "";
-  const [selectedIndex, setSelectedIndex] = useState < number > 0;
+  const [keywords, setKeywords] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const setsetIndexHandler = (index) => setSelectedIndex(index);
 
@@ -92,11 +92,8 @@ const TextInnerBox = styled.View`
 `;
 const Text = styled.Text`
   font-size: ${(props) => (props.small ? "14px" : "18px")};
-
   font-family: IBMPlexSansBold;
-
   color: ${(props) => (props.color ? COLORS.orange : "#000")};
-
   padding: ${(props) => (props.padding ? "20px" : 0)};
   margin-top: ${({ margin }) => (margin ? "-5px" : 0)};
 `;

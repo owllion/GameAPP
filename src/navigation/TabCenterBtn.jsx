@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import { Icon } from "react-native-elements";
 import COLORS from "../assets/color/colors";
 
-const TabCenterBtn = (props: { onPress: () => void }) => {
+const TabCenterBtn = (props) => {
   return (
     <Pressable
       android_ripple={{ color: COLORS.light, borderless: true }}
