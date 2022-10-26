@@ -2,19 +2,8 @@ import React from "react";
 import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
 import { useNavigation } from "@react-navigation/native";
-export interface Game {
-  game: {
-    image: Array<string>;
-    productName: string;
-    price: number;
-    category: string;
-    description: string;
-    productId: string;
-    rating: number;
-  };
-}
 
-const FavItem = ({ game }: Game) => {
+const FavItem = ({ game }) => {
   const navigation = useNavigation();
   return (
     <Pressable onPress={() => navigation.navigate("Detail", { item: game })}>

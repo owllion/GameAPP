@@ -3,12 +3,8 @@ import styled from "styled-components/native";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { useNavigation } from "@react-navigation/native";
-interface Props {
-  routeName: string;
-  text: string;
-}
 
-const NavLink = (props: Props) => {
+const NavLink = (props) => {
   const navigation = useNavigation();
 
   const [isLoaded] = useFonts({

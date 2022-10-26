@@ -3,14 +3,7 @@ import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
 import { Overlay } from "react-native-elements";
 
-interface Props {
-  visible: boolean;
-  closeHandler: () => void;
-  setAddressHandler: (address: string) => void;
-  data: string[];
-}
-
-const Modal = ({ visible, closeHandler, setAddressHandler, data }: Props) => {
+const Modal = ({ visible, closeHandler, setAddressHandler, data }) => {
   if (!visible) return null;
 
   return (
@@ -55,26 +48,8 @@ const Text = styled.Text`
   border-bottom-width: 1px;
   border-bottom-color: ${COLORS.grey};
   border-style: solid;
-  color: ${({ white }: { white: boolean }) =>
-    white ? COLORS.light : COLORS.dark};
+  color: ${({ white }) => (white ? COLORS.light : COLORS.dark)};
   padding-bottom: 6px;
-`;
-const Input = styled.TextInput`
-  font-family: IBMPlexSansRegular;
-  padding-left: 20px;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 20px;
-  background-color: ${COLORS.white};
-`;
-
-const CheckBtn = styled.Pressable`
-  padding: 10px;
-  margin-top: 35px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  background-color: ${COLORS.orange};
 `;
 const ChooseBtn = styled.Pressable`
   padding: 5px 5px 0 0;

@@ -3,12 +3,7 @@ import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
 import { Icon } from "react-native-elements";
 
-interface Props {
-  text: string;
-  handle: () => void;
-}
-
-const ConfigItem = ({ text, handle }: Props) => {
+const ConfigItem = ({ text, handle }) => {
   return (
     <Config
       android_ripple={{

@@ -2,11 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import Constants from "expo-constants";
 
-interface Props {
-  children: React.ReactNode;
-}
-
-const Container = ({ children }: Props) => {
+const Container = ({ children }) => {
   return <View>{children}</View>;
 };
 

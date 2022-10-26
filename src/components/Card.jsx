@@ -18,34 +18,7 @@ const categoryItems = [
   { cateName: "Rhythm", iconType: "font-awesome-5", iconName: "music" },
 ];
 
-interface Game {
-  image: Array<string>;
-  productName: string;
-  price: number;
-  category: string;
-  description: string;
-  productId: string;
-  rating: number;
-}
-interface Props {
-  gameList: Game[];
-  index: number;
-  cardItem: boolean;
-  portrait: boolean;
-}
-interface renderProps {
-  item: {
-    image: Array<string>;
-    productName: string;
-    price: number;
-    category: string;
-    description: string;
-    productId: string;
-    rating: number;
-  };
-}
-
-const Card = ({ gameList, index, cardItem, portrait }: Props) => {
+const Card = ({ gameList, index, cardItem, portrait }) => {
   const result = gameList.filter(
     (g) => g.category === categoryItems[index].cateName
   );
@@ -59,13 +32,13 @@ const Card = ({ gameList, index, cardItem, portrait }: Props) => {
       showsHorizontalScrollIndicator={false}
       data={cardItem ? result : popular}
       keyExtractor={(i) => i.productName}
-      renderItem={({ item }: renderProps) =>
+      renderItem={({ item }) =>
         cardItem ? <CardItem game={item} /> : <PopularCard game={item} />
       }
     />
   );
 };
-const FlatList = styled.FlatList<{ h: boolean }>`
+const FlatList = styled.FlatList`
   margin-top: -20px;
   padding-left: 7px;
   height: ${({ h }) => (h ? "420px" : "280px")};

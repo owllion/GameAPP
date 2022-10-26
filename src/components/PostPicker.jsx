@@ -10,32 +10,11 @@ import PickerItem from "./PickerItem";
 import ErrorMsg from "./forms/ErrorMsg";
 import { useFormikContext } from "formik";
 
-interface KeyCategory {
-  label: string;
-  id: number;
-}
-
-interface Category {
-  item: {
-    id: number;
-    label: string;
-    bg: string;
-    icon: string;
-  };
-}
-
-interface Props {
-  cate: KeyCategory[];
-  fieldName: string;
-  numColumns: number;
-}
-
-const PostPicker = (props: Props) => {
-  const { fieldName, cate, numColumns } = props;
+const PostPicker = ({ fieldName, cate, numColumns }) => {
   const { errors, setFieldValue, touched, values } = useFormikContext();
 
   //Modal shoe or not show
-  const [visible, setVisible] = useState<boolean>(false);
+  const [visible, setVisible] = useState < boolean > false;
 
   const [isLoaded] = useFonts({
     IBMPlexSansRegular: require("../assets/fonts/IBMPlexSans-Regular.ttf"),
@@ -104,8 +83,8 @@ const PostPicker = (props: Props) => {
           style={{ marginTop: "50%" }}
           data={cate}
           numColumns={numColumns}
-          keyExtractor={(i: KeyCategory) => i.id.toString()}
-          renderItem={({ item }: Category) => {
+          keyExtractor={(i) => i.id.toString()}
+          renderItem={({ item }) => {
             return (
               <PickerItem
                 label={item.label}
@@ -147,8 +126,7 @@ const IconBox = styled.View`
 
 const Text = styled.Text`
   font-family: ${regular.fontFamily};
-  color: ${(props: { dark: boolean }) => (props.dark ? "#000" : "gray")};
+  color: ${(props) => (props.dark ? "#000" : "gray")};
 `;
-const CategoryTitle = styled.Text``;
 const FlatList = styled.FlatList``;
 export default PostPicker;

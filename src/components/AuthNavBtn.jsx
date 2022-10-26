@@ -3,13 +3,7 @@ import styled from "styled-components/native";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 
-interface Props {
-  text: string;
-  onPress: () => void;
-}
-
-const SubmitBtn = (props: Props) => {
-  const { text, onPress } = props;
+const SubmitBtn = ({ text, onPress }) => {
   const [isLoaded] = useFonts({
     MarcellusRegular: require("../assets/fonts/Marcellus-Regular.ttf"),
   });

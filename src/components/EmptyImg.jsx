@@ -2,14 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
 
-interface Props {
-  text: string;
-  img: string;
-  color: string;
-}
-
-const EmptyImg = (props: Props) => {
-  const { text, img, color } = props;
+const EmptyImg = ({ text, img, color }) => {
   return (
     <>
       <Text
@@ -45,7 +38,6 @@ const Text = styled.Text`
   padding-top: 20px;
   padding-left: 40px;
   margin-bottom: 20px;
-  color: ${({ white }: { white: boolean }) =>
-    white ? COLORS.white : COLORS.primary};
+  color: ${({ white }) => (white ? COLORS.white : COLORS.primary)};
 `;
 export default EmptyImg;

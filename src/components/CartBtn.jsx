@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components/native";
 import { Icon, Badge } from "react-native-elements";
 import COLORS from "../assets/color/colors";
-import { useAppSelector } from "../store/hooks";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 const CartBtn = () => {
-  const cartList = useAppSelector((state) => state.auth.cartList);
-
+  const cartList = useSelector((state) => state.auth.cartList);
   const navigation = useNavigation();
 
   return (

@@ -3,15 +3,7 @@ import styled from "styled-components/native";
 import { AntDesign } from "@expo/vector-icons";
 import COLORS from "../assets/color/colors";
 
-interface Props {
-  qtyHandler?: (type: string) => void;
-  updateQtyHandler?: (type: string, index: number) => void;
-  qty: number;
-  stock: number;
-  index?: number;
-}
-
-const QtyBtn = ({ qtyHandler, updateQtyHandler, qty, stock, index }: Props) => {
+const QtyBtn = ({ qtyHandler, updateQtyHandler, qty, stock, index }) => {
   return (
     <QuantityBox>
       <QuantityBtn

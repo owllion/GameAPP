@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
+import { useSelector } from "react-redux";
 
-import { useAppSelector } from "../store/hooks";
 import FavItem from "../components/FavItem";
 import COLORS from "../assets/color/colors";
 import BackBtn from "../components/BackBtn";
@@ -9,7 +9,7 @@ import EmptyImg from "../components/EmptyImg";
 
 const numColumns = 2;
 const FavScreen = () => {
-  const favList = useAppSelector((state) => state.auth.favList);
+  const favList = useSelector((state) => state.auth.favList);
 
   return (
     <Container>

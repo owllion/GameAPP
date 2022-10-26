@@ -20,11 +20,7 @@ const categoryItems = [
   { cateName: "Rhythm", iconType: "font-awesome-5", iconName: "music" },
 ];
 
-interface Props {
-  selectedIndex: number;
-  setsetIndexHandler: (index: number) => void;
-}
-const ListCategory = ({ selectedIndex, setsetIndexHandler }: Props) => {
+const ListCategory = ({ selectedIndex, setsetIndexHandler }) => {
   const [isLoaded] = useFonts({
     IBMPlexSansBold: require("../assets/fonts/IBMPlexSans-Bold.ttf"),
   });
@@ -71,13 +67,8 @@ const CateBox = styled.View`
 `;
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback``;
 const InnerBox = styled.View`
-  background-color: ${({
-    index,
-    selectedIndex,
-  }: {
-    index: number;
-    selectedIndex: number;
-  }) => (selectedIndex === index ? COLORS.primary : COLORS.light)};
+  background-color: ${({ index, selectedIndex }) =>
+    selectedIndex === index ? COLORS.primary : COLORS.light};
   padding: 10px;
   border-radius: 7px;
   align-items: center;
@@ -85,13 +76,8 @@ const InnerBox = styled.View`
 const Text = styled.Text`
   font-size: 10px;
   font-family: IBMPlexSansBold;
-  color: ${({
-    index,
-    selectedIndex,
-  }: {
-    index: number;
-    selectedIndex: number;
-  }) => (selectedIndex === index ? COLORS.white : COLORS.dark)};
+  color: ${({ index, selectedIndex }) =>
+    selectedIndex === index ? COLORS.white : COLORS.dark};
 `;
 
 export default ListCategory;

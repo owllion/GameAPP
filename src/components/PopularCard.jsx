@@ -5,22 +5,9 @@ import COLORS from "../assets/color/colors";
 import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-const { width } = Dimensions.get("screen");
 import { useNavigation } from "@react-navigation/native";
 
-interface Game {
-  game: {
-    image: Array<string>;
-    productName: string;
-    price: number;
-    category: string;
-    description: string;
-    productId: string;
-    rating: number;
-  };
-}
-
-const PopularCard = ({ game }: Game) => {
+const PopularCard = ({ game }) => {
   const navigation = useNavigation();
 
   const [isLoaded] = useFonts({
@@ -92,11 +79,10 @@ const TextBox = styled.View`
 `;
 const Text = styled.Text`
   font-size: 12px;
-  padding: ${({ padding }: { padding: boolean }) => (padding ? "15px" : 0)};
+  padding: ${({ padding }) => (padding ? "15px" : 0)};
   font-family: IBMPlexSansBold;
-  color: ${({ color }: { color: boolean }) =>
-    color ? COLORS.primary : COLORS.dark};
-  margin-top: ${({ margin }: { margin: boolean }) => (margin ? "-10px" : 0)};
+  color: ${({ color }) => (color ? COLORS.primary : COLORS.dark)};
+  margin-top: ${({ margin }) => (margin ? "-10px" : 0)};
 `;
 const Price = styled.Text`
   font-family: IBMPlexSansBold;

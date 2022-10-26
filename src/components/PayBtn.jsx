@@ -5,7 +5,7 @@ import { Platform } from "react-native";
 import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
 import { createOrder } from "../store/actions/CreateOrderAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -58,27 +58,6 @@ const schedulePushNotification = async () => {
   });
 };
 
-interface Props {
-  newCity: string;
-  newDistrict: string;
-  newRoad: string;
-  finalPrice: number;
-  code: string;
-  discount: number;
-  cartList: {
-    image: Array<string>;
-    productName: string;
-    price: number;
-    category: string;
-    description: string;
-    productId: string;
-    rating: number;
-    qty: number;
-    isChecked: boolean;
-    stock: number;
-  }[];
-  Address: () => string;
-}
 const PayBtn = ({
   newCity,
   newDistrict,
@@ -88,7 +67,7 @@ const PayBtn = ({
   discount,
   cartList,
   Address,
-}: Props) => {
+}) => {
   const dispatch = useDispatch();
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
@@ -153,10 +132,9 @@ const Pressable = styled.Pressable`
   border-radius: 8px;
 `;
 const Text = styled.Text`
-  font-size: ${({ title }: { title: boolean }) => (title ? "25px" : "15px")};
-  font-family: ${({ regular }: { regular: boolean }) =>
+  font-size: ${({ title }) => (title ? "25px" : "15px")};
+  font-family: ${({ regular }) =>
     regular ? "IBMPlexSansRegular" : "IBMPlexSansBold"};
-  color: ${({ highlight }: { highlight: boolean }) =>
-    highlight ? COLORS.orange : COLORS.white};
+  color: ${({ highlight }) => (highlight ? COLORS.orange : COLORS.white)};
 `;
 export default PayBtn;

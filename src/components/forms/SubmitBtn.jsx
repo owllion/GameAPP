@@ -5,17 +5,9 @@ import { useDispatch } from "react-redux";
 import { registerOrLogin } from "../../store/actions/AuthAction";
 import COLORS from "../../assets/color/colors";
 
-interface IProps {
-  text: string;
-}
-interface IFieldValue {
-  email: string;
-  name: string;
-  password: string;
-}
-const SubmitBtn = ({ text }: IProps) => {
+const SubmitBtn = ({ text }) => {
   const dispatch = useDispatch();
-  const { errors, values } = useFormikContext<IFieldValue>();
+  const { errors, values } = useFormikContext();
 
   const isChecked = errors.email ? false : true;
 

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/core";
-const BackBtn = ({ routeName }: { routeName: string | null }) => {
+const BackBtn = ({ routeName }) => {
   const navigation = useNavigation();
   return (
     <View>

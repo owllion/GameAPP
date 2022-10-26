@@ -11,12 +11,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToFav, removeFromFav } from "../store/actions/FavAction";
 import ActivityIndicator from "../components/ActivityIndicator";
 
-const Detail = ({ navigation, route }: any) => {
+const Detail = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
   const favList = useSelector((state) => state.auth.favList);
 
-  const [isFav, setFav] = useState<unknown>();
+  const [isFav, setFav] = useState();
 
   //click btn will call api-->get and set new favlist to state -->useEffect run-->get new index--> set new isFav --> heart btn change !
   useEffect(() => {
@@ -25,7 +25,7 @@ const Detail = ({ navigation, route }: any) => {
     index === -1 ? setFav(-1) : setFav(index);
   }, [favList]);
 
-  const [qty, setQty] = useState<number>(1);
+  const [qty, setQty] = useState < number > 1;
 
   const { item } = route.params;
   const gameId = item.productId;
@@ -33,7 +33,7 @@ const Detail = ({ navigation, route }: any) => {
     (i) => i.img
   );
 
-  const qtyHandler = (type: string) => {
+  const qtyHandler = (type) => {
     setQty(type === "add" ? qty + 1 : qty - 1);
   };
 
@@ -151,9 +151,8 @@ const RatingBox = styled.View`
   right: 30px;
 `;
 const Text = styled.Text`
-  font-size: ${({ large }: { large: boolean }) => (large ? "20px" : "12px")};
-  color: ${({ color }: { color: boolean }) =>
-    color ? COLORS.white : COLORS.dark};
+  font-size: ${({ large }) => (large ? "20px" : "12px")};
+  color: ${({ color }) => (color ? COLORS.white : COLORS.dark)};
   font-family: IBMPlexSansBold;
 `;
 const ContentBox = styled.View`
@@ -172,9 +171,9 @@ const IconBox = styled.View`
 `;
 const ContentText = styled.Text`
   margin: 7px 0;
-  font-size: ${({ large }: { large: boolean }) => (large ? "18px" : "10px")};
+  font-size: ${({ large }) => (large ? "18px" : "10px")};
   color: ${COLORS.white};
-  font-family: ${({ bold }: { bold: boolean }) =>
+  font-family: ${({ bold }) =>
     bold ? "IBMPlexSansBold" : "IBMPlexSansRegular"};
 `;
 const PriceAndNumber = styled.View`

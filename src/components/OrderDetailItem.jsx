@@ -4,8 +4,7 @@ import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
 import DayJS from "react-dayjs";
 
-const OrderDetailItem = (props) => {
-  const { orderDetail, date } = props;
+const OrderDetailItem = ({ orderDetail, date }) => {
   return (
     <>
       <PriceWrapper>

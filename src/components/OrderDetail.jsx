@@ -4,8 +4,7 @@ import { Icon } from "react-native-elements";
 import COLORS from "../assets/color/colors";
 import OrderDetailItem from "./OrderDetailItem";
 
-const OrderDetail = (props) => {
-  const { orderItem, date, orderDetail } = props;
+const OrderDetail = ({ orderItem, date, orderDetail }) => {
   return (
     <ScrollView>
       <InnerContainer>

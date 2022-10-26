@@ -1,9 +1,10 @@
 import React from "react";
 import LottieView from "lottie-react-native";
 import styled from "styled-components/native";
-import { useAppSelector } from "../store/hooks";
+import { useSelector } from "react-redux";
+
 const ActivityIndicator = () => {
-  const visible = useAppSelector((state) => state.auth.loading);
+  const visible = useSelector((state) => state.auth.loading);
   console.log(visible);
   if (!visible) return null;
 

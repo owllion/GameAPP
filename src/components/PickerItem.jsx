@@ -3,18 +3,7 @@ import styled from "styled-components/native";
 import { regular } from "../assets/style/style";
 import { Icon } from "react-native-elements";
 
-interface Props {
-  label: string;
-  item: {
-    id: number;
-    label: string;
-    bg: string;
-    icon: string;
-  };
-  selectHandler: (item: string) => void;
-}
-
-const PickerItem = ({ label, selectHandler, item }: Props) => {
+const PickerItem = ({ label, selectHandler, item }) => {
   console.log(item.icon);
   return (
     <TouchableOpacity onPress={selectHandler}>
@@ -30,7 +19,7 @@ const Text = styled.Text`
   font-family: ${regular.fontFamily};
 `;
 const View = styled.View`
-  background-color: ${(props: { bg: string }) => (props.bg ? props.bg : null)};
+  background-color: ${(props) => (props.bg ? props.bg : null)};
   padding: 12px;
   width: 80px;
   height: 80px;

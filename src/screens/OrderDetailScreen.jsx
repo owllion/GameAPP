@@ -3,8 +3,7 @@ import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
 import BackBtn from "../components/BackBtn";
 import { getOrderDetail } from "../store/actions/OrderDetailAction";
-import { useAppSelector } from "../store/hooks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ActivityIndicator from "../components/ActivityIndicator";
 import OrderDetail from "../components/OrderDetail";
 
@@ -13,10 +12,9 @@ const OrderDetailScreen = ({ route }) => {
 
   const dispatch = useDispatch();
 
-  const detail = useAppSelector((state) => state.order.detail);
+  const detail = useSelector((state) => state.order.detail);
   const orderItem = detail.order_item;
-  const date = detail.createdAt;
-  const formatedDate = new Date(date).format("yyyy-MM-dd hh:mm");
+  const createdAt = detail.createdAt;
 
   useEffect(() => {
     dispatch(getOrderDetail({ orderId }));
@@ -37,7 +35,11 @@ const OrderDetailScreen = ({ route }) => {
             </Text>
           </TextBox>
         </UpperBlock>
-        <OrderDetail orderDetail={detail} date={d} orderItem={orderItem} />
+        <OrderDetail
+          orderDetail={detail}
+          date={createdAt}
+          orderItem={orderItem}
+        />
       </Container>
     </>
   );

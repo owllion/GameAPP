@@ -20,7 +20,7 @@ const View = styled.View`
   background-color: red;
   height: 50px;
   position: absolute;
-  top: Constants.statusBarHeight;
+  top: ${Constants.statusBarHeight};
   width: 100%;
   z-index: 1;
   align-items: center;
