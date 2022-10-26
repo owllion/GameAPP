@@ -59,7 +59,7 @@ const UpperBlock = styled.View`
   padding-left: 20px;
 `;
 
-const Text = styled.Text<{ title: boolean; highlight: boolean; bold: boolean }>`
+const Text = styled.Text`
   font-size: ${({ title }) => (title ? "25px" : "11px")};
   color: ${({ highlight }) => (highlight ? COLORS.orange : COLORS.dark)};
   font-family: ${({ bold }) =>

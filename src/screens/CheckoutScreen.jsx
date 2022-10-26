@@ -5,7 +5,7 @@ import BackBtn from "../components/BackBtn";
 import ActivityIndicator from "../components/ActivityIndicator";
 import CheckoutContent from "../components/CheckoutContent";
 
-const CheckoutScreen = ({ route }: any) => {
+const CheckoutScreen = ({ route }) => {
   const { total, newCity, newDistrict, newRoad } = route.params;
   return (
     <>
@@ -42,11 +42,10 @@ const TextBox = styled.View`
   margin-bottom: 20px;
 `;
 const Text = styled.Text`
-  font-size: ${({ title }: { title: boolean }) => (title ? "25px" : "15px")};
-  font-family: ${({ regular }: { regular: boolean }) =>
+  font-size: ${({ title }) => (title ? "25px" : "15px")};
+  font-family: ${({ regular }) =>
     regular ? "IBMPlexSansRegular" : "IBMPlexSansBold"};
-  color: ${({ highlight }: { highlight: boolean }) =>
-    highlight ? COLORS.orange : COLORS.white};
+  color: ${({ highlight }) => (highlight ? COLORS.orange : COLORS.white)};
 `;
 
 export default CheckoutScreen;

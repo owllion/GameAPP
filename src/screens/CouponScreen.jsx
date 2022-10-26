@@ -8,16 +8,9 @@ import BackBtn from "../components/BackBtn";
 import EmptyImg from "../components/EmptyImg";
 
 const selectedState = [{ title: "Unused" }, { title: "Used" }];
-interface List {
-  discount_type: string;
-  amount: number;
-  expiry_date: Date;
-  minimum_amount: number;
-  code: string;
-}
 const CouponScreen = () => {
-  const [selected, setSelected] = useState<number>(0);
-  const [renderList, setRenderList] = useState<List[]>([]);
+  const [selected, setSelected] = useState(0);
+  const [renderList, setRenderList] = useState([]);
   const couponList = useSelector((state) => state.auth.couponList);
 
   const renderListHandler = () => {
@@ -34,7 +27,6 @@ const CouponScreen = () => {
   useEffect(() => {
     renderListHandler();
   }, [selected]);
-  console.log(renderList);
 
   return (
     <Container>
@@ -130,22 +122,12 @@ const UseBox = styled.Pressable`
   align-items: center;
   width: 150px;
   height: 50px;
-  background-color: ${({
-    index,
-    selectedIndex,
-  }: {
-    index: number;
-    selectedIndex: number;
-  }) => (selectedIndex === index ? COLORS.green : COLORS.light)};
+  background-color: ${({ index, selectedIndex }) =>
+    selectedIndex === index ? COLORS.green : COLORS.light};
 `;
 const UseText = styled.Text`
-  color: ${({
-    index,
-    selectedIndex,
-  }: {
-    index: number;
-    selectedIndex: number;
-  }) => (selectedIndex === index ? COLORS.white : COLORS.dark)};
+  color: ${({ index, selectedIndex }) =>
+    selectedIndex === index ? COLORS.white : COLORS.dark};
   font-size: 12px;
   font-family: IBMPlexSansRegular;
 `;
@@ -172,11 +154,10 @@ const RightBox = styled.View`
   align-items: center;
 `;
 const Text = styled.Text`
-  font-family: ${({ bold }: { bold: boolean }) =>
+  font-family: ${({ bold }) =>
     bold ? "IBMPlexSansBold" : "IBMPlexSansRegular"};
-  font-size: ${({ title }: { title: boolean }) => (title ? "20px" : "11px")};
-  color: ${({ highlight }: { highlight: boolean }) =>
-    highlight ? COLORS.white : COLORS.dark};
+  font-size: ${({ title }) => (title ? "20px" : "11px")};
+  color: ${({ highlight }) => (highlight ? COLORS.white : COLORS.dark)};
 `;
 
 export default CouponScreen;

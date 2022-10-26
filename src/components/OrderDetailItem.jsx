@@ -2,33 +2,9 @@ import React from "react";
 import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
 import COLORS from "../assets/color/colors";
+import DayJS from "react-dayjs";
 
-interface Props {
-  orderDetail: {
-    order_status: string;
-    orderId: string;
-    total_price: number;
-    discount: number;
-    discount_code: string;
-    payment_method: string;
-    delivery_address: string;
-    order_item: {
-      image: Array<string>;
-      productName: string;
-      price: number;
-      category: string;
-      description: string;
-      productId: string;
-      rating: number;
-      qty: number;
-      isChecked: boolean;
-      stock: number;
-    }[];
-  };
-  date: Date;
-}
-
-const OrderDetailItem = (props: Props) => {
+const OrderDetailItem = (props) => {
   const { orderDetail, date } = props;
   return (
     <>
@@ -87,7 +63,9 @@ const OrderDetailItem = (props: Props) => {
         </DetailBox>
         <DetailBox>
           <Text>Order Time</Text>
-          <Text>{date}</Text>
+          <DayJS format="yyyy-MM-dd hh:mm" element={Text}>
+            {date}
+          </DayJS>
         </DetailBox>
         <DetailBox>
           <Text>Order Status</Text>
@@ -145,10 +123,9 @@ const OrderDetailWrapper = styled.View`
 `;
 
 const Text = styled.Text`
-  font-size: ${({ title }: { title: boolean }) => (title ? "25px" : "11px")};
-  color: ${({ highlight }: { highlight: boolean }) =>
-    highlight ? COLORS.orange : COLORS.dark};
-  font-family: ${({ bold }: { bold: boolean }) =>
+  font-size: ${({ title }) => (title ? "25px" : "11px")};
+  color: ${({ highlight }) => (highlight ? COLORS.orange : COLORS.dark)};
+  font-family: ${({ bold }) =>
     bold ? "IBMPlexSansBold" : "IBMPlexSansRegular"};
 `;
 export default OrderDetailItem;
