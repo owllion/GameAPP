@@ -1,15 +1,9 @@
 import { authActions } from "../slice/Auth";
 import axios from "../../api/axios";
-import { isLoading } from "expo-font";
-interface UserData {
-  email: string;
-  password: string;
-  userName: string;
-}
 
-export const registerOrLogin = (payload: UserData) => {
-  let path: string;
-  return async (dispatch: any, getState: any) => {
+export const registerOrLogin = (payload) => {
+  let path;
+  return async (dispatch, getState) => {
     payload.userName ? (path = "register") : (path = "rnLogin");
     const handler = path === "register" ? "signup" : "signin";
     try {
@@ -26,7 +20,7 @@ export const registerOrLogin = (payload: UserData) => {
     } catch (e) {
       if (e.response) {
         const msg = e.response.data.msg;
-        let errMsg: string | undefined;
+        let errMsg;
 
         //login error
         if (msg.includes("No")) {

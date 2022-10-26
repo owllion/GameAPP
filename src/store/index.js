@@ -3,8 +3,6 @@ import thunk from "redux-thunk";
 
 import { configureStore } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ThunkAction } from "redux-thunk";
-import { AnyAction } from "redux";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import authSlice from "./slice/Auth";
