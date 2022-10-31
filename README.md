@@ -5,7 +5,7 @@
 > An E-commerce App Built With React Native.
 
 ## Status
-> The project is being upgraded and is not available 
+> The project is being upgraded and is not available now.
 
 ## Skills
 > React Native + Redux + React Native Elements
